@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0f14;
+  --foreground: #e8edf3;
+  --muted: #94a3b8;
+  --accent: #1dbf73;
+  --accent-dark: #0e7c4f;
+  --card: #111827;
+  --border: #1f3d2f;
+  /* Solid surfaces — no translucent “glass” layers */
+  --surface: #090c11;
+  --panel: #101820;
+  --edge: #2a3544;
+  --accent-soft: #15261f;
+  --accent-soft-hover: #1a3028;
+  /* Classic chrome: modest radius + restrained panel shadow (solid surfaces only) */
+  --radius-chrome: 0.125rem;
+  --shadow-content: 0 4px 14px rgba(0, 0, 0, 0.45);
+
+  /*
+   * Light marketing bands: “paper” sections on near-white with slate body copy.
+   * Use for alternating rhythm (reading, lists); keep dark tokens for hero, stats, and footer weight.
+   */
+  --surface-light: #f8fafc;
+  --foreground-on-light: #0f172a;
+  --muted-on-light: #475569;
+  --surface-light-edge: #e2e8f0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-edge: var(--edge);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-hover: var(--accent-soft-hover);
+  --color-surface-light: var(--surface-light);
+  --color-foreground-on-light: var(--foreground-on-light);
+  --color-muted-on-light: var(--muted-on-light);
+  --color-surface-light-edge: var(--surface-light-edge);
+  --font-sans: var(--font-plus-jakarta);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Global scale-up: bumps all rem-based Tailwind typography and spacing together */
+  font-size: 112.5%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--accent-soft-hover);
+  color: var(--foreground);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.focus-ring-on-light:focus-visible {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 2px;
+}
