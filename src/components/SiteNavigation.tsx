@@ -12,9 +12,8 @@ type Mega = "services" | "areas" | null;
 type MainLink = { href: string; label: string; ariaLabel?: string };
 
 const mainLinks: MainLink[] = [
+  { href: "/about", label: "About Us", ariaLabel: "About Trivon Protection" },
   { href: "/industries", label: "Industries", ariaLabel: "Industries we serve" },
-  { href: "/our-process", label: "Process", ariaLabel: "Our process" },
-  { href: "/knowledge", label: "Knowledge", ariaLabel: "Knowledge base" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -216,18 +215,6 @@ export const SiteNavigation = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="border-t border-edge px-2 py-2">
-                  <Link
-                    href="/services"
-                    className="block rounded-sm px-2 py-1.5 text-xs font-medium text-muted hover:bg-panel hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent"
-                    onClick={() => {
-                      cancelScheduledClose();
-                      setOpenMega(null);
-                    }}
-                  >
-                    All services
-                  </Link>
-                </div>
               </div>
             ) : null}
           </div>
@@ -285,16 +272,6 @@ export const SiteNavigation = () => {
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href="/service-areas/california"
-                      className="mx-2 mt-2 block rounded-sm px-2 py-1.5 text-xs font-medium text-muted hover:bg-panel hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent"
-                      onClick={() => {
-                        cancelScheduledClose();
-                        setOpenMega(null);
-                      }}
-                    >
-                      California overview
-                    </Link>
                   </div>
                   <div className="min-w-0 px-1 py-2">
                     <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted">Texas</p>
@@ -314,29 +291,7 @@ export const SiteNavigation = () => {
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href="/service-areas/texas"
-                      className="mx-2 mt-2 block rounded-sm px-2 py-1.5 text-xs font-medium text-muted hover:bg-panel hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent"
-                      onClick={() => {
-                        cancelScheduledClose();
-                        setOpenMega(null);
-                      }}
-                    >
-                      Texas overview
-                    </Link>
                   </div>
-                </div>
-                <div className="border-t border-edge px-2 py-2">
-                  <Link
-                    href="/service-areas"
-                    className="block rounded-sm px-2 py-1.5 text-xs font-medium text-muted hover:bg-panel hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent"
-                    onClick={() => {
-                      cancelScheduledClose();
-                      setOpenMega(null);
-                    }}
-                  >
-                    All service areas
-                  </Link>
                 </div>
               </div>
             ) : null}
@@ -393,16 +348,6 @@ export const SiteNavigation = () => {
                       {s.title}
                     </Link>
                   ))}
-                  <Link
-                    href="/services"
-                    className="mt-1 block rounded-sm px-3 py-2 text-xs font-medium text-muted hover:bg-panel hover:text-foreground"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileSection(null);
-                    }}
-                  >
-                    All services
-                  </Link>
                 </div>
               ) : null}
             </div>
@@ -437,16 +382,6 @@ export const SiteNavigation = () => {
                       {a.name}
                     </Link>
                   ))}
-                  <Link
-                    href="/service-areas/california"
-                    className="mt-1 block px-3 py-2 text-xs font-medium text-muted hover:text-foreground"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileSection(null);
-                    }}
-                  >
-                    California overview
-                  </Link>
                   <p className="mt-3 px-3 pb-1 text-xs font-semibold uppercase tracking-wide text-muted">Texas</p>
                   {texasAreas.map((a) => (
                     <Link
@@ -461,26 +396,6 @@ export const SiteNavigation = () => {
                       {a.name}
                     </Link>
                   ))}
-                  <Link
-                    href="/service-areas/texas"
-                    className="mt-1 block px-3 py-2 text-xs font-medium text-muted hover:text-foreground"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileSection(null);
-                    }}
-                  >
-                    Texas overview
-                  </Link>
-                  <Link
-                    href="/service-areas"
-                    className="mt-2 block border-t border-edge px-3 py-2 text-xs font-medium text-muted hover:bg-panel hover:text-foreground"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileSection(null);
-                    }}
-                  >
-                    All service areas
-                  </Link>
                 </div>
               ) : null}
             </div>

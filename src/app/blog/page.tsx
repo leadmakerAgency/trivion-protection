@@ -1,9 +1,10 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { ArchiveSidebar } from "@/components/ArchiveSidebar";
+import { ArchiveArticleCard } from "@/components/ArchiveArticleCard";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { buildMetadata } from "@/lib/seo";
 import { getBlogIndex } from "@/lib/mdx";
+import { resolveBlogCover } from "@/lib/blog-covers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Blog — Los Angeles security insights",
@@ -16,40 +17,35 @@ export default function BlogIndexPage() {
   const posts = getBlogIndex();
   return (
     <InteriorPageShell
+      surface="paper"
       pageTone="archive"
       breadcrumbs={[{ href: "/blog", label: "Blog" }]}
       title="Blog"
-      description="Short articles for operators who want better security outcomes in Los Angeles County—without
-          the fluff."
+      description="Short articles for operators who want better security outcomes in Los Angeles County—policy, field practice, and hiring—without filler."
+      headerClassName="pb-10"
       sidebar={
         <ArchiveSidebar
           segment="blog"
+          surface="light"
           recent={posts.slice(0, 5).map((p) => ({ slug: p.slug, title: p.title }))}
         />
       }
     >
-      <ul className="border-t border-surface-light-edge">
-        {posts.map((p) => (
-          <li key={p.slug} className="border-b border-surface-light-edge last:border-b-0">
-            <Link
+      <div>
+        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-2">
+          {posts.map((p) => (
+            <ArchiveArticleCard
+              key={p.slug}
               href={`/blog/${p.slug}`}
-              className="group block py-4 transition-colors hover:bg-white"
-            >
-              <p className="text-xs text-muted-on-light">
-                {new Date(p.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </p>
-              <h2 className="mt-1 text-lg font-semibold text-foreground-on-light group-hover:underline group-hover:text-accent-dark">
-                {p.title}
-              </h2>
-              <p className="mt-2 text-sm text-muted-on-light">{p.description}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+              title={p.title}
+              description={p.description}
+              date={p.date}
+              imageSrc={resolveBlogCover(p.slug, p.coverImage)}
+              imageAlt={`Photography illustrating “${p.title}”`}
+            />
+          ))}
+        </div>
+      </div>
     </InteriorPageShell>
   );
 }

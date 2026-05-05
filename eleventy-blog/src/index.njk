@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: Home
+permalink: /index.html
+---
+<section class="hero">
+  <h1>{{ site.title }}</h1>
+  <p>{{ site.description }}</p>
+</section>
+<section class="recent-posts">
+  <h2>Recent posts</h2>
+  <ul class="post-list">
+    {% for post in collections.posts | reverse %}
+      <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+        {% if post.data.date %}<span class="post-list-date">{{ post.data.date }}</span>{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ '/posts/' | url }}">All posts</a></p>
+</section>

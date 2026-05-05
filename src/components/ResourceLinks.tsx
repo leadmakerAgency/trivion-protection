@@ -6,21 +6,27 @@ type ResourceLinksProps = {
   items: MdxLinkPreview[];
   id?: string;
   tone?: "dark" | "light";
+  align?: "left" | "center";
 };
 
-export const ResourceLinks = ({ title, items, id, tone = "dark" }: ResourceLinksProps) => {
+export const ResourceLinks = ({ title, items, id, tone = "dark", align = "left" }: ResourceLinksProps) => {
   if (items.length === 0) return null;
 
   const h2 = tone === "light" ? "text-foreground-on-light" : "text-foreground";
-  const border = tone === "light" ? "border-surface-light-edge" : "border-edge";
   const hover = tone === "light" ? "hover:border-accent-dark/30 hover:bg-white" : "hover:border-edge hover:bg-panel";
   const titleLink = tone === "light" ? "text-foreground-on-light group-hover:text-accent-dark" : "text-foreground";
   const desc = tone === "light" ? "text-muted-on-light" : "text-muted";
 
+  const centered = align === "center";
+
   return (
-    <section id={id} className="scroll-mt-28">
-      <h2 className={`text-2xl font-semibold tracking-tight ${h2}`}>{title}</h2>
-      <ul className={`mt-4 space-y-3 border-t pt-4 ${border}`}>
+    <section id={id} className={`scroll-mt-28 ${centered ? "text-center" : ""}`}>
+      <h2
+        className={`text-2xl font-semibold tracking-tight ${h2} ${centered ? "mx-auto max-w-3xl text-balance" : ""}`}
+      >
+        {title}
+      </h2>
+      <ul className={`mt-8 space-y-4 ${centered ? "mx-auto max-w-3xl text-left" : ""}`}>
         {items.map((item) => (
           <li key={`${item.segment}-${item.slug}`}>
             <Link

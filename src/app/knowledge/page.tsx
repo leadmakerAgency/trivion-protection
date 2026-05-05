@@ -1,9 +1,10 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { ArchiveSidebar } from "@/components/ArchiveSidebar";
+import { ArchiveArticleCard } from "@/components/ArchiveArticleCard";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { buildMetadata } from "@/lib/seo";
 import { getKnowledgeIndex } from "@/lib/mdx";
+import { resolveKnowledgeCover } from "@/lib/knowledge-covers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Knowledge base — Los Angeles security guides",
@@ -16,45 +17,41 @@ export default function KnowledgeIndexPage() {
   const posts = getKnowledgeIndex();
   return (
     <InteriorPageShell
+      surface="paper"
       pageTone="archive"
       breadcrumbs={[{ href: "/knowledge", label: "Knowledge" }]}
       title="Knowledge base"
-      description="Practical articles for hiring managers comparing Los Angeles security guard companies—written
-          to help you scope services correctly, not to substitute for a licensed consultation at your
-          specific site."
+      description="Evergreen guides for hiring managers comparing Los Angeles security vendors—scoped to help you
+          procure the right coverage, not to replace a licensed consultation at your location."
+      headerClassName="pb-10"
       sidebar={
         <ArchiveSidebar
           segment="knowledge"
+          surface="light"
           recent={posts.slice(0, 5).map((p) => ({ slug: p.slug, title: p.title }))}
         />
       }
     >
-      {posts.length === 0 ? (
-        <p className="text-sm text-muted-on-light">Articles are loading soon.</p>
-      ) : (
-        <ul className="border-t border-surface-light-edge">
-          {posts.map((p) => (
-            <li key={p.slug} className="border-b border-surface-light-edge last:border-b-0">
-              <Link
+      <div>
+        {posts.length === 0 ? (
+          <p className="text-sm text-muted-on-light">Articles are loading soon.</p>
+        ) : (
+          <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-2">
+            {posts.map((p) => (
+              <ArchiveArticleCard
+                key={p.slug}
                 href={`/knowledge/${p.slug}`}
-                className="group block py-4 transition-colors hover:bg-white"
-              >
-                <p className="text-xs text-muted-on-light">
-                  {new Date(p.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </p>
-                <h2 className="mt-1 text-lg font-semibold text-foreground-on-light group-hover:underline group-hover:text-accent-dark">
-                  {p.title}
-                </h2>
-                <p className="mt-2 text-sm text-muted-on-light">{p.description}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+                title={p.title}
+                description={p.description}
+                date={p.date}
+                imageSrc={resolveKnowledgeCover(p.slug, p.coverImage)}
+                imageAlt={`Context for guide: ${p.title}`}
+                readLabel="Read guide"
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </InteriorPageShell>
   );
 }

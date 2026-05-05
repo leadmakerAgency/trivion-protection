@@ -15,6 +15,8 @@ type ImageTextBandProps = {
   children: ReactNode;
   footer?: ReactNode;
   className?: string;
+  /** Text column alignment (`center` stacks well under centered section intros). */
+  textAlign?: "left" | "center";
 };
 
 export const ImageTextBand = ({
@@ -29,8 +31,10 @@ export const ImageTextBand = ({
   children,
   footer,
   className = "",
+  textAlign = "left",
 }: ImageTextBandProps) => {
   const bodyText = textTone === "onLight" ? "text-muted-on-light" : "text-muted";
+  const colAlign = textAlign === "center" ? "text-center lg:text-left" : "text-left";
   const imageBorder =
     textTone === "onLight" ? "border-surface-light-edge shadow-sm" : "border-edge";
 
@@ -43,8 +47,12 @@ export const ImageTextBand = ({
   );
 
   const textCol = (
-    <div className={imageFirst ? "" : "lg:order-1"}>
-      {eyebrow ? <div className="mb-3">{eyebrow}</div> : null}
+    <div className={`${imageFirst ? "" : "lg:order-1"} ${colAlign}`}>
+      {eyebrow ? (
+        <div className={`mb-3 ${textAlign === "center" ? "flex justify-center lg:justify-start" : ""}`}>
+          {eyebrow}
+        </div>
+      ) : null}
       <div
         className={`text-3xl font-semibold tracking-tight sm:text-4xl ${textTone === "onLight" ? "text-foreground-on-light" : "text-foreground"}`}
       >

@@ -31,7 +31,8 @@ export default function ServicesIndexPage() {
 
   return (
     <InteriorPageShell
-      className="py-8"
+      surface="paper"
+      breadcrumbMode="seoOnly"
       breadcrumbs={[{ href: "/services", label: "Services" }]}
       title="Security guard services"
       description="Trivon Protection provides Los Angeles County security guard services for properties that
@@ -50,8 +51,8 @@ export default function ServicesIndexPage() {
             continuous rounds.
           </p>
           <p>
-            Use the articles below when you are comparing vendors or building an RFP, then open the service pages for
-            the operational detail your facilities team will actually run.
+            Use the articles below when you are comparing vendors or building an RFP. Each program card summarizes who
+            it fits, what it covers, and a field highlight—enough to shortlist before you talk scope with us.
           </p>
         </ContentProse>
 
@@ -62,26 +63,32 @@ export default function ServicesIndexPage() {
         ) : null}
       </SectionBand>
 
-      <SectionBand tone="dark" className="!border-t-0">
+      <SectionBand tone="light" divider={false} className="!border-t-0">
         <Section
           title="Programs by coverage type"
-          subtitle="Each card links to a full guide: scenarios, deliverables, staffing models, tradeoffs, FAQs, and related reading."
+          subtitle="Each card spells out fit, coverage, and a representative field highlight so you can compare programs at a glance before opening a detail view."
+          tone="light"
           className="!py-0"
         >
           {(["static", "mobile", "specialized"] as const).map((cat) => (
             <div key={cat} className="mb-12 last:mb-0">
-              <h3 className="text-lg font-semibold uppercase tracking-wide text-accent">{categoryLabel[cat]}</h3>
+              <h3 className="text-lg font-semibold uppercase tracking-wide text-accent-dark">{categoryLabel[cat]}</h3>
               <div className="mt-4 grid gap-6 md:grid-cols-2">
                 {servicesByCategory(cat).map((s) => (
                   <Link
                     key={s.slug}
                     href={`/services/${s.slug}`}
-                    className="group rounded-sm border border-edge bg-card p-6 transition-colors hover:bg-panel"
+                    className="group rounded-xl border border-surface-light-edge bg-white p-6 shadow-sm transition hover:border-accent-dark/35 hover:shadow-md"
                   >
-                    <h2 className="text-xl font-semibold text-foreground group-hover:underline">{s.title}</h2>
-                    <p className="mt-3 text-sm font-medium leading-relaxed text-foreground/90">{s.bestFor}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{s.shortDescription}</p>
-                    <p className="mt-4 text-sm font-semibold text-accent">Open the full guide</p>
+                    <h2 className="text-xl font-semibold text-foreground-on-light group-hover:text-accent-dark group-hover:underline">
+                      {s.title}
+                    </h2>
+                    <p className="mt-3 text-sm font-medium leading-relaxed text-foreground-on-light">{s.bestFor}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-on-light">{s.shortDescription}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-on-light">
+                      <span className="font-medium text-foreground-on-light">Field highlight: </span>
+                      {s.highlights[0]}
+                    </p>
                   </Link>
                 ))}
               </div>

@@ -11,7 +11,7 @@ import { imageAttribution } from "@/lib/site-images";
 
 const footerLinks = [
   { href: "/about", label: "About" },
-  { href: "/our-process", label: "Process" },
+  { href: "/#our-process", label: "Process" },
   { href: "/industries", label: "Industries" },
   { href: "/knowledge", label: "Knowledge" },
   { href: "/blog", label: "Blog" },

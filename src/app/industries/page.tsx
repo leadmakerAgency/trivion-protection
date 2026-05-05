@@ -31,6 +31,7 @@ const industryImageById: Record<string, string> = {
 export default function IndustriesPage() {
   return (
     <InteriorPageShell
+      surface="paper"
       breadcrumbs={[{ href: "/industries", label: "Industries" }]}
       title="Industries we serve"
       description="Los Angeles County is a portfolio of different risk profiles. These briefs translate how we
@@ -47,19 +48,15 @@ export default function IndustriesPage() {
             ? getServiceBySlug(industry.secondaryServiceSlug)
             : null;
           const reading = resolveMdxLinkPreviews("knowledge", industry.relatedKnowledgeSlugs);
-          const band: "light" | "dark" = index % 2 === 0 ? "light" : "dark";
           const imageFirst = index % 2 === 0;
-          const imgBorder = band === "light" ? "border-surface-light-edge shadow-sm" : "border-edge";
-          const h2 = band === "light" ? "text-foreground-on-light" : "text-foreground";
-          const body = band === "light" ? "text-muted-on-light" : "text-muted";
-          const eye = band === "light" ? "text-accent-dark" : "text-accent";
-          const tipBox =
-            band === "light"
-              ? "rounded-sm border border-surface-light-edge bg-white p-4 shadow-sm"
-              : "rounded-sm border border-edge bg-card p-4";
+          const imgBorder = "border-surface-light-edge shadow-sm";
+          const h2 = "text-foreground-on-light";
+          const body = "text-muted-on-light";
+          const eye = "text-accent-dark";
+          const tipBox = "rounded-xl border border-surface-light-edge bg-white p-4 shadow-sm";
 
           return (
-            <SectionBand key={industry.id} tone={band} id={industry.id}>
+            <SectionBand key={industry.id} tone="light" divider={false} id={industry.id}>
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
                 <div
                   className={`relative min-h-[220px] overflow-hidden rounded-sm border lg:min-h-[280px] ${imgBorder} ${imageFirst ? "" : "lg:order-2"}`}
@@ -109,7 +106,7 @@ export default function IndustriesPage() {
                       <Button
                         href={`/services/${primary.slug}`}
                         variant="primary"
-                        surface={band === "light" ? "light" : "dark"}
+                        surface="light"
                       >
                         {primary.title}
                       </Button>
@@ -118,19 +115,19 @@ export default function IndustriesPage() {
                       <Button
                         href={`/services/${secondary.slug}`}
                         variant="secondary"
-                        surface={band === "light" ? "light" : "dark"}
+                        surface="light"
                       >
                         {secondary.title}
                       </Button>
                     ) : null}
-                    <Button href="/contact" variant="secondary" surface={band === "light" ? "light" : "dark"}>
+                    <Button href="/contact" variant="secondary" surface="light">
                       Request a tailored proposal
                     </Button>
                   </div>
 
                   {reading.length > 0 ? (
                     <div className="mt-8">
-                      <ResourceLinks title="Guides that pair with this industry" items={reading} tone={band} />
+                      <ResourceLinks title="Guides that pair with this industry" items={reading} tone="light" />
                     </div>
                   ) : null}
                 </div>

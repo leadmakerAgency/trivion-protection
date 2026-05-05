@@ -7,6 +7,8 @@ export type MdxFrontmatter = {
   description: string;
   date: string;
   author?: string;
+  /** Card / hero image path under `public`, e.g. `/images/construction.jpg` */
+  coverImage?: string;
 };
 
 const readCollection = (segment: "knowledge" | "blog") => {

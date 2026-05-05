@@ -14,6 +14,7 @@ export const metadata: Metadata = buildMetadata({
 export default function ContactPage() {
   return (
     <InteriorPageShell
+      surface="paper"
       breadcrumbs={[{ href: "/contact", label: "Contact" }]}
       title="Request a quote"
       description={
@@ -23,7 +24,7 @@ export default function ContactPage() {
         </p>
       }
     >
-      <QuoteForm />
+      <QuoteForm surface="light" />
     </InteriorPageShell>
   );
 }

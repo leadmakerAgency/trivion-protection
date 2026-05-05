@@ -10,7 +10,6 @@ const staticPaths = [
   "/careers",
   "/contact",
   "/industries",
-  "/our-process",
   "/services",
   "/service-areas",
   "/service-areas/california",

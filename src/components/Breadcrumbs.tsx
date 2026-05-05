@@ -7,9 +7,11 @@ export type Crumb = { href: string; label: string };
 type BreadcrumbsProps = {
   items: Crumb[];
   tone?: "dark" | "light";
+  /** `seoOnly` emits BreadcrumbList JSON-LD without visible navigation. */
+  mode?: "full" | "seoOnly";
 };
 
-export const Breadcrumbs = ({ items, tone = "dark" }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ items, tone = "dark", mode = "full" }: BreadcrumbsProps) => {
   const base = getSiteUrl();
   const trail = [{ href: "/", label: "Home" }, ...items];
   const schema = {
@@ -22,6 +24,10 @@ export const Breadcrumbs = ({ items, tone = "dark" }: BreadcrumbsProps) => {
       item: `${base}${c.href.startsWith("/") ? c.href : `/${c.href}`}`,
     })),
   };
+
+  if (mode === "seoOnly") {
+    return <JsonLd data={schema} />;
+  }
 
   const muted = tone === "light" ? "text-muted-on-light" : "text-muted";
   const current = tone === "light" ? "text-foreground-on-light" : "text-foreground";

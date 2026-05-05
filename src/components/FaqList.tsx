@@ -4,7 +4,9 @@ type FaqListProps = {
   title?: string;
   items: FaqItem[];
   id?: string;
-  variant?: "dark" | "light";
+  variant?: "dark" | "light" | "landing";
+  /** When false, only the accordion list renders (pair with MarketingSectionHeader). */
+  showHeading?: boolean;
 };
 
 export const FaqList = ({
@@ -12,12 +14,16 @@ export const FaqList = ({
   items,
   id,
   variant = "dark",
+  showHeading = true,
 }: FaqListProps) => {
-  const isLight = variant === "light";
+  const isLight = variant === "light" || variant === "landing";
+  const isLanding = variant === "landing";
   const titleClass = isLight ? "text-foreground-on-light" : "text-foreground";
-  const shell = isLight
-    ? "divide-y divide-surface-light-edge rounded-sm border border-surface-light-edge bg-white shadow-sm"
-    : "divide-y divide-edge rounded-sm border border-edge bg-card";
+  const shell = isLanding
+    ? "divide-y divide-surface-light-edge/80 rounded-xl bg-white/95 p-1 ring-1 ring-surface-light-edge shadow-sm sm:p-2"
+    : isLight
+      ? "divide-y divide-surface-light-edge rounded-sm border border-surface-light-edge bg-white shadow-sm"
+      : "divide-y divide-edge rounded-sm border border-edge bg-card";
   const summaryFocus = isLight ? "focus-ring-on-light" : "focus-ring";
   const qClass = isLight ? "text-foreground-on-light" : "text-foreground";
   const chevron = isLight ? "text-muted-on-light" : "text-muted";
@@ -26,10 +32,15 @@ export const FaqList = ({
 
   return (
     <section id={id} className="scroll-mt-28">
-      <h2 className={`text-2xl font-semibold tracking-tight ${titleClass}`}>{title}</h2>
-      <div className={`mt-4 ${shell}`}>
+      {showHeading ? (
+        <h2 className={`text-2xl font-semibold tracking-tight ${titleClass}`}>{title}</h2>
+      ) : null}
+      <div className={`${showHeading ? "mt-4 " : ""}${shell}`}>
         {items.map((item) => (
-          <details key={item.question} className="group px-4 py-3">
+          <details
+            key={item.question}
+            className={`group ${isLanding ? "rounded-lg px-4 py-4 sm:px-5 sm:py-4" : "px-4 py-3"}`}
+          >
             <summary
               className={`${summaryFocus} cursor-pointer list-none rounded-sm text-left text-base font-medium marker:content-none [&::-webkit-details-marker]:hidden ${qClass}`}
             >

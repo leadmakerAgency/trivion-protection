@@ -499,4 +499,15 @@ export const services: ServiceItem[] = [
 
 export const getServiceBySlug = (slug: string) => services.find((s) => s.slug === slug);
 
+/** Prefer same-category services, then fill from the rest — for compact “Related” grids on marketing pages. */
+export const getRelatedServiceSlugs = (slug: string, limit = 4): string[] => {
+  const svc = getServiceBySlug(slug);
+  if (!svc) return [];
+  const sameCategory = services.filter((s) => s.slug !== slug && s.category === svc.category).map((s) => s.slug);
+  const remainder = services
+    .filter((s) => s.slug !== slug && !sameCategory.includes(s.slug))
+    .map((s) => s.slug);
+  return [...sameCategory, ...remainder].slice(0, limit);
+};
+
 export const servicesByCategory = (cat: ServiceCategory) => services.filter((s) => s.category === cat);

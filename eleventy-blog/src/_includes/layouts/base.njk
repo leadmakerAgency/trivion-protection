@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ description or site.description }}" />
+    <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/css/styles.css' | url }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="{{ '/' | url }}">{{ site.title }}</a>
+        <a href="{{ '/posts/' | url }}">Posts</a>
+        <a href="{{ '/admin/' | url }}">Admin</a>
+      </nav>
+    </header>
+    <main id="main" class="site-main">
+      {{ content | safe }}
+    </main>
+    <footer class="site-footer">
+      <p>Built with <a href="https://www.11ty.dev/">Eleventy</a> and <a href="https://sveltiacms.app/">Sveltia CMS</a>.</p>
+    </footer>
+  </body>
+</html>

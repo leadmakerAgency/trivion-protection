@@ -23,9 +23,11 @@ import { ImageTextBand } from "@/components/ImageTextBand";
 import { JsonLd } from "@/components/JsonLd";
 import { SectionBand } from "@/components/SectionBand";
 import { StatStrip } from "@/components/StatStrip";
-import { homeFaq } from "@/lib/faq";
-import { services } from "@/lib/services";
 import { californiaAreas, texasAreas } from "@/lib/areas";
+import { homeFaq } from "@/lib/faq";
+import { industries } from "@/lib/industries";
+import { OUR_PROCESS_STEPS } from "@/lib/our-process";
+import { getServiceBySlug, services } from "@/lib/services";
 import { homeDescription, homeTitle } from "@/lib/seo";
 import { siteImages } from "@/lib/site-images";
 import type { Metadata } from "next";
@@ -64,18 +66,19 @@ const trustItems: { text: string; Icon: typeof TbClipboardCheck }[] = [
   },
 ];
 
-const industryTiles: { label: string; href: string; Icon: typeof TbShoppingCart }[] = [
-  { label: "Retail and mixed-use", href: "/industries#retail-mixed-use", Icon: TbShoppingCart },
-  { label: "Corporate offices", href: "/industries#corporate-offices", Icon: TbBuildingSkyscraper },
-  { label: "Warehouses and logistics", href: "/industries#industrial-warehouse", Icon: TbTruckDelivery },
-  { label: "Construction sites", href: "/industries#construction", Icon: TbCrane },
-  { label: "Residential communities / HOAs", href: "/industries#residential-hoa", Icon: TbHomeShield },
-  { label: "Healthcare and clinics", href: "/industries#healthcare", Icon: TbHeartRateMonitor },
-  { label: "Hospitality", href: "/industries#hospitality", Icon: TbBuildingWarehouse },
-  { label: "Film and production support", href: "/industries#film-production", Icon: TbMovie },
-];
+const industryIconById: Record<string, typeof TbShoppingCart> = {
+  "retail-mixed-use": TbShoppingCart,
+  "corporate-offices": TbBuildingSkyscraper,
+  "industrial-warehouse": TbTruckDelivery,
+  construction: TbCrane,
+  "residential-hoa": TbHomeShield,
+  healthcare: TbHeartRateMonitor,
+  hospitality: TbBuildingWarehouse,
+  "film-production": TbMovie,
+};
 
 export default function HomePage() {
+  const warehouseProgram = getServiceBySlug("warehouse-security-guards");
   return (
     <>
       <JsonLd data={faqSchema} />
@@ -98,8 +101,8 @@ export default function HomePage() {
                 <Button href="/contact" variant="primary">
                   Get a quote
                 </Button>
-                <Button href="/services" variant="secondary">
-                  Explore services
+                <Button href="#services" variant="secondary">
+                  Programs below
                 </Button>
               </div>
             </div>
@@ -110,7 +113,7 @@ export default function HomePage() {
               alt="Uniformed security guard at a commercial building entrance—access control for businesses and multi-tenant sites."
               fill
               priority
-              className="object-cover object-[center_35%]"
+              className="object-cover object-top"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
@@ -136,16 +139,13 @@ export default function HomePage() {
           <Button href="/contact" surface="light" variant="primary">
             Get a quote
           </Button>
-          <Button href="/our-process" surface="light" variant="secondary">
-            How we onboard
-          </Button>
         </div>
       </SectionBand>
 
       <SectionBand
         tone="darkImage"
         imageSrc={siteImages.guardNightStreet}
-        imageAlt="Security officer on an urban street at night—overnight visibility and patrol-ready posture."
+        imageAlt="Security officer walking through contrasting light and shadow—overnight visibility and patrol-ready posture."
         imageSizes="100vw"
         imageClassName="object-cover object-[center_40%]"
       >
@@ -163,30 +163,33 @@ export default function HomePage() {
             From industrial corridors to mixed-use edges, we staff with clear escalation paths and documentation
             your insurer and legal partners can follow.
           </p>
-          <div className="mt-8">
-            <Button href="/services/warehouse-security-guards" variant="secondary">
-              Warehouse security
-            </Button>
-          </div>
+          {warehouseProgram ? (
+            <p className="mt-6 max-w-3xl text-base leading-relaxed text-muted">
+              <span className="font-medium text-foreground">Warehouse and logistics programs: </span>
+              {warehouseProgram.shortDescription}{" "}
+              {warehouseProgram.scenarios[0]?.body}
+            </p>
+          ) : null}
         </div>
       </SectionBand>
 
-      <SectionBand tone="light">
+      <SectionBand tone="light" id="services">
         <div className="max-w-5xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-accent-dark">Services</p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight text-foreground-on-light sm:text-5xl">
             Security guard services designed for real Los Angeles risk profiles
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-on-light">
-            Choose a service to see typical post duties, ideal industries, and how we align staffing to your hours
-            and access points.
+            Each program below includes who it fits, a short field summary, and a concrete highlight from post orders so
+            you can compare armed and unarmed posts, patrol, fire watch, construction, and warehouse coverage from one
+            grid—tap a title when you want the full program dossier.
           </p>
         </div>
         <div className="mt-12">
           <div className="relative mb-12 aspect-[21/9] max-h-[280px] overflow-hidden rounded-sm border border-surface-light-edge shadow-sm sm:max-h-[320px]">
             <Image
               src={siteImages.guardParkingLot}
-              alt="Uniformed security officer beside a vehicle on asphalt—mobile patrol, parking structures, and route-based checks."
+              alt="Security officer in a high-visibility vest viewed from behind—mobile patrol, parking structures, and route-based checks."
               fill
               className="object-cover object-[center_55%]"
               sizes="(max-width: 1280px) 100vw, 1280px"
@@ -214,14 +217,12 @@ export default function HomePage() {
                 </h3>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-foreground-on-light/90">{s.bestFor}</p>
                 <p className="mt-3 text-base leading-relaxed text-muted-on-light">{s.shortDescription}</p>
-                <p className="mt-5 text-base font-semibold text-accent-dark">Open the full guide</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-on-light">
+                  <span className="font-medium text-foreground-on-light">Field highlight: </span>
+                  {s.highlights[0]}
+                </p>
               </Link>
             ))}
-          </div>
-          <div className="mt-10">
-            <Button href="/services" surface="light" variant="secondary">
-              All services
-            </Button>
           </div>
         </div>
       </SectionBand>
@@ -268,7 +269,7 @@ export default function HomePage() {
       <SectionBand tone="light">
         <ImageTextBand
           imageSrc={siteImages.construction}
-          imageAlt="Crews in hard hats on an active construction site—gate control, delivery verification, and perimeter coverage for building projects."
+          imageAlt="Black-and-white photograph of a secured gate and perimeter—gate control, delivery verification, and site access for building and industrial projects."
           imageSizes="(max-width: 1024px) 100vw, 45vw"
           imageFirst={false}
           eyebrow={
@@ -283,22 +284,50 @@ export default function HomePage() {
             actually runs.
           </p>
         </ImageTextBand>
-        <div className="mt-12 flex flex-wrap gap-2">
-          {industryTiles.map(({ label, href, Icon }) => (
-            <Link
-              key={label}
-              href={href}
-              className="focus-ring-on-light inline-flex items-center gap-2 rounded-full border border-surface-light-edge bg-white px-4 py-2 text-sm font-medium text-foreground-on-light shadow-sm hover:border-accent-dark/40 hover:text-accent-dark"
-            >
-              <Icon className="h-4 w-4 shrink-0 text-accent-dark" aria-hidden />
-              {label}
-            </Link>
-          ))}
-        </div>
-        <div className="mt-8">
-          <Button href="/industries" surface="light" variant="secondary">
-            View industries we serve
-          </Button>
+        <div className="mt-12 grid gap-10 sm:grid-cols-2">
+          {industries.map((industry) => {
+            const Icon = industryIconById[industry.id] ?? TbShieldCheck;
+            return (
+              <div
+                key={industry.id}
+                className="rounded-sm border border-surface-light-edge bg-white p-6 shadow-sm"
+              >
+                <div className="flex items-start gap-3">
+                  <Icon className="mt-0.5 h-6 w-6 shrink-0 text-accent-dark" aria-hidden />
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-semibold text-foreground-on-light">{industry.title}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-muted-on-light">{industry.summary}</p>
+                    <div className="mt-4">
+                      <h4 className="text-xs font-semibold uppercase tracking-wide text-accent-dark">Challenges</h4>
+                      <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-muted-on-light">
+                        {industry.challenges.map((c) => (
+                          <li key={c}>{c}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="text-xs font-semibold uppercase tracking-wide text-accent-dark">Typical posts</h4>
+                      <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-muted-on-light">
+                        {industry.typicalPosts.map((c) => (
+                          <li key={c}>{c}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mt-4 rounded-sm border border-surface-light-edge bg-surface-light p-4">
+                      <h4 className="text-xs font-semibold uppercase tracking-wide text-foreground-on-light">
+                        Reporting tips
+                      </h4>
+                      <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-muted-on-light">
+                        {industry.reportingTips.map((c) => (
+                          <li key={c}>{c}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </SectionBand>
 
@@ -309,8 +338,10 @@ export default function HomePage() {
             California-first coverage with Texas regional programs
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted">
-            Explore county and metro pages for localized intent—each page links back to core services so visitors
-            (and search engines) understand what you offer on the ground.
+            California remains our primary deployment corridor; Texas supports regional operators with multi-state
+            footprints. The directories below name the metros and counties we brief most often, each tuned to local
+            traffic patterns, property mixes, and supervision expectations—without asking you to leave this page for
+            baseline context.
           </p>
         </div>
         <div className="mt-12 grid gap-12 border-t border-edge pt-12 md:grid-cols-2">
@@ -356,7 +387,7 @@ export default function HomePage() {
         </div>
       </SectionBand>
 
-      <SectionBand tone="light">
+      <SectionBand tone="light" id="our-process">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-accent-dark">Process</p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground-on-light sm:text-4xl">
@@ -367,34 +398,16 @@ export default function HomePage() {
           </p>
         </div>
         <ol className="mt-10 max-w-4xl divide-y divide-surface-light-edge border-t border-surface-light-edge">
-          {[
-            {
-              title: "Discovery and risk review",
-              body: "We align on hours, access points, incident history, and reporting expectations.",
-            },
-            {
-              title: "Proposal and staffing plan",
-              body: "You get a practical schedule with armed/unarmed recommendations—not generic filler.",
-            },
-            {
-              title: "Deployment and supervision",
-              body: "We onboard your team, set communication channels, and maintain quality checks.",
-            },
-          ].map((step, idx) => (
-            <li key={step.title} className="flex gap-6 py-8 first:pt-6">
+          {OUR_PROCESS_STEPS.map((step, idx) => (
+            <li key={step.name} className="flex gap-6 py-8 first:pt-6">
               <span className="text-sm font-semibold uppercase tracking-wide text-accent-dark">Step {idx + 1}</span>
               <div>
-                <h3 className="text-xl font-semibold text-foreground-on-light">{step.title}</h3>
-                <p className="mt-2 text-base leading-relaxed text-muted-on-light">{step.body}</p>
+                <h3 className="text-xl font-semibold text-foreground-on-light">{step.name}</h3>
+                <p className="mt-2 text-base leading-relaxed text-muted-on-light">{step.detail}</p>
               </div>
             </li>
           ))}
         </ol>
-        <div className="mt-4">
-          <Button href="/our-process" surface="light" variant="ghost" className="px-0 text-accent-dark hover:bg-transparent">
-            Read our full process
-          </Button>
-        </div>
       </SectionBand>
 
       <SectionBand tone="light" innerClassName="max-w-5xl">

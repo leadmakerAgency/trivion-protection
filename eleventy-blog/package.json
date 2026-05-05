@@ -1,0 +1,18 @@
+{
+  "name": "eleventy-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Eleventy static site with Sveltia CMS (GitHub)",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

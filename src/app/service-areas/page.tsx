@@ -17,6 +17,8 @@ export const metadata: Metadata = buildMetadata({
 export default function ServiceAreasIndexPage() {
   return (
     <InteriorPageShell
+      surface="paper"
+      breadcrumbMode="seoOnly"
       breadcrumbs={[{ href: "/service-areas", label: "Service areas" }]}
       title="Service areas"
       description="Use these pages when you need intent-specific coverage guidance—Los Angeles County security
@@ -24,10 +26,10 @@ export default function ServiceAreasIndexPage() {
           national teams."
       headerActions={
         <div className="flex flex-wrap gap-3">
-          <Button href="/service-areas/california" variant="primary">
+          <Button href="/service-areas/california" variant="primary" surface="light">
             California hub
           </Button>
-          <Button href="/service-areas/texas" variant="secondary">
+          <Button href="/service-areas/texas" variant="secondary" surface="light">
             Texas hub
           </Button>
         </div>
@@ -49,44 +51,50 @@ export default function ServiceAreasIndexPage() {
         </ContentProse>
       </SectionBand>
 
-      <SectionBand tone="dark" className="!border-t-0">
+      <SectionBand tone="light" divider={false} className="!border-t-0">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="text-xl font-semibold text-foreground">California</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
+            <h2 className="text-xl font-semibold text-foreground-on-light">California</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-on-light">
               County and metro guides with intros, focus bullets, and recommended services drawn from local risk
               patterns.
             </p>
             <ul className="mt-6 space-y-4 text-sm">
               {californiaAreas.map((a) => (
-                <li key={a.slug} className="border-t border-edge pt-4 first:border-t-0 first:pt-0">
+                <li
+                  key={a.slug}
+                  className="border-t border-surface-light-edge pt-4 first:border-t-0 first:pt-0"
+                >
                   <Link
-                    className="text-base font-semibold text-foreground hover:text-accent hover:underline"
+                    className="text-base font-semibold text-foreground-on-light hover:text-accent-dark hover:underline"
                     href={`/service-areas/california/${a.slug}`}
                   >
                     {a.name}
                   </Link>
-                  <p className="mt-1 text-muted">{a.metaDescription}</p>
+                  <p className="mt-1 text-muted-on-light">{a.metaDescription}</p>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-foreground">Texas</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
+            <h2 className="text-xl font-semibold text-foreground-on-light">Texas</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-on-light">
               Regional hubs for DFW-area programs with patrol, access control, and construction options aligned to
               multi-state governance.
             </p>
             <ul className="mt-6 space-y-4 text-sm">
               {texasAreas.map((a) => (
-                <li key={a.slug} className="border-t border-edge pt-4 first:border-t-0 first:pt-0">
+                <li
+                  key={a.slug}
+                  className="border-t border-surface-light-edge pt-4 first:border-t-0 first:pt-0"
+                >
                   <Link
-                    className="text-base font-semibold text-foreground hover:text-accent hover:underline"
+                    className="text-base font-semibold text-foreground-on-light hover:text-accent-dark hover:underline"
                     href={`/service-areas/texas/${a.slug}`}
                   >
                     {a.name}
                   </Link>
-                  <p className="mt-1 text-muted">{a.metaDescription}</p>
+                  <p className="mt-1 text-muted-on-light">{a.metaDescription}</p>
                 </li>
               ))}
             </ul>

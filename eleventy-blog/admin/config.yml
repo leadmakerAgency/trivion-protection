@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+# Paths are relative to the repository root (leading slash).
+# If you move this site to a dedicated repo with src at repo root, change folder/media_folder to /src/posts and /src/media.
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USER/YOUR_GITHUB_REPO
+  # For OAuth (recommended for non-technical editors), deploy https://github.com/sveltia/sveltia-cms-auth
+  # and set base_url to your worker URL:
+  # base_url: https://your-worker.your-subdomain.workers.dev
+
+# GitHub Pages "project" site (https://user.github.io/repo/): set public_folder to "/YOUR_GITHUB_REPO/media"
+# so Markdown image paths match the deployed URL. For a custom domain at site root, "/media" is fine.
+media_folder: /eleventy-blog/src/media
+public_folder: /media
+
+output:
+  omit_empty_optional_fields: true
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: /eleventy-blog/src/posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - {
+          label: Description,
+          name: description,
+          widget: string,
+          required: false,
+        }
+      - {
+          label: Date,
+          name: date,
+          widget: datetime,
+          type: date,
+          picker_utc: false,
+        }
+      - { label: Body, name: body, widget: markdown }

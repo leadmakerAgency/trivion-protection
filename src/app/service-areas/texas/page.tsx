@@ -16,6 +16,8 @@ export const metadata: Metadata = buildMetadata({
 export default function TexasHubPage() {
   return (
     <InteriorPageShell
+      surface="paper"
+      breadcrumbMode="seoOnly"
       breadcrumbs={[
         { href: "/service-areas", label: "Service areas" },
         { href: "/service-areas/texas", label: "Texas" },
@@ -37,18 +39,21 @@ export default function TexasHubPage() {
         </ContentProse>
       </SectionBand>
 
-      <SectionBand tone="dark" className="!border-t-0">
+      <SectionBand tone="light" divider={false} className="!border-t-0">
         <ul className="grid gap-4 md:grid-cols-2">
           {texasAreas.map((a) => (
-            <li key={a.slug} className="rounded-sm border border-edge bg-card p-5">
+            <li
+              key={a.slug}
+              className="rounded-xl border border-surface-light-edge bg-white p-5 shadow-sm transition hover:border-accent-dark/25"
+            >
               <Link
-                className="text-lg font-semibold text-foreground hover:underline"
+                className="text-lg font-semibold text-foreground-on-light hover:text-accent-dark hover:underline"
                 href={`/service-areas/texas/${a.slug}`}
               >
                 {a.name}
               </Link>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{a.metaDescription}</p>
-              <p className="mt-3 text-xs text-muted">
+              <p className="mt-2 text-sm leading-relaxed text-muted-on-light">{a.metaDescription}</p>
+              <p className="mt-3 text-xs text-muted-on-light">
                 Includes: {a.commonPropertyTypes.slice(0, 2).join(", ")}
                 {a.commonPropertyTypes.length > 2 ? "…" : ""}
               </p>

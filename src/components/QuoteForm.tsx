@@ -13,12 +13,12 @@ const serviceOptions = [
   "Multiple / not sure",
 ];
 
-const fieldClass =
-  "focus-ring w-full rounded-sm border border-edge bg-panel px-3 py-2 text-foreground outline-none";
+type QuoteFormProps = {
+  /** Paper pages use bordered white fields for readability on white backgrounds */
+  surface?: "dark" | "light";
+};
 
-const legendClass = "px-1 text-sm font-semibold text-foreground";
-
-export const QuoteForm = () => {
+export const QuoteForm = ({ surface = "dark" }: QuoteFormProps) => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -62,12 +62,31 @@ export const QuoteForm = () => {
     }
   };
 
+  const isLight = surface === "light";
+  const fieldClass = isLight
+    ? "focus-ring-on-light w-full rounded-sm border border-surface-light-edge bg-white px-3 py-2 text-foreground-on-light placeholder:text-muted-on-light/80 outline-none shadow-sm"
+    : "focus-ring w-full rounded-sm border border-edge bg-panel px-3 py-2 text-foreground outline-none";
+  const legendClass = isLight
+    ? "px-1 text-sm font-semibold text-foreground-on-light"
+    : "px-1 text-sm font-semibold text-foreground";
+  const labelMuted = isLight ? "text-muted-on-light" : "text-muted";
+  const formShell = isLight
+    ? "grid gap-6 rounded-xl border border-surface-light-edge bg-surface-light p-6 shadow-sm sm:p-8"
+    : "grid gap-6 rounded-sm border border-edge bg-card p-6 sm:p-8";
+  const fieldsetShell = isLight
+    ? "grid gap-4 rounded-lg border border-surface-light-edge bg-white p-4 sm:p-5"
+    : "grid gap-4 border border-edge p-4 sm:p-5";
+  const statusClass =
+    status === "success"
+      ? isLight
+        ? "text-accent-dark"
+        : "text-accent"
+      : isLight
+        ? "text-red-700"
+        : "text-red-300";
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="grid gap-6 rounded-sm border border-edge bg-card p-6 sm:p-8"
-      noValidate
-    >
+    <form onSubmit={handleSubmit} className={formShell} noValidate>
       <input
         type="text"
         name="website"
@@ -77,34 +96,34 @@ export const QuoteForm = () => {
         aria-hidden
       />
 
-      <fieldset className="grid gap-4 border border-edge p-4 sm:p-5">
+      <fieldset className={fieldsetShell}>
         <legend className={legendClass}>Contact details</legend>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="grid gap-1 text-sm">
-            <span className="text-muted">Full name</span>
+            <span className={labelMuted}>Full name</span>
             <input name="name" required className={fieldClass} />
           </label>
           <label className="grid gap-1 text-sm">
-            <span className="text-muted">Company</span>
+            <span className={labelMuted}>Company</span>
             <input name="company" className={fieldClass} />
           </label>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="grid gap-1 text-sm">
-            <span className="text-muted">Phone</span>
+            <span className={labelMuted}>Phone</span>
             <input name="phone" required type="tel" className={fieldClass} />
           </label>
           <label className="grid gap-1 text-sm">
-            <span className="text-muted">Email</span>
+            <span className={labelMuted}>Email</span>
             <input name="email" required type="email" className={fieldClass} />
           </label>
         </div>
       </fieldset>
 
-      <fieldset className="grid gap-4 border border-edge p-4 sm:p-5">
+      <fieldset className={fieldsetShell}>
         <legend className={legendClass}>Job details</legend>
         <label className="grid gap-1 text-sm">
-          <span className="text-muted">Service needed</span>
+          <span className={labelMuted}>Service needed</span>
           <select name="service" required className={fieldClass} defaultValue="">
             <option value="" disabled>
               Select an option
@@ -117,11 +136,11 @@ export const QuoteForm = () => {
           </select>
         </label>
         <label className="grid gap-1 text-sm">
-          <span className="text-muted">Site address(es) or cities</span>
+          <span className={labelMuted}>Site address(es) or cities</span>
           <textarea name="locations" required rows={3} className={fieldClass} />
         </label>
         <label className="grid gap-1 text-sm">
-          <span className="text-muted">Hours / schedule needed</span>
+          <span className={labelMuted}>Hours / schedule needed</span>
           <input
             name="schedule"
             placeholder="Example: 24/7, Mon–Fri nights, weekends only"
@@ -129,22 +148,20 @@ export const QuoteForm = () => {
           />
         </label>
         <label className="grid gap-1 text-sm">
-          <span className="text-muted">Details</span>
+          <span className={labelMuted}>Details</span>
           <textarea name="details" rows={4} className={fieldClass} />
         </label>
       </fieldset>
 
       {message ? (
-        <p
-          role="status"
-          className={`text-sm ${status === "success" ? "text-accent" : "text-red-300"}`}
-        >
+        <p role="status" className={`text-sm ${statusClass}`}>
           {message}
         </p>
       ) : null}
       <Button
         type="submit"
         variant="primary"
+        surface={isLight ? "light" : "dark"}
         className="w-full sm:w-auto"
         disabled={status === "loading"}
       >
