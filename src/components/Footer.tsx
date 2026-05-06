@@ -79,9 +79,18 @@ export const Footer = () => {
               </Link>
             ))}
           </nav>
-          <p className="text-muted sm:text-base">
-            © {year} {SITE_NAME}. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-1 text-muted sm:items-end">
+            <p className="sm:text-base">
+              © {year} {SITE_NAME}. All rights reserved.
+            </p>
+            <a
+              href="/llms.txt"
+              aria-label="LLM-readable site index (llms.txt)"
+              className="text-xs text-muted/80 hover:text-accent hover:underline"
+            >
+              llms.txt
+            </a>
+          </div>
         </div>
       </div>
     </footer>
