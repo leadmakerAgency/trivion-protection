@@ -222,10 +222,7 @@ export default function HomePage() {
             );
           })}
         </ul>
-        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-          <Button href="/services" surface="light" variant="secondary">
-            Browse all services
-          </Button>
+        <div className="mt-12 flex justify-center">
           <Button href="/contact" surface="light" variant="primary">
             Get a quote
           </Button>
