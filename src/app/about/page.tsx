@@ -7,7 +7,7 @@ import {
   TbClipboardList,
   TbMail,
   TbMapPin,
-  TbPhoneCall,
+  TbPhone,
   TbShieldCheck,
 } from "react-icons/tb";
 import { Button } from "@/components/Button";
@@ -15,12 +15,7 @@ import { ImageTextBand } from "@/components/ImageTextBand";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { buildMetadata } from "@/lib/seo";
 import { OUR_PROCESS_STEPS } from "@/lib/our-process";
-import {
-  PLACEHOLDER_ADDRESS,
-  PLACEHOLDER_EMAIL,
-  PLACEHOLDER_PHONE,
-  SITE_NAME,
-} from "@/lib/site";
+import { getSiteAddressLines, getSiteContactEmail, getSitePhoneRaw, getSiteTelHref, SITE_NAME } from "@/lib/site";
 import { siteImages } from "@/lib/site-images";
 
 export const metadata: Metadata = buildMetadata({
@@ -54,6 +49,11 @@ const pillars = [
 const processPreview = OUR_PROCESS_STEPS.slice(0, 3);
 
 const AboutPage = () => {
+  const addressLines = getSiteAddressLines();
+  const email = getSiteContactEmail();
+  const phoneDisplay = getSitePhoneRaw();
+  const telHref = getSiteTelHref();
+
   return (
     <InteriorPageShell
       surface="paper"
@@ -73,18 +73,30 @@ const AboutPage = () => {
             <ul className="mt-4 space-y-4 text-sm text-foreground-on-light">
               <li className="flex gap-3">
                 <TbMapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" aria-hidden />
-                <span>{PLACEHOLDER_ADDRESS}</span>
+                <span className="space-y-1">
+                  {addressLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
               </li>
-              <li className="flex gap-3">
-                <TbPhoneCall className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" aria-hidden />
-                <a className="font-medium hover:underline" href={`tel:${PLACEHOLDER_PHONE.replace(/\D/g, "")}`}>
-                  {PLACEHOLDER_PHONE}
-                </a>
-              </li>
+              {phoneDisplay ? (
+                <li className="flex gap-3">
+                  <TbPhone className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" aria-hidden />
+                  {telHref ? (
+                    <a className="font-medium hover:underline" href={telHref}>
+                      {phoneDisplay}
+                    </a>
+                  ) : (
+                    <span>{phoneDisplay}</span>
+                  )}
+                </li>
+              ) : null}
               <li className="flex gap-3">
                 <TbMail className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" aria-hidden />
-                <a className="font-medium hover:underline" href={`mailto:${PLACEHOLDER_EMAIL}`}>
-                  {PLACEHOLDER_EMAIL}
+                <a className="font-medium hover:underline" href={`mailto:${email}`}>
+                  {email}
                 </a>
               </li>
             </ul>

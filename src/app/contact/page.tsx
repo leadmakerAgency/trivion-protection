@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { QuoteForm } from "@/components/QuoteForm";
 import { buildMetadata } from "@/lib/seo";
-import { PLACEHOLDER_EMAIL, PLACEHOLDER_PHONE } from "@/lib/site";
+import { getSiteContactEmail } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact: request a security quote",
@@ -12,6 +12,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function ContactPage() {
+  const email = getSiteContactEmail();
   return (
     <InteriorPageShell
       surface="paper"
@@ -19,8 +20,8 @@ export default function ContactPage() {
       title="Request a quote"
       description={
         <p>
-          Share your site details, hours, and service needs. If email delivery is not configured yet
-          in your deployment, you can still reach us at {PLACEHOLDER_PHONE} or {PLACEHOLDER_EMAIL}.
+          Share your site details, hours, and service needs. If email delivery is not configured yet in your
+          deployment, you can still reach us at {email}.
         </p>
       }
     >

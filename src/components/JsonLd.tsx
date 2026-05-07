@@ -1,4 +1,4 @@
-import { getSiteUrl, SITE_LOGO_PATH, SITE_NAME } from "@/lib/site";
+/** Renders `<script type="application/ld+json">` safely (server components). */
 
 type JsonLdProps = {
   data: Record<string, unknown> | Record<string, unknown>[];
@@ -7,33 +7,6 @@ type JsonLdProps = {
 export const JsonLd = ({ data }: JsonLdProps) => {
   const payload = Array.isArray(data) ? data : [data];
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(payload) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(payload.length === 1 ? payload[0] : payload) }} />
   );
-};
-
-export const organizationSchema = () => {
-  const url = getSiteUrl();
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: SITE_NAME,
-    url,
-    logo: `${url}${SITE_LOGO_PATH}`,
-    sameAs: [],
-    description:
-      "Trivon Protection provides licensed security guard services in Los Angeles County, including armed and unarmed posts, patrol programs, fire watch, construction, and warehouse coverage.",
-  };
-};
-
-export const websiteSchema = () => {
-  const url = getSiteUrl();
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: SITE_NAME,
-    url,
-  };
 };

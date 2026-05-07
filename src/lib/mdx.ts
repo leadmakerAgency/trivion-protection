@@ -5,7 +5,10 @@ import matter from "gray-matter";
 export type MdxFrontmatter = {
   title: string;
   description: string;
+  /** ISO-ish date shown in articles */
   date: string;
+  /** Optional update timestamp for freshness (OG `modified_time`, JSON-LD) */
+  updated?: string;
   author?: string;
   /** Card / hero image path under `public`, e.g. `/images/construction.jpg` */
   coverImage?: string;
@@ -45,6 +48,24 @@ export const getMdxSlugs = (segment: "knowledge" | "blog") => {
     .readdirSync(dir)
     .filter((f) => f.endsWith(".mdx"))
     .map((f) => f.replace(/\.mdx$/, ""));
+};
+
+/** Best-effort last modified: max of file mtime and frontmatter `date` / `updated`. */
+export const getMdxLastModified = (segment: "knowledge" | "blog", slug: string): Date => {
+  const filePath = path.join(process.cwd(), "content", segment, `${slug}.mdx`);
+  let fileMtimeMs = Date.now();
+  if (fs.existsSync(filePath)) {
+    fileMtimeMs = fs.statSync(filePath).mtime.getTime();
+  }
+  const post = getMdxSource(segment, slug);
+  if (!post) return new Date(fileMtimeMs);
+  const publishedMs = new Date(post.meta.date).getTime();
+  let latestMs = Math.max(fileMtimeMs, Number.isNaN(publishedMs) ? 0 : publishedMs);
+  if (post.meta.updated) {
+    const u = new Date(post.meta.updated).getTime();
+    if (!Number.isNaN(u)) latestMs = Math.max(latestMs, u);
+  }
+  return new Date(latestMs);
 };
 
 export type MdxLinkPreview = {

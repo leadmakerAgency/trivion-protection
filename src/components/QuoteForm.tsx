@@ -32,7 +32,6 @@ export const QuoteForm = ({ surface = "dark" }: QuoteFormProps) => {
     const payload = {
       name: String(formData.get("name") ?? ""),
       company: String(formData.get("company") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
       email: String(formData.get("email") ?? ""),
       service: String(formData.get("service") ?? ""),
       locations: String(formData.get("locations") ?? ""),
@@ -50,7 +49,7 @@ export const QuoteForm = ({ surface = "dark" }: QuoteFormProps) => {
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !data.ok) {
         setStatus("error");
-        setMessage(data.error ?? "Something went wrong. Please call or email us.");
+        setMessage(data.error ?? "Something went wrong. Please email us.");
         return;
       }
       setStatus("success");
@@ -108,16 +107,10 @@ export const QuoteForm = ({ surface = "dark" }: QuoteFormProps) => {
             <input name="company" className={fieldClass} />
           </label>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="grid gap-1 text-sm">
-            <span className={labelMuted}>Phone</span>
-            <input name="phone" required type="tel" className={fieldClass} />
-          </label>
-          <label className="grid gap-1 text-sm">
-            <span className={labelMuted}>Email</span>
-            <input name="email" required type="email" className={fieldClass} />
-          </label>
-        </div>
+        <label className="grid gap-1 text-sm">
+          <span className={labelMuted}>Email</span>
+          <input name="email" required type="email" className={fieldClass} />
+        </label>
       </fieldset>
 
       <fieldset className={fieldsetShell}>

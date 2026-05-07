@@ -12,7 +12,7 @@ import { FaqList } from "@/components/FaqList";
 import { ImageTextBand } from "@/components/ImageTextBand";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { SectionBand } from "@/components/SectionBand";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, clipMetaDescription } from "@/lib/seo";
 import { getAreaLandingSectionIcon } from "@/lib/service-landing-icons";
 import { allAreas, type ServiceAreaState } from "@/lib/areas";
 import { getServiceBySlug } from "@/lib/services";
@@ -32,6 +32,10 @@ const POPULAR_SERVICE_SLUGS = [
   "warehouse-security-guards",
 ] as const;
 
+const AreaLocalFocusIcon = getAreaLandingSectionIcon("local-focus");
+const AreaRiskIcon = getAreaLandingSectionIcon("risks");
+const AreaPlanningIcon = getAreaLandingSectionIcon("planning");
+
 export const generateStaticParams = () =>
   allAreas.map((a) => ({ state: a.state, slug: a.slug }));
 
@@ -42,7 +46,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
   if (!area) return {};
   return buildMetadata({
     title: `${area.name} security guards`,
-    description: `${area.metaDescription} ${area.intro.slice(0, 100)}…`,
+    description: clipMetaDescription(`${area.metaDescription} ${area.intro}`, 158),
     path: `/service-areas/${state}/${slug}`,
   });
 };
@@ -59,10 +63,6 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
     state === "california" ? siteImages.guardParkingLot : siteImages.guardWarehouseAisle;
 
   const programSlugs = [...new Set([...area.recommendedServiceSlugs, ...POPULAR_SERVICE_SLUGS])];
-
-  const LocalFocusIcon = getAreaLandingSectionIcon("local-focus");
-  const RiskIcon = getAreaLandingSectionIcon("risks");
-  const PlanningIcon = getAreaLandingSectionIcon("planning");
 
   const pageTitle = `Security guards in ${area.name}`;
 
@@ -112,7 +112,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
               textAlign="center"
               eyebrow={
                 <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent-dark">
-                  <LocalFocusIcon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                  <AreaLocalFocusIcon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
                   Local focus
                 </span>
               }
@@ -149,7 +149,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
               tone="onLight"
               eyebrow={
                 <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent-dark">
-                  <RiskIcon className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
+                  <AreaRiskIcon className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
                   Risk notes
                 </span>
               }
@@ -200,7 +200,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
               tone="onLight"
               eyebrow={
                 <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent-dark">
-                  <PlanningIcon className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
+                  <AreaPlanningIcon className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
                   Checklist
                 </span>
               }

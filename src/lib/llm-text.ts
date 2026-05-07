@@ -139,7 +139,7 @@ export const buildLlmsTxt = (): string => {
     linkLine(
       "Contact",
       absUrl("/contact"),
-      "Request a written quote or talk to operations.",
+      "Request a written quote or email operations.",
     ),
   );
   lines.push("");

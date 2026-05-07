@@ -12,9 +12,11 @@ import { StaffingModelCard } from "@/components/landing/StaffingModelCard";
 import { FaqList } from "@/components/FaqList";
 import { ImageTextBand } from "@/components/ImageTextBand";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
+import { JsonLd } from "@/components/JsonLd";
 import { ResourceLinks } from "@/components/ResourceLinks";
 import { SectionBand } from "@/components/SectionBand";
-import { buildMetadata } from "@/lib/seo";
+import { buildServicePageStructuredData } from "@/lib/jsonld/service-page";
+import { buildMetadata, clipMetaDescription } from "@/lib/seo";
 import { getScenarioIcon, getStaffingIcon } from "@/lib/service-landing-icons";
 import { resolveMdxLinkPreviews } from "@/lib/mdx";
 import { getRelatedServiceSlugs, getServiceBySlug, services, type ServiceCategory } from "@/lib/services";
@@ -45,7 +47,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
   if (!service) return {};
   return buildMetadata({
     title: `${service.title} in Los Angeles`,
-    description: `${service.shortDescription} ${service.whoBenefits.slice(0, 140)}…`,
+    description: clipMetaDescription(`${service.shortDescription} ${service.bestFor}`, 158),
     path: `/services/${slug}`,
   });
 };
@@ -64,19 +66,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const pageTitle = `${service.title} in Los Angeles County`;
 
   return (
-    <InteriorPageShell
-      as="article"
-      surface="paper"
-      className="border-b-0"
-      headerPadding="compact"
-      headerTone="light"
-      breadcrumbMode="seoOnly"
-      suppressVisibleTitle
-      breadcrumbs={[{ href: "/services", label: "Services" }, { href: `/services/${slug}`, label: service.title }]}
-      title={pageTitle}
-      contentWidth="full"
-      contentPad="none"
-    >
+    <>
+      <JsonLd data={buildServicePageStructuredData(service, slug, service.faqs)} />
+      <InteriorPageShell
+        as="article"
+        surface="paper"
+        className="border-b-0"
+        headerPadding="compact"
+        headerTone="light"
+        breadcrumbMode="seoOnly"
+        suppressVisibleTitle
+        breadcrumbs={[
+          { href: "/services", label: "Services" },
+          { href: `/services/${slug}`, label: service.title },
+        ]}
+        title={pageTitle}
+        contentWidth="full"
+        contentPad="none"
+      >
       <div className="space-y-0">
         <LandingMarketingHero
           variant="service"
@@ -289,5 +296,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
       </div>
     </InteriorPageShell>
+    </>
   );
 }

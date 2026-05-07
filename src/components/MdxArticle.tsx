@@ -5,7 +5,6 @@ type MdxTone = "dark" | "light";
 const buildMdxComponents = (tone: MdxTone) => {
   const fg = tone === "light" ? "text-foreground-on-light" : "text-foreground";
   const muted = tone === "light" ? "text-muted-on-light" : "text-muted";
-  const accent = tone === "light" ? "text-accent-dark" : "text-accent";
   const border = tone === "light" ? "border-surface-light-edge" : "border-edge";
   const subtleBg = tone === "light" ? "bg-surface-light" : "bg-panel";
 

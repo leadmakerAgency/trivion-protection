@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { IconType } from "react-icons";
 import {
   TbBuildingSkyscraper,
   TbBuildingWarehouse,
@@ -7,15 +8,18 @@ import {
   TbClipboardCheck,
   TbClock,
   TbCrane,
+  TbFlame,
   TbHeartRateMonitor,
   TbHomeShield,
+  TbMail,
   TbMapPin,
   TbMovie,
-  TbPhoneCall,
   TbReportSearch,
+  TbShield,
   TbShieldCheck,
   TbShoppingCart,
   TbTruckDelivery,
+  TbUserShield,
 } from "react-icons/tb";
 import { Button } from "@/components/Button";
 import { FaqList } from "@/components/FaqList";
@@ -28,15 +32,11 @@ import { homeFaq } from "@/lib/faq";
 import { industries } from "@/lib/industries";
 import { OUR_PROCESS_STEPS } from "@/lib/our-process";
 import { getServiceBySlug, services } from "@/lib/services";
-import { homeDescription, homeTitle } from "@/lib/seo";
+import { buildHomeMetadata } from "@/lib/seo";
 import { siteImages } from "@/lib/site-images";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: homeTitle,
-  description: homeDescription,
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = buildHomeMetadata();
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -75,6 +75,15 @@ const industryIconById: Record<string, typeof TbShoppingCart> = {
   healthcare: TbHeartRateMonitor,
   hospitality: TbBuildingWarehouse,
   "film-production": TbMovie,
+};
+
+const serviceIconBySlug: Record<string, IconType> = {
+  "armed-security-guards": TbShield,
+  "unarmed-security-guards": TbUserShield,
+  "marked-vehicle-patrol-security": TbCar4Wd,
+  "fire-watch-security-guards": TbFlame,
+  "construction-site-security-guards": TbCrane,
+  "warehouse-security-guards": TbTruckDelivery,
 };
 
 export default function HomePage() {
@@ -174,56 +183,52 @@ export default function HomePage() {
       </SectionBand>
 
       <SectionBand tone="light" id="services">
-        <div className="max-w-5xl">
+        <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-accent-dark">Services</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-foreground-on-light sm:text-5xl">
-            Security guard services designed for real Los Angeles risk profiles
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground-on-light sm:text-4xl">
+            Security guard services for every kind of site
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted-on-light">
-            Each program below includes who it fits, a short field summary, and a concrete highlight from post orders so
-            you can compare armed and unarmed posts, patrol, fire watch, construction, and warehouse coverage from one
-            grid. Tap a title when you want the full program dossier.
+          <p className="mt-4 text-base leading-relaxed text-muted-on-light sm:text-lg">
+            Static posts, mobile patrol, fire watch, and industry-specific programs—all built around clear post orders,
+            reporting, and supervision. Open any card for scope, staffing options, and FAQs.
           </p>
         </div>
-        <div className="mt-12">
-          <div className="relative mb-12 aspect-[21/9] max-h-[280px] overflow-hidden rounded-sm border border-surface-light-edge shadow-sm sm:max-h-[320px]">
-            <Image
-              src={siteImages.guardParkingLot}
-              alt="Security officer in a high-visibility vest viewed from behind, mobile patrol, parking structures, and route-based checks."
-              fill
-              className="object-cover object-[center_55%]"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-            <div
-              className="absolute inset-y-0 left-0 z-[1] w-[min(52%,20rem)] bg-surface-light sm:w-[min(45%,24rem)]"
-              aria-hidden
-            />
-            <div className="absolute bottom-4 left-4 z-[2] flex items-center gap-2 rounded-sm border border-surface-light-edge bg-white px-3 py-2 text-foreground-on-light shadow-sm">
-              <TbCar4Wd className="h-7 w-7 shrink-0 text-accent-dark" aria-hidden />
-              <span className="max-w-[12rem] text-xs font-semibold uppercase leading-tight tracking-wide text-muted-on-light">
-                Mobile & marked patrol
-              </span>
-            </div>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="group rounded-sm border border-surface-light-edge bg-white px-6 py-6 shadow-sm transition-colors hover:border-accent-dark/35"
-              >
-                <h3 className="text-xl font-semibold text-foreground-on-light group-hover:underline">
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-foreground-on-light/90">{s.bestFor}</p>
-                <p className="mt-3 text-base leading-relaxed text-muted-on-light">{s.shortDescription}</p>
-                <p className="mt-4 text-sm leading-relaxed text-muted-on-light">
-                  <span className="font-medium text-foreground-on-light">Field highlight: </span>
-                  {s.highlights[0]}
-                </p>
-              </Link>
-            ))}
-          </div>
+        <ul className="mt-14 grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s) => {
+            const Icon = serviceIconBySlug[s.slug] ?? TbShieldCheck;
+            return (
+              <li key={s.slug}>
+                <Link
+                  href={`/services/${s.slug}`}
+                  className="group flex h-full flex-col rounded-sm border border-surface-light-edge bg-white p-6 text-left shadow-sm transition-[border-color,box-shadow] hover:border-accent-dark/35 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-dark"
+                >
+                  <div
+                    className="flex h-11 w-11 items-center justify-center rounded-sm bg-accent-dark/10 text-accent-dark"
+                    aria-hidden
+                  >
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-foreground-on-light">{s.title}</h3>
+                  <p className="mt-2 text-sm font-medium leading-snug text-foreground-on-light/85">{s.bestFor}</p>
+                  <p className="mt-3 flex-1 text-base leading-relaxed text-muted-on-light">{s.shortDescription}</p>
+                  <span className="mt-5 text-sm font-semibold text-accent-dark">
+                    View program{" "}
+                    <span className="inline transition-transform group-hover:translate-x-0.5" aria-hidden>
+                      →
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+          <Button href="/services" surface="light" variant="secondary">
+            Browse all services
+          </Button>
+          <Button href="/contact" surface="light" variant="primary">
+            Get a quote
+          </Button>
         </div>
       </SectionBand>
 
@@ -247,9 +252,10 @@ export default function HomePage() {
                 label: "California-first programs with regional playbooks when you operate in multiple metros.",
               },
               {
-                icon: <TbPhoneCall />,
-                headline: "24/7 coordination line",
-                label: "A staffed path for urgent shift changes, incidents, and escalation, not a dead voicemail box.",
+                icon: <TbMail />,
+                headline: "Email-first coordination",
+                label:
+                  "A clear channel for urgent scheduling updates, incidents, and escalation—with written follow-through so details do not vanish.",
               },
               {
                 icon: <TbClock />,

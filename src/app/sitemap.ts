@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allAreas } from "@/lib/areas";
-import { getMdxSlugs } from "@/lib/mdx";
+import { getMdxLastModified, getMdxSlugs } from "@/lib/mdx";
 import { getSiteUrl } from "@/lib/site";
 import { services } from "@/lib/services";
 
@@ -20,11 +20,16 @@ const staticPaths = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
-  const lastModified = new Date();
+  const fallbackLastMod = new Date();
+  const staticLastModFromEnv = process.env.NEXT_PUBLIC_SITE_STATIC_LASTMOD_ISO;
+  const staticLastModified =
+    staticLastModFromEnv && !Number.isNaN(new Date(staticLastModFromEnv).getTime())
+      ? new Date(staticLastModFromEnv)
+      : fallbackLastMod;
 
   const routes: MetadataRoute.Sitemap = staticPaths.map((path) => ({
     url: `${base}${path}`,
-    lastModified,
+    lastModified: staticLastModified,
     changeFrequency: path === "/" ? "weekly" : "monthly",
     priority: path === "/" ? 1 : 0.7,
   }));
@@ -32,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   services.forEach((s) => {
     routes.push({
       url: `${base}/services/${s.slug}`,
-      lastModified,
+      lastModified: staticLastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     });
@@ -41,7 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   allAreas.forEach((a) => {
     routes.push({
       url: `${base}/service-areas/${a.state}/${a.slug}`,
-      lastModified,
+      lastModified: staticLastModified,
       changeFrequency: "monthly",
       priority: a.slug === "los-angeles-county" ? 0.9 : 0.65,
     });
@@ -50,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   getMdxSlugs("knowledge").forEach((slug) => {
     routes.push({
       url: `${base}/knowledge/${slug}`,
-      lastModified,
+      lastModified: getMdxLastModified("knowledge", slug),
       changeFrequency: "monthly",
       priority: 0.6,
     });
@@ -59,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   getMdxSlugs("blog").forEach((slug) => {
     routes.push({
       url: `${base}/blog/${slug}`,
-      lastModified,
+      lastModified: getMdxLastModified("blog", slug),
       changeFrequency: "monthly",
       priority: 0.55,
     });

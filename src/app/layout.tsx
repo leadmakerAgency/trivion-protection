@@ -3,7 +3,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
-import { JsonLd, organizationSchema, websiteSchema } from "@/components/JsonLd";
+import { JsonLd } from "@/components/JsonLd";
+import { buildSiteStructuredDataGraph } from "@/lib/jsonld/site-graph";
 import { getSiteUrl, SITE_LOGO_PATH, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -24,10 +25,12 @@ export const metadata: Metadata = {
     apple: SITE_LOGO_PATH,
   },
   openGraph: {
-    images: [{ url: SITE_LOGO_PATH, alt: `${SITE_NAME} logo` }],
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_US",
   },
   twitter: {
-    images: [SITE_LOGO_PATH],
+    card: "summary_large_image",
   },
 };
 
@@ -42,7 +45,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-background text-foreground antialiased"
         suppressHydrationWarning
       >
-        <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        <JsonLd data={buildSiteStructuredDataGraph()} />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <Footer />

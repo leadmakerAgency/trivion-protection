@@ -5,7 +5,6 @@ import { z } from "zod";
 const bodySchema = z.object({
   name: z.string().min(2),
   company: z.string().optional(),
-  phone: z.string().min(7),
   email: z.string().email(),
   service: z.string().min(2),
   locations: z.string().min(4),
@@ -40,19 +39,18 @@ export const POST = async (request: Request) => {
 
   if (!apiKey || !to || !from) {
     return NextResponse.json(
-      { ok: false, error: "Email is not configured yet. Please contact us by phone." },
+      { ok: false, error: "Email is not configured yet. Please try again later or email us directly." },
       { status: 500 },
     );
   }
 
   const resend = new Resend(apiKey);
-  const { name, company, phone, email, service, locations, schedule, details } = parsed.data;
+  const { name, company, email, service, locations, schedule, details } = parsed.data;
 
   const html = `
     <h2>New quote request: Trivon Protection</h2>
     <p><strong>Name:</strong> ${escapeHtml(name)}</p>
     <p><strong>Company:</strong> ${escapeHtml(company ?? "")}</p>
-    <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Service:</strong> ${escapeHtml(service)}</p>
     <p><strong>Locations:</strong><br/>${escapeHtml(locations).replace(/\n/g, "<br/>")}</p>

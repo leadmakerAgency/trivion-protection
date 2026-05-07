@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import {
-  PLACEHOLDER_ADDRESS,
-  PLACEHOLDER_EMAIL,
-  PLACEHOLDER_PHONE,
-  SITE_NAME,
-} from "@/lib/site";
+import { getSiteAddressLines, getSiteContactEmail, getSitePhoneRaw, getSiteTelHref, SITE_NAME } from "@/lib/site";
 import { services } from "@/lib/services";
 import { imageAttribution } from "@/lib/site-images";
 
@@ -21,6 +16,11 @@ const footerLinks = [
 
 export const Footer = () => {
   const year = new Date().getFullYear();
+  const email = getSiteContactEmail();
+  const phoneDisplay = getSitePhoneRaw();
+  const telHref = getSiteTelHref();
+  const addressLines = getSiteAddressLines();
+
   return (
     <footer className="border-t border-edge bg-background">
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10">
@@ -34,23 +34,26 @@ export const Footer = () => {
               California-licensed professionals. Insurance and supervision aligned to professional
               standards, details confirmed during onboarding.
             </p>
-            <p className="mt-4 text-sm text-muted">
-              Placeholder contact details, replace before launch.
-            </p>
             <p className="mt-3 text-xs leading-relaxed text-muted/80">{imageAttribution}</p>
           </div>
           <div className="md:border-r md:border-solid md:border-edge md:px-2 lg:px-4">
             <p className="text-base font-semibold text-foreground">Contact</p>
             <ul className="mt-3 space-y-2 text-base text-muted">
-              <li>{PLACEHOLDER_ADDRESS}</li>
+              {addressLines.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+              {phoneDisplay && telHref ? (
+                <li>
+                  <a className="hover:text-accent hover:underline" href={telHref}>
+                    {phoneDisplay}
+                  </a>
+                </li>
+              ) : phoneDisplay ? (
+                <li>{phoneDisplay}</li>
+              ) : null}
               <li>
-                <a className="hover:text-accent hover:underline" href={`tel:${PLACEHOLDER_PHONE}`}>
-                  {PLACEHOLDER_PHONE}
-                </a>
-              </li>
-              <li>
-                <a className="hover:text-accent hover:underline" href={`mailto:${PLACEHOLDER_EMAIL}`}>
-                  {PLACEHOLDER_EMAIL}
+                <a className="hover:text-accent hover:underline" href={`mailto:${email}`}>
+                  {email}
                 </a>
               </li>
             </ul>
