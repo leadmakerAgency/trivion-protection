@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArchiveSidebar } from "@/components/ArchiveSidebar";
+import { ArchiveIndexPanel } from "@/components/ArchiveIndexPanel";
 import { ArchiveArticleCard } from "@/components/ArchiveArticleCard";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { buildMetadata } from "@/lib/seo";
@@ -18,21 +18,19 @@ export default function KnowledgeIndexPage() {
   return (
     <InteriorPageShell
       surface="paper"
-      pageTone="archive"
       breadcrumbs={[{ href: "/knowledge", label: "Knowledge" }]}
       title="Knowledge base"
       description="Evergreen guides for hiring managers comparing Los Angeles security vendors and scoped to help you
           procure the right coverage, not to replace a licensed consultation at your location."
       headerClassName="pb-10"
-      sidebar={
-        <ArchiveSidebar
+      contentWidth="wide"
+    >
+      <div>
+        <ArchiveIndexPanel
           segment="knowledge"
           surface="light"
           recent={posts.slice(0, 5).map((p) => ({ slug: p.slug, title: p.title }))}
         />
-      }
-    >
-      <div>
         {posts.length === 0 ? (
           <p className="text-sm text-muted-on-light">Articles are loading soon.</p>
         ) : (

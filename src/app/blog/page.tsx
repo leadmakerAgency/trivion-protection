@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArchiveSidebar } from "@/components/ArchiveSidebar";
+import { ArchiveIndexPanel } from "@/components/ArchiveIndexPanel";
 import { ArchiveArticleCard } from "@/components/ArchiveArticleCard";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { buildMetadata } from "@/lib/seo";
@@ -18,20 +18,18 @@ export default function BlogIndexPage() {
   return (
     <InteriorPageShell
       surface="paper"
-      pageTone="archive"
       breadcrumbs={[{ href: "/blog", label: "Blog" }]}
       title="Blog"
       description="Short articles for Los Angeles County operators covering policy, field practice, hiring, and stronger security outcomes, without filler."
       headerClassName="pb-10"
-      sidebar={
-        <ArchiveSidebar
+      contentWidth="wide"
+    >
+      <div>
+        <ArchiveIndexPanel
           segment="blog"
           surface="light"
           recent={posts.slice(0, 5).map((p) => ({ slug: p.slug, title: p.title }))}
         />
-      }
-    >
-      <div>
         <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-2">
           {posts.map((p) => (
             <ArchiveArticleCard

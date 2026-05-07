@@ -94,9 +94,9 @@ export const InteriorPageShell = ({
       className={
         isArchive
           ? isPaper
-            ? "rounded-lg border border-surface-light-edge bg-surface-light px-5 py-6 text-sm text-foreground-on-light shadow-sm lg:sticky lg:top-24 lg:self-start"
-            : "rounded-sm border border-edge bg-panel px-5 py-6 text-sm text-foreground shadow-content lg:sticky lg:top-24 lg:self-start"
-          : "border-t border-edge pt-8 text-sm text-muted lg:sticky lg:top-24 lg:self-start lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0"
+            ? "rounded-lg border border-surface-light-edge bg-surface-light px-5 py-6 text-sm text-foreground-on-light shadow-sm lg:self-start"
+            : "rounded-sm border border-edge bg-panel px-5 py-6 text-sm text-foreground shadow-content lg:self-start"
+          : "border-t border-edge pt-8 text-sm text-muted lg:self-start lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0"
       }
     >
       {sidebar}
@@ -122,8 +122,6 @@ export const InteriorPageShell = ({
     </div>
   );
 
-  const rootBorder =
-    effectiveHeaderTone === "light" || isPaper ? "border-surface-light-edge" : "border-edge";
   const rootBg = isPaper ? "bg-white" : effectiveHeaderTone === "light" ? "bg-surface-light" : "bg-surface";
 
   const headerChrome = suppressVisibleTitle ? (
@@ -150,13 +148,10 @@ export const InteriorPageShell = ({
     </div>
   );
 
-  const archiveBodyShell =
-    isPaper
-      ? "border-t border-surface-light-edge bg-white"
-      : "border-t border-surface-light-edge bg-surface-light";
+  const archiveBodyShell = isPaper ? "bg-white" : "bg-surface-light";
 
   return (
-    <Root className={`border-b ${rootBorder} ${rootBg} ${className}`}>
+    <Root className={`${rootBg} ${className}`}>
       {headerChrome}
       {isArchive ? <div className={archiveBodyShell}>{body}</div> : body}
     </Root>

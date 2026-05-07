@@ -12,10 +12,15 @@ type Mega = "services" | "areas" | null;
 type MainLink = { href: string; label: string; ariaLabel?: string };
 
 const mainLinks: MainLink[] = [
-  { href: "/about", label: "About Us", ariaLabel: "About Trivon Protection" },
   { href: "/industries", label: "Industries", ariaLabel: "Industries we serve" },
   { href: "/blog", label: "Blog" },
 ];
+
+const aboutLink: MainLink = {
+  href: "/about",
+  label: "About Us",
+  ariaLabel: "About Trivon Protection",
+};
 
 const navLinkClass =
   "focus-ring shrink-0 whitespace-nowrap rounded-sm px-3 py-2.5 text-sm font-medium text-foreground/90 hover:bg-panel hover:text-foreground";
@@ -302,6 +307,9 @@ export const SiteNavigation = () => {
               {l.label}
             </Link>
           ))}
+          <Link href={aboutLink.href} className={navLinkClass} aria-label={aboutLink.ariaLabel}>
+            {aboutLink.label}
+          </Link>
         </div>
       </div>
 
@@ -411,6 +419,14 @@ export const SiteNavigation = () => {
                 {l.label}
               </Link>
             ))}
+            <Link
+              href={aboutLink.href}
+              className="border-t border-edge px-4 py-2.5 text-sm font-medium hover:bg-panel"
+              aria-label={aboutLink.ariaLabel}
+              onClick={() => setMobileOpen(false)}
+            >
+              {aboutLink.label}
+            </Link>
 
             <div className="mt-1 flex flex-col gap-2 border-t border-edge px-4 py-3">
               <Button href="/contact" variant="primary" onClick={() => setMobileOpen(false)}>

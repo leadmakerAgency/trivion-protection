@@ -57,18 +57,19 @@ const AboutPage = () => {
   return (
     <InteriorPageShell
       surface="paper"
-      pageTone="archive"
       contentWidth="wide"
       breadcrumbs={[{ href: "/about", label: "About" }]}
       title="About Trivon Protection"
       description={`${SITE_NAME} is a Los Angeles County security guard company built for operators who need programs that are easy to run: clear post orders, consistent supervision, and documentation that holds up when something goes wrong.`}
       contentClassName="space-y-16 sm:space-y-20 pb-20 text-sm leading-relaxed text-muted-on-light"
-      sidebar={
-        <div className="space-y-8">
+    >
+      <section
+        aria-label="Contact and related pages"
+        className="rounded-xl border border-surface-light-edge bg-surface-light p-6 shadow-sm sm:p-8"
+      >
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-on-light">
-              At a glance
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-on-light">At a glance</p>
             <ul className="mt-4 space-y-4 text-sm text-foreground-on-light">
               <li className="flex gap-3">
                 <TbMapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" aria-hidden />
@@ -88,11 +89,9 @@ const AboutPage = () => {
               </li>
             </ul>
           </div>
-          <nav aria-label="Related pages" className="border-t border-surface-light-edge pt-6">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-on-light">
-              Explore
-            </p>
-            <ul className="mt-3 flex flex-col gap-2">
+          <nav aria-label="Related pages">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-on-light">Explore</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {[
                 { href: "/services", label: "Services" },
                 { href: "/industries", label: "Industries" },
@@ -114,8 +113,8 @@ const AboutPage = () => {
             </ul>
           </nav>
         </div>
-      }
-    >
+      </section>
+
       <ImageTextBand
         imageSrc={siteImages.teamPersonnel}
         imageAlt="Security professionals in uniform coordinating near a commercial building, team-based coverage and supervised field operations."
@@ -212,7 +211,7 @@ const AboutPage = () => {
               .
             </p>
           </div>
-          <div className="relative min-h-[220px] border-t border-surface-light-edge lg:border-l lg:border-t-0">
+          <div className="relative min-h-[220px] lg:min-h-full">
             <Image
               src={siteImages.corporateAccess}
               alt="Corporate building lobby and access control context, professional environments where clear visitor rules and guard presence reduce incidents."

@@ -24,6 +24,17 @@ npm run dev
 
 Open http://localhost:8080 (or the port Eleventy prints). The admin UI is at http://localhost:8080/admin/.
 
+## Same CMS on the Next.js site (Vercel)
+
+This repo’s production site is **Next.js**, not Eleventy-only hosting. Static files under Next’s [`public/`](https://nextjs.org/docs/app/building-your-application/optimizing/static-assets) are served at the site root.
+
+- **Source of truth:** [`admin/config.yml`](admin/config.yml) (and `index.html`) live under **`eleventy-blog/admin/`** only.
+- **Deploy:** Root [`package.json`](../package.json) runs [`scripts/copy-sveltia-admin.cjs`](../scripts/copy-sveltia-admin.cjs) via **`prebuild`** and **`predev`**, copying `eleventy-blog/admin` → **`public/admin/`** before `next build` / `next dev`.
+- **URL:** After deploy, open **`https://<your-domain>/admin`** (e.g. `https://trivion-protection.vercel.app/admin`).
+- **`public/admin/`** is gitignored; do not edit it by hand—it is regenerated every build/dev.
+
+OAuth **Authorization callback** / GitHub OAuth **Homepage URL** should include this production `/admin` origin if you log in from Vercel.
+
 ## Configure Sveltia (`admin/config.yml`)
 
 1. **`backend.repo`** — Set to `YOUR_GITHUB_USER/YOUR_GITHUB_REPO` (the repo that contains `eleventy-blog/`).
