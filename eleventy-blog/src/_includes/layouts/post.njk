@@ -3,9 +3,23 @@ layout: layouts/base.njk
 ---
 <article class="post">
   <header class="post-header">
+    {% if hero_emoji %}<p class="post-hero-emoji" aria-hidden="true">{{ hero_emoji }}</p>{% endif %}
     <h1>{{ title }}</h1>
     {% if date %}<p class="post-meta"><time datetime="{{ date }}">{{ date }}</time></p>{% endif %}
-    {% if description %}<p class="post-dek">{{ description }}</p>{% endif %}
+    {% set dek = excerpt or description %}
+    {% if dek %}<p class="post-dek">{{ dek }}</p>{% endif %}
+    {% if tags %}
+    <ul class="post-tags" aria-label="Tags">
+      {% for tag in tags %}
+        <li>{{ tag }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
   </header>
+  {% if featured_image %}
+  <figure class="post-featured">
+    <img src="{{ featured_image | url }}" alt="" decoding="async" loading="lazy" />
+  </figure>
+  {% endif %}
   <div class="post-body">{{ content | safe }}</div>
 </article>

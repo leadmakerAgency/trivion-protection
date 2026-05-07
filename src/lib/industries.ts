@@ -19,7 +19,7 @@ export const industries: IndustryItem[] = [
       "Customer-forward presence, after-hours lockup routines, and parking structure patrol touchpoints for high-theft environments.",
     challenges: [
       "Parking structures concentrate theft and disorder on predictable nights.",
-      "Tenant mix changes faster than post orders—guards need clear boundaries.",
+      "Tenant mix changes faster than post orders, guards need clear boundaries.",
     ],
     typicalPosts: [
       "Lobby or corridor visibility during peaks",
@@ -136,7 +136,7 @@ export const industries: IndustryItem[] = [
       "After-hours perimeter and parking support",
     ],
     reportingTips: [
-      "Minimize PHI in security logs—record facts needed for safety only.",
+      "Minimize PHI in security logs, record facts needed for safety only.",
       "Align escalation names with on-call clinical leadership.",
     ],
     primaryServiceSlug: "unarmed-security-guards",

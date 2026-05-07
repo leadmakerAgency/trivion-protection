@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 # Paths are relative to the repository root (leading slash).
-# If you move this site to a dedicated repo with src at repo root, change folder/media_folder to /src/posts and /src/media.
+# If you move this site to its own repo with src at repo root, change folder/media_folder to /src/posts and /src/media.
 
 backend:
   name: github
@@ -9,8 +9,7 @@ backend:
   # and set base_url to your worker URL:
   # base_url: https://your-worker.your-subdomain.workers.dev
 
-# GitHub Pages "project" site (https://user.github.io/repo/): set public_folder to "/YOUR_GITHUB_REPO/media"
-# so Markdown image paths match the deployed URL. For a custom domain at site root, "/media" is fine.
+# GitHub Pages project site: set public_folder to "/YOUR_GITHUB_REPO/media" so uploads match deployed URLs.
 media_folder: /eleventy-blog/src/media
 public_folder: /media
 
@@ -23,22 +22,71 @@ collections:
     label_singular: Post
     folder: /eleventy-blog/src/posts
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
     extension: md
     format: frontmatter
     fields:
-      - { label: Title, name: title, widget: string }
       - {
-          label: Description,
-          name: description,
+          label: Title,
+          name: title,
           widget: string,
+          required: true,
+        }
+      - {
+          label: Slug,
+          name: slug,
+          widget: string,
+          required: true,
+          hint: "URL-friendly slug, e.g. airbnb-cleaning-cambridge",
+          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        }
+      - {
+          label: Publish Date,
+          name: date,
+          widget: datetime,
+          required: true,
+          default: "{{now}}",
+          picker_utc: true,
+        }
+      - {
+          label: Excerpt,
+          name: excerpt,
+          widget: text,
+          required: true,
+          hint: "Short summary shown on the blog list and in SEO.",
+        }
+      - {
+          label: Featured Image,
+          name: featured_image,
+          widget: image,
+          required: false,
+          hint: "Optional thumbnail image shown on the blog list.",
+        }
+      - {
+          label: Hero Emoji,
+          name: hero_emoji,
+          widget: string,
+          required: false,
+          maxlength: 16,
+          hint: "Optional emoji used in the blog card thumbnail.",
+        }
+      - {
+          label: Tags,
+          name: tags,
+          widget: list,
+          required: false,
+          hint: "One tag per line (simple list).",
+        }
+      - {
+          label: Draft,
+          name: draft,
+          widget: boolean,
+          default: false,
           required: false,
         }
       - {
-          label: Date,
-          name: date,
-          widget: datetime,
-          type: date,
-          picker_utc: false,
+          label: Body,
+          name: body,
+          widget: markdown,
+          required: true,
         }
-      - { label: Body, name: body, widget: markdown }

@@ -1,3 +1,5 @@
+import { getPublishInstant, isPublishedForSite } from "./lib/publish-utils.js";
+
 /**
  * GitHub Pages (project site): set ELEVENTY_PATH_PREFIX, e.g. my-repo or /my-repo/
  * User/org site or custom domain: leave unset (defaults to site root).
@@ -17,6 +19,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("src/media");
   eleventyConfig.addPassthroughCopy("src/css");
+
+  eleventyConfig.addCollection("publishedPosts", (collectionApi) => {
+    return collectionApi.getFilteredByTag("posts").filter((item) => isPublishedForSite(item.data)).sort((a, b) => {
+      const ta = getPublishInstant(a.data.date) ?? 0;
+      const tb = getPublishInstant(b.data.date) ?? 0;
+      return ta - tb;
+    });
+  });
 
   return {
     pathPrefix: pathPrefix === "/" ? undefined : pathPrefix,

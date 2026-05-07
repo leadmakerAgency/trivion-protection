@@ -10,7 +10,9 @@ Static blog under `eleventy-blog/` in this repository.
 | `src/posts/` | Markdown entries (edited via CMS or locally) |
 | `src/media/` | Uploaded media (copied to `_site/media`) |
 | `admin/` | Sveltia `index.html` + `config.yml` (copied verbatim to `_site/admin`; kept outside `src/` so Eleventy does not process `index.html` as a template) |
-| `_site/` | Build output (gitignored) | [Eleventy](https://www.11ty.dev/) builds Markdown in `src/posts/` into `_site/`. [Sveltia CMS](https://sveltiacms.app/) runs in the browser at `/admin/` and commits content to GitHub via the API.
+| `_site/` | Build output (gitignored) |
+
+[Eleventy](https://www.11ty.dev/) builds Markdown in `src/posts/` into `_site/`. [Sveltia CMS](https://sveltiacms.app/) runs in the browser at `/admin/` and commits content to GitHub via the API.
 
 ## Quick start (local)
 
@@ -37,6 +39,24 @@ Open http://localhost:8080 (or the port Eleventy prints). The admin UI is at htt
 
    - **Project site** (`https://<user>.github.io/<repo>/`): set `public_folder` to `/<repo>/media` so Markdown images resolve under the same prefix as the build (`ELEVENTY_PATH_PREFIX` in CI should match the repo name).
    - **Site at domain root** (custom domain or `username.github.io` with no subpath): keep `public_folder: /media` and set `ELEVENTY_PATH_PREFIX` empty when building (see below).
+
+## Post fields (`admin/config.yml`)
+
+Each post uses YAML front matter shaped by the **Posts** collection. Current fields:
+
+| Field | Role |
+| --- | --- |
+| `title` | Display title (required). |
+| `slug` | URL-safe segment used in the **filename** (required). Lowercase letters, digits, hyphens only (`pattern` in config). Not automatically used as the Eleventy URL path; URLs still come from the file stem (see [`src/posts/posts.11tydata.js`](src/posts/posts.11tydata.js)). |
+| `date` | Publish instant for scheduling (required). Stored with **`picker_utc: true`** as ISO strings ending in `Z`. Default in the CMS is `{{now}}`. |
+| `excerpt` | Short summary for listings, meta description, RSS (required). Legacy **`description`** is still read by templates if `excerpt` is missing. |
+| `featured_image` | Optional image path under `public_folder` / media uploads. |
+| `hero_emoji` | Optional short string for a decorative emoji in the post header. |
+| `tags` | Optional **simple list** (newline-separated in the CMS UI → array of strings in YAML). |
+| `draft` | When `true`, excluded from production builds until cleared. |
+| `body` | Main Markdown content. |
+
+**Filename pattern:** Sveltia saves files as `{{year}}-{{month}}-{{day}}-{{fields.slug}}.md` under `src/posts/`.
 
 ## Authentication (GitHub backend)
 
@@ -70,6 +90,28 @@ Sveltia does **not** use Netlify Git Gateway. Pick one:
 4. **Collaborators**: Editors need **write** access to the repository so the CMS can push commits.
 
 5. **CSP**: If you add a Content Security Policy to the site, allow requests required by Sveltia and GitHub per [Sveltia security docs](https://sveltiacms.app/en/docs/security#setting-up-content-security-policy).
+
+6. **`ELEVENTY_SITE_URL`**: Set in CI (see workflow) to your public origin **without a trailing slash** (e.g. `https://<user>.github.io`). Eleventy’s `pathPrefix` still adds `/<repo>/` to paths; RSS `link`/`guid` values combine origin + `post.url`. For a custom domain, change this env in the workflow.
+
+7. **Scheduled rebuild**: The workflow runs on a **cron** (hourly UTC by default) so posts with a **Publish date** in the past are included on the next build without a new Git push. GitHub Actions cron is not minute-precise.
+
+## Drafts and scheduling
+
+Sveltia saves to Git **immediately**; there is no built-in “publish later” queue in the CMS. This project handles drafts and scheduling at **build time**:
+
+| Front matter | Behavior in production builds |
+| --- | --- |
+| **`draft: true`** | No HTML output and not listed in `/`, `/posts/`, or RSS until you set `draft: false`. |
+| **`date`** (Publish date) | **ISO datetimes** (e.g. from the CMS with UTC picker) use that instant. Plain **`YYYY-MM-DD`** alone is still treated as **00:00 UTC** that day. Until `now` (build time) is past the resolved instant, the post is scheduled: **no output**, excluded from listings/RSS. |
+
+**Preview locally** (show drafts and/or future-dated posts as normal published posts):
+
+- PowerShell: `$env:SHOW_DRAFTS='1'; $env:SHOW_FUTURE='1'; npm run dev`
+- Bash: `SHOW_DRAFTS=1 SHOW_FUTURE=1 npm run dev`
+
+Leave both unset in CI so production matches “live” content only.
+
+**RSS** (`/feed.xml`) lists only `publishedPosts` (same rules). [`src/_data/site.js`](src/_data/site.js) exposes `site.url` from `ELEVENTY_SITE_URL`.
 
 ## Limits (from upstream docs)
 

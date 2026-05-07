@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PLACEHOLDER_EMAIL, PLACEHOLDER_PHONE } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Contact — request a security quote",
+  title: "Contact: request a security quote",
   description:
     "Request a quote for Los Angeles County security guards: armed and unarmed posts, patrol, fire watch, construction, and warehouse programs.",
   path: "/contact",

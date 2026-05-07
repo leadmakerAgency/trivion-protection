@@ -54,7 +54,7 @@ export const QuoteForm = ({ surface = "dark" }: QuoteFormProps) => {
         return;
       }
       setStatus("success");
-      setMessage("Thanks — we received your request and will follow up shortly.");
+      setMessage("Thanks. We received your request and will follow up shortly.");
       form.reset();
     } catch {
       setStatus("error");

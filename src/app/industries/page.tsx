@@ -13,7 +13,7 @@ import { siteImages } from "@/lib/site-images";
 export const metadata: Metadata = buildMetadata({
   title: "Industries we serve in Los Angeles",
   description:
-    "Deep industry briefs for retail, corporate, logistics, construction, HOAs, healthcare, hospitality, and production—challenges, typical posts, reporting tips, and links to services and guides.",
+    "Deep industry briefs for retail, corporate, logistics, construction, HOAs, healthcare, hospitality, and production, challenges, typical posts, reporting tips, and links to services and guides.",
   path: "/industries",
 });
 
@@ -35,7 +35,7 @@ export default function IndustriesPage() {
       breadcrumbs={[{ href: "/industries", label: "Industries" }]}
       title="Industries we serve"
       description="Los Angeles County is a portfolio of different risk profiles. These briefs translate how we
-          staff, supervise, and report for each vertical—so procurement and operations share the same vocabulary."
+          staff, supervise, and report for each vertical, so procurement and operations share the same vocabulary."
       contentWidth="wide"
       contentPad="none"
       contentClassName="pb-0"
@@ -63,7 +63,7 @@ export default function IndustriesPage() {
                 >
                   <Image
                     src={img}
-                    alt={`${industry.title} — security operations context`}
+                    alt={`${industry.title}: security operations context`}
                     fill
                     className="object-cover object-center"
                     sizes="(max-width: 1024px) 100vw, 45vw"

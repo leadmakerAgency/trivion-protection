@@ -7,7 +7,7 @@ import { getKnowledgeIndex } from "@/lib/mdx";
 import { resolveKnowledgeCover } from "@/lib/knowledge-covers";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Knowledge base — Los Angeles security guides",
+  title: "Knowledge base: Los Angeles security guides",
   description:
     "Evergreen guides on Los Angeles security guard costs, armed vs unarmed coverage, fire watch basics, and construction site loss prevention from Trivon Protection.",
   path: "/knowledge",
@@ -21,7 +21,7 @@ export default function KnowledgeIndexPage() {
       pageTone="archive"
       breadcrumbs={[{ href: "/knowledge", label: "Knowledge" }]}
       title="Knowledge base"
-      description="Evergreen guides for hiring managers comparing Los Angeles security vendors—scoped to help you
+      description="Evergreen guides for hiring managers comparing Los Angeles security vendors and scoped to help you
           procure the right coverage, not to replace a licensed consultation at your location."
       headerClassName="pb-10"
       sidebar={

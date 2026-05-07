@@ -8,9 +8,9 @@ import { buildMetadata } from "@/lib/seo";
 import { californiaAreas, texasAreas } from "@/lib/areas";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Service areas — California and Texas",
+  title: "Service areas: California and Texas",
   description:
-    "California-first localized pages for Los Angeles County and regional metros, plus Texas hubs for multi-state operators—each with property context, risk notes, and recommended service mixes.",
+    "California-first localized pages for Los Angeles County and regional metros, plus Texas hubs for multi-state operators, each with property context, risk notes, and recommended service mixes.",
   path: "/service-areas",
 });
 
@@ -21,7 +21,7 @@ export default function ServiceAreasIndexPage() {
       breadcrumbMode="seoOnly"
       breadcrumbs={[{ href: "/service-areas", label: "Service areas" }]}
       title="Service areas"
-      description="Use these pages when you need intent-specific coverage guidance—Los Angeles County security
+      description="Use these pages when you need intent-specific coverage guidance, Los Angeles County security
           guards, Orange County mixed-use programs, Inland Empire logistics, or Texas regional standards for
           national teams."
       headerActions={
@@ -46,7 +46,7 @@ export default function ServiceAreasIndexPage() {
           </p>
           <p>
             Each localized page includes property archetypes, risk notes, a planning checklist, recommended service
-            mixes, and FAQs—so your team can compare regions with the same structure.
+            mixes, and FAQs, so your team can compare regions with the same structure.
           </p>
         </ContentProse>
       </SectionBand>

@@ -1,6 +1,6 @@
 /**
- * Remote imagery (Imgur hero, Pexels, Unsplash). Loaded via `next/image` — see `next.config.ts` remotePatterns.
- * Roles map to marketing sections and service detail bands — see `serviceDetailImage`.
+ * Remote imagery (Imgur hero, Pexels, Unsplash). Loaded via `next/image`: see `next.config.ts` remotePatterns.
+ * Roles map to marketing sections and service detail bands: see `serviceDetailImage`.
  */
 export const siteImages = {
   heroPrimary: "https://i.imgur.com/hArFIQ3.png",

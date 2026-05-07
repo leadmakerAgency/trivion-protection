@@ -32,10 +32,10 @@ export const Footer = () => {
             <p className="text-base leading-relaxed text-muted">
               Licensed private security for Los Angeles County and select regional programs.
               California-licensed professionals. Insurance and supervision aligned to professional
-              standards—details confirmed during onboarding.
+              standards, details confirmed during onboarding.
             </p>
             <p className="mt-4 text-sm text-muted">
-              Placeholder contact details—replace before launch.
+              Placeholder contact details, replace before launch.
             </p>
             <p className="mt-3 text-xs leading-relaxed text-muted/80">{imageAttribution}</p>
           </div>

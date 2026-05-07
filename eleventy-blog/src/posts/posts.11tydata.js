@@ -1,3 +1,5 @@
+import { isPublishedForSite } from "../../lib/publish-utils.js";
+
 export default {
   layout: "layouts/post.njk",
   tags: "posts",
@@ -7,7 +9,9 @@ export default {
       const normalized = data.page.inputPath.replace(/\\/g, "/");
       const match = normalized.match(/\/posts\/([^/]+)\.md$/);
       const slug = match ? match[1] : data.page.fileSlug;
-      return `/posts/${slug}/index.html`;
+      const path = `/posts/${slug}/index.html`;
+      if (!isPublishedForSite(data)) return false;
+      return path;
     },
   },
 };

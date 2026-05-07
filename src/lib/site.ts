@@ -10,6 +10,6 @@ export const getSiteUrl = () =>
 
 export const PLACEHOLDER_PHONE = "(555) 000-0000";
 export const PLACEHOLDER_EMAIL = "info@trivonprotection.com";
-export const PLACEHOLDER_ADDRESS = "Los Angeles County, CA — full address coming soon";
+export const PLACEHOLDER_ADDRESS = "Los Angeles County, CA: full address coming soon";
 
-export const HOURS_LABEL = "24/7 — Around the clock";
+export const HOURS_LABEL = "24/7: Around the clock";

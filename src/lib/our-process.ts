@@ -18,7 +18,7 @@ export const OUR_PROCESS_STEPS: ProcessStep[] = [
   {
     name: "Proposal",
     detail:
-      "You receive a staffing plan with clear assumptions: armed vs unarmed, patrol design, start dates, supervision cadence, and pricing structure—without hidden fees buried in fine print.",
+      "You receive a staffing plan with clear assumptions: armed vs unarmed, patrol design, start dates, supervision cadence, and pricing structure without hidden fees buried in fine print.",
   },
   {
     name: "Onboarding",
@@ -28,7 +28,7 @@ export const OUR_PROCESS_STEPS: ProcessStep[] = [
   {
     name: "Operations and supervision",
     detail:
-      "Field leadership checks quality, replaces callouts, and enforces standards. You should feel the difference in consistency—not just uniforms on site.",
+      "Field leadership checks quality, replaces callouts, and enforces standards. You should feel the difference in consistency, not just uniforms on site.",
   },
   {
     name: "Reporting and review",

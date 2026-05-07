@@ -90,11 +90,11 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
           title={pageTitle}
           subtitle={area.intro}
           imageSrc={heroImage}
-          imageAlt={`Security operations context for ${area.name} — patrol and access programs.`}
+          imageAlt={`Security operations context for ${area.name}: patrol and access programs.`}
           footnote={
             <span>
-              Briefings cover the property archetypes you run—retail and mixed-use, corporate workplaces, logistics and
-              yards, active construction, HOAs, healthcare adjacency, hospitality, and production equipment zones—so
+              Briefings cover the property archetypes you run: retail and mixed-use, corporate workplaces, logistics and
+              yards, active construction, HOAs, healthcare adjacency, hospitality, and production equipment zones, so
               post orders match tenant mix and peak windows, not a one-size template.
             </span>
           }
@@ -133,7 +133,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
               align="center"
               eyebrow="Property mix"
               title="Sites and programs we support here"
-              description="Archetypes we see most often—your footprint may combine several of these."
+              description="Archetypes we see most often. Your footprint may combine several of these."
             />
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
               {area.commonPropertyTypes.map((t) => (
@@ -231,7 +231,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
                 align="center"
                 eyebrow="Sub-markets"
                 title="Neighborhood and local depth"
-                description={`${area.name} is not one uniform risk profile—we tune post orders to asset type, access points, tenant mix, and peak windows.`}
+                description={`${area.name} is not one uniform risk profile, we tune post orders to asset type, access points, tenant mix, and peak windows.`}
               />
               <div className="mt-8 grid gap-6 md:grid-cols-2">
                 {area.subMarkets.map((b) => (
@@ -255,7 +255,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
             />
             <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-on-light sm:text-base">
               When you are ready to compare static posts, marked patrol, and specialized coverage for this footprint, we
-              walk through the tradeoffs on your scope call—bring hours, access points, and any recent incident notes.{" "}
+              walk through the tradeoffs on your scope call. Bring hours, access points, and any recent incident notes.{" "}
               <Link href="/contact" className="font-medium text-accent-dark hover:underline">
                 Request a quote
               </Link>{" "}
@@ -271,7 +271,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
               align="center"
               eyebrow="FAQ"
               title="Questions about coverage in this area"
-              description="Short answers grounded in how we brief teams—not generic security marketing."
+              description="Short answers grounded in how we brief teams, not generic security marketing."
             />
             <div className="mx-auto mt-8 max-w-2xl">
               <FaqList showHeading={false} variant="landing" items={area.faqs} />
@@ -285,7 +285,7 @@ export default async function ServiceAreaDetailPage({ params }: PageProps) {
               Ready for coverage in this area?
             </h2>
             <p className="mt-4 max-w-2xl text-base text-muted-on-light sm:text-lg">
-              Tell us about your site footprint and schedules—we reply with staffing options grounded in {area.name}{" "}
+              Tell us about your site footprint and schedules. We reply with staffing options grounded in {area.name}{" "}
               realities.
             </p>
             <Button href="/contact" variant="primary" surface="light" className="mt-8 shrink-0">

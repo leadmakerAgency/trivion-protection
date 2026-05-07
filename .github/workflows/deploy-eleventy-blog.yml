@@ -12,6 +12,9 @@ on:
     paths:
       - "eleventy-blog/**"
       - ".github/workflows/deploy-eleventy-blog.yml"
+  # Rebuild periodically so posts whose Publish date has passed appear without a manual push (GitHub cron resolution: ~hourly).
+  schedule:
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -41,8 +44,10 @@ jobs:
         working-directory: eleventy-blog
         env:
           # GitHub Pages project URL: https://<user>.github.io/<repo>/
-          # For a user/org site at the domain root (repo named <user>.github.io), set this to empty in the workflow or split jobs.
+          # For a user/org site at the domain root (repo named <user>.github.io), set ELEVENTY_PATH_PREFIX empty and set ELEVENTY_SITE_URL to your public origin if needed.
           ELEVENTY_PATH_PREFIX: ${{ github.event.repository.name }}
+          # RSS absolute links: Pages hostname only; Eleventy pathPrefix adds /<repo>/ to paths.
+          ELEVENTY_SITE_URL: https://${{ github.repository_owner }}.github.io
         run: |
           npm ci
           npm run build

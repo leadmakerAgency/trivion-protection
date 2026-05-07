@@ -21,7 +21,7 @@ import {
 
 const scenarioFallback: LucideIcon[] = [Building2, Factory, ShieldCheck, Warehouse];
 
-/** Two icons per service — matches typical two scenarios per program page */
+/** Two icons per service: matches typical two scenarios per program page */
 const scenarioBySlug: Record<string, LucideIcon[]> = {
   "armed-security-guards": [ShieldAlert, Warehouse],
   "unarmed-security-guards": [UserCheck, Landmark],

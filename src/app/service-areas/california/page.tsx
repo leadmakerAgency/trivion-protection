@@ -9,7 +9,7 @@ import { californiaAreas } from "@/lib/areas";
 export const metadata: Metadata = buildMetadata({
   title: "California security guard service areas",
   description:
-    "County and metro guides across California: property mixes, risk notes, planning checklists, recommended services, and FAQs—anchored on Los Angeles County operations.",
+    "County and metro guides across California: property mixes, risk notes, planning checklists, recommended services, and FAQs, anchored on Los Angeles County operations.",
   path: "/service-areas/california",
 });
 
@@ -32,7 +32,7 @@ export default function CaliforniaHubPage() {
         <ContentProse tone="light" title="How to use these California pages">
           <p>
             Pick the geography that matches your footprint, then read the property archetypes and risk notes. Each
-            page ends with a planning checklist you can forward to facilities, loss prevention, or your GC—so security
+            page ends with a planning checklist you can forward to facilities, loss prevention, or your GC, so security
             scope conversations start with facts instead of slogans.
           </p>
         </ContentProse>

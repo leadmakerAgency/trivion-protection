@@ -87,7 +87,7 @@ export default function HomePage() {
           <div className="order-2 flex flex-col justify-center px-5 py-12 sm:px-8 sm:py-16 lg:order-1 lg:px-10 lg:py-20">
             <div className="max-w-2xl xl:max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-wide text-accent sm:text-base">
-                Security guard company — Los Angeles County
+                Security guard company: Los Angeles County
               </p>
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 Los Angeles security guards with a disciplined, field-first approach
@@ -110,7 +110,7 @@ export default function HomePage() {
           <div className="relative order-1 min-h-[220px] sm:min-h-[280px] lg:order-2 lg:min-h-[min(100vh-8rem,640px)]">
             <Image
               src={siteImages.heroPrimary}
-              alt="Uniformed security guard at a commercial building entrance—access control for businesses and multi-tenant sites."
+              alt="Uniformed security guard at a commercial building entrance, access control for businesses and multi-tenant sites."
               fill
               priority
               className="object-cover object-top"
@@ -145,7 +145,7 @@ export default function HomePage() {
       <SectionBand
         tone="darkImage"
         imageSrc={siteImages.guardNightStreet}
-        imageAlt="Security officer walking through contrasting light and shadow—overnight visibility and patrol-ready posture."
+        imageAlt="Security officer walking through contrasting light and shadow, overnight visibility and patrol-ready posture."
         imageSizes="100vw"
         imageClassName="object-cover object-[center_40%]"
       >
@@ -155,7 +155,7 @@ export default function HomePage() {
             Coverage that respects truck courts, laydown yards, and after-hours risk
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Organized theft and trespass often follow predictable patterns—quiet windows, blind corners, and
+            Organized theft and trespass often follow predictable patterns: quiet windows, blind corners, and
             inconsistent patrol timing. We align posts, routes, and reporting with your receiving hours and
             access rules so leadership sees security that matches operations.
           </p>
@@ -182,14 +182,14 @@ export default function HomePage() {
           <p className="mt-5 text-lg leading-relaxed text-muted-on-light">
             Each program below includes who it fits, a short field summary, and a concrete highlight from post orders so
             you can compare armed and unarmed posts, patrol, fire watch, construction, and warehouse coverage from one
-            grid—tap a title when you want the full program dossier.
+            grid. Tap a title when you want the full program dossier.
           </p>
         </div>
         <div className="mt-12">
           <div className="relative mb-12 aspect-[21/9] max-h-[280px] overflow-hidden rounded-sm border border-surface-light-edge shadow-sm sm:max-h-[320px]">
             <Image
               src={siteImages.guardParkingLot}
-              alt="Security officer in a high-visibility vest viewed from behind—mobile patrol, parking structures, and route-based checks."
+              alt="Security officer in a high-visibility vest viewed from behind, mobile patrol, parking structures, and route-based checks."
               fill
               className="object-cover object-[center_55%]"
               sizes="(max-width: 1280px) 100vw, 1280px"
@@ -234,7 +234,7 @@ export default function HomePage() {
             What you can expect from our field programs
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
-            We avoid vanity metrics. Below are practical commitments we build proposals around—specific numbers
+            We avoid vanity metrics. Below are practical commitments we build proposals around; specific numbers
             vary by site and are confirmed in writing.
           </p>
         </div>
@@ -249,7 +249,7 @@ export default function HomePage() {
               {
                 icon: <TbPhoneCall />,
                 headline: "24/7 coordination line",
-                label: "A staffed path for urgent shift changes, incidents, and escalation—not a dead voicemail box.",
+                label: "A staffed path for urgent shift changes, incidents, and escalation, not a dead voicemail box.",
               },
               {
                 icon: <TbClock />,
@@ -269,7 +269,7 @@ export default function HomePage() {
       <SectionBand tone="light">
         <ImageTextBand
           imageSrc={siteImages.construction}
-          imageAlt="Black-and-white photograph of a secured gate and perimeter—gate control, delivery verification, and site access for building and industrial projects."
+          imageAlt="Black-and-white photograph of a secured gate and perimeter, gate control, delivery verification, and site access for building and industrial projects."
           imageSizes="(max-width: 1024px) 100vw, 45vw"
           imageFirst={false}
           eyebrow={
@@ -279,7 +279,7 @@ export default function HomePage() {
         >
           <p>
             Construction and industrial programs need disciplined gate control, delivery verification, and
-            after-hours integrity checks—not generic lobby templates. The same field-first mindset extends to
+            after-hours integrity checks, not generic lobby templates. The same field-first mindset extends to
             retail, corporate, and HOA sites where reporting and supervision have to match how your operation
             actually runs.
           </p>
@@ -340,7 +340,7 @@ export default function HomePage() {
           <p className="mt-4 text-lg leading-relaxed text-muted">
             California remains our primary deployment corridor; Texas supports regional operators with multi-state
             footprints. The directories below name the metros and counties we brief most often, each tuned to local
-            traffic patterns, property mixes, and supervision expectations—without asking you to leave this page for
+            traffic patterns, property mixes, and supervision expectations without asking you to leave this page for
             baseline context.
           </p>
         </div>
@@ -366,7 +366,7 @@ export default function HomePage() {
             <h3 className="text-lg font-semibold text-foreground">Texas</h3>
             <p className="mt-3 text-base text-muted">
               Regional programs for operators with multi-state footprints. If your scope is primarily Los Angeles,
-              start with a California plan—we align reporting and supervision expectations across regions when
+              start with a California plan. We align reporting and supervision expectations across regions when
               needed.
             </p>
             <ul className="mt-4 grid gap-2 text-base">

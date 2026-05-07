@@ -35,19 +35,19 @@ const pillars = [
     Icon: TbShieldCheck,
     title: "Accountability in the field",
     body:
-      "Uniforms and a warm body are not a program. We build post orders, checkpoints, and supervision cadence so coverage is repeatable—especially across nights, weekends, and high-turnover environments.",
+      "Uniforms and a warm body are not a program. We build post orders, checkpoints, and supervision cadence so coverage is repeatable, especially across nights, weekends, and high-turnover environments.",
   },
   {
     Icon: TbClipboardList,
     title: "Reporting your team can use",
     body:
-      "Daily activity logs, incident documentation, and escalation notes should help property and operations leaders make decisions—not sit unread in an inbox. We align formats to how you already review risk.",
+      "Daily activity logs, incident documentation, and escalation notes should help property and operations leaders make decisions, not sit unread in an inbox. We align formats to how you already review risk.",
   },
   {
     Icon: TbCertificate,
     title: "California compliance, clearly packaged",
     body:
-      "Private security in California is regulated through BSIS requirements. We keep credentials and insurance confirmations organized for your procurement and legal partners—no placeholder license numbers on the web.",
+      "Private security in California is regulated through BSIS requirements. We keep credentials and insurance confirmations organized for your procurement and legal partners with no placeholder license numbers on the web.",
   },
 ] as const;
 
@@ -118,7 +118,7 @@ const AboutPage = () => {
     >
       <ImageTextBand
         imageSrc={siteImages.teamPersonnel}
-        imageAlt="Security professionals in uniform coordinating near a commercial building—team-based coverage and supervised field operations."
+        imageAlt="Security professionals in uniform coordinating near a commercial building, team-based coverage and supervised field operations."
         imageSizes="(max-width: 1024px) 100vw, 40vw"
         imageClassName="object-cover object-[center_35%]"
         textTone="onLight"
@@ -130,12 +130,12 @@ const AboutPage = () => {
         <p>
           From retail edges and parking structures to logistics yards and construction phases, risk shows up as
           patterns: inconsistent patrol timing, unclear access rules, and reporting that does not reach the right
-          people. We design programs around your hours, traffic flows, and tenant mix—then staff with leadership that
+          people. We design programs around your hours, traffic flows, and tenant mix, then staff with leadership that
           enforces standards on shift.
         </p>
         <p>
           Our bias is toward clarity: armed and unarmed posts, mobile patrol routes, fire watch, and warehouse programs
-          should all feel like one accountable vendor relationship—not a patchwork of personalities you have to manage
+          should all feel like one accountable vendor relationship, not a patchwork of personalities you have to manage
           yourself.
         </p>
       </ImageTextBand>
@@ -184,7 +184,7 @@ const AboutPage = () => {
               From first conversation to steady-state operations
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-on-light">
-              Good security procurement is not a single quote—it is alignment on hours, escalation paths, and what
+              Good security procurement is not a single quote; it is alignment on hours, escalation paths, and what
               “good” looks like on paper and on camera. We walk sites when it helps, push back when assumptions are
               unsafe, and document the plan before boots are on the ground.
             </p>
@@ -205,7 +205,7 @@ const AboutPage = () => {
               ))}
             </ol>
             <p className="mt-8 text-sm text-muted-on-light">
-              See the full lifecycle—including onboarding, supervision, and review cadence—on our{" "}
+              See the full lifecycle, including onboarding, supervision, and review cadence, on our{" "}
               <Link href="/#our-process" className="font-medium text-accent-dark hover:underline">
                 homepage process section
               </Link>
@@ -215,7 +215,7 @@ const AboutPage = () => {
           <div className="relative min-h-[220px] border-t border-surface-light-edge lg:border-l lg:border-t-0">
             <Image
               src={siteImages.corporateAccess}
-              alt="Corporate building lobby and access control context—professional environments where clear visitor rules and guard presence reduce incidents."
+              alt="Corporate building lobby and access control context, professional environments where clear visitor rules and guard presence reduce incidents."
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 35vw"
@@ -236,7 +236,7 @@ const AboutPage = () => {
           <p className="mt-4 text-base leading-relaxed">
             BSIS licensing, workers’ compensation, and liability coverage are baseline expectations for any serious
             vendor. We treat your risk transfer chain seriously: when you request a proposal packet, you receive the
-            documentation your finance and legal teams expect—not marketing fluff.
+            documentation your finance and legal teams expect, not marketing fluff.
           </p>
           <p className="mt-4 text-base leading-relaxed">
             If you have carrier-specific insurance certificates, additional insured language, or vendor onboarding
@@ -280,7 +280,7 @@ const AboutPage = () => {
             Tell us about your site
           </h2>
           <p className="mt-3 text-base leading-relaxed text-muted-on-light">
-            Share hours, access rules, and what has gone wrong before—we will respond with a practical staffing approach
+            Share hours, access rules, and what has gone wrong before. We will respond with a practical staffing approach
             and next steps.
           </p>
         </div>

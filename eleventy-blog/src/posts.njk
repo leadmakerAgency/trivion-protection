@@ -5,10 +5,14 @@ permalink: /posts/index.html
 ---
 <h1>Posts</h1>
 <ul class="post-list">
-  {% for post in collections.posts | reverse %}
-    <li>
-      <a href="{{ post.url }}">{{ post.data.title }}</a>
-      {% if post.data.date %}<span class="post-list-date">{{ post.data.date }}</span>{% endif %}
+  {% for post in collections.publishedPosts | reverse %}
+    <li class="post-list-item">
+      <div class="post-list-heading">
+        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        {% if post.data.date %}<span class="post-list-date">{{ post.data.date }}</span>{% endif %}
+      </div>
+      {% set dek = post.data.excerpt or post.data.description %}
+      {% if dek %}<p class="post-list-excerpt">{{ dek }}</p>{% endif %}
     </li>
   {% endfor %}
 </ul>

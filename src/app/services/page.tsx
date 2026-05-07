@@ -12,7 +12,7 @@ import { servicesByCategory, type ServiceCategory } from "@/lib/services";
 export const metadata: Metadata = buildMetadata({
   title: "Security guard services in Los Angeles",
   description:
-    "Compare armed and unarmed posts, marked vehicle patrol, fire watch, construction, and warehouse security programs—each with scenarios, staffing models, and FAQs for Los Angeles County operators.",
+    "Compare armed and unarmed posts, marked vehicle patrol, fire watch, construction, and warehouse security programs, each with scenarios, staffing models, and FAQs for Los Angeles County operators.",
   path: "/services",
 });
 
@@ -38,21 +38,21 @@ export default function ServicesIndexPage() {
       description="Trivon Protection provides Los Angeles County security guard services for properties that
           need disciplined access control, visible deterrence, and reporting your leadership can
           trust. Each program page walks through scenarios, deliverables, staffing models, and common
-          questions—not a thin brochure."
+          questions so you never get just a thin brochure."
       contentWidth="wide"
       contentClassName="pb-0"
     >
       <SectionBand tone="light" className="!pt-0 sm:!pt-0">
         <ContentProse tone="light" title="How to choose a program without guessing">
           <p>
-            Start with hours, access points, and the incidents you are trying to prevent—not the uniform color.
+            Start with hours, access points, and the incidents you are trying to prevent, not the uniform color.
             Static posts excel when someone must always verify visitors; marked patrol excels when geography makes
             predictability dangerous; specialized programs like fire watch exist when compliance windows demand
             continuous rounds.
           </p>
           <p>
             Use the articles below when you are comparing vendors or building an RFP. Each program card summarizes who
-            it fits, what it covers, and a field highlight—enough to shortlist before you talk scope with us.
+            it fits, what it covers, and a concise field highlight to help you shortlist before you talk scope with us.
           </p>
         </ContentProse>
 

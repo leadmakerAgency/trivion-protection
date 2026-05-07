@@ -36,7 +36,7 @@ export const services: ServiceItem[] = [
     bestFor:
       "Banks, jewelry and high-value retail, critical infrastructure, overnight industrial sites, and locations where policy and insurance clearly support armed posts.",
     whoBenefits:
-      "Armed coverage is not a default—it is a deliberate choice when deterrence, response time, and post orders align with your risk tier and legal environment. Trivon Protection staffs armed posts with professionals trained to de-escalate first and document always, while maintaining readiness when circumstances escalate.",
+      "Armed coverage is not a default, it is a deliberate choice when deterrence, response time, and post orders align with your risk tier and legal environment. Trivon Protection staffs armed posts with professionals trained to de-escalate first and document always, while maintaining readiness when circumstances escalate.",
     highlights: [
       "Professional presence aligned to post orders",
       "Coordinated escalation paths with local authorities when required",
@@ -68,8 +68,8 @@ export const services: ServiceItem[] = [
       },
     ],
     considerations: [
-      "Armed posts are a poor fit when public interaction is continuous and brand tone requires a softer profile—compare with unarmed programs.",
-      "If your primary risk is internal theft, armed uniforms alone rarely fix process gaps—pair coverage with access control discipline.",
+      "Armed posts are a poor fit when public interaction is continuous and brand tone requires a softer profile, compare with unarmed programs.",
+      "If your primary risk is internal theft, armed uniforms alone rarely fix process gaps, pair coverage with access control discipline.",
     ],
     faqs: [
       {
@@ -80,7 +80,7 @@ export const services: ServiceItem[] = [
       {
         question: "Can armed officers perform access control and customer greeting?",
         answer:
-          "Yes when post orders define tone, boundaries, and de-escalation steps. Many sites blend firm enforcement with professional communication—especially during opening and closing windows.",
+          "Yes when post orders define tone, boundaries, and de-escalation steps. Many sites blend firm enforcement with professional communication, especially during opening and closing windows.",
       },
       {
         question: "What should we prepare before the first shift?",
@@ -121,7 +121,7 @@ export const services: ServiceItem[] = [
     bestFor:
       "Corporate lobbies, retail and mixed-use, clinics, HOAs, and public-facing sites where professionalism and clear communication matter as much as deterrence.",
     whoBenefits:
-      "Unarmed programs win when your biggest risks are unauthorized entry, disorderly conduct, parking structure vulnerability, and after-hours integrity checks—not necessarily a show of lethal force. We design posts around visitor experience, firm boundaries, and reporting your managers can use weekly.",
+      "Unarmed programs win when your biggest risks are unauthorized entry, disorderly conduct, parking structure vulnerability, and after-hours integrity checks, not necessarily a show of lethal force. We design posts around visitor experience, firm boundaries, and reporting your managers can use weekly.",
     highlights: [
       "Access control, visitor management, and patrol routines",
       "Conflict reduction and clear communication with staff and guests",
@@ -153,8 +153,8 @@ export const services: ServiceItem[] = [
       },
     ],
     considerations: [
-      "If your site has repeated armed robberies or credible threats, unarmed coverage may be insufficient—upgrade paths should be documented.",
-      "Busy retail without line-of-sight support may still need patrol augmentation—ask about marked vehicle add-ons.",
+      "If your site has repeated armed robberies or credible threats, unarmed coverage may be insufficient, upgrade paths should be documented.",
+      "Busy retail without line-of-sight support may still need patrol augmentation, ask about marked vehicle add-ons.",
     ],
     faqs: [
       {
@@ -165,7 +165,7 @@ export const services: ServiceItem[] = [
       {
         question: "How do you train for customer-facing sites?",
         answer:
-          "De-escalation, inclusive communication, and scenario drills are core. Your brand tone and prohibited behaviors are written into post orders—not assumed.",
+          "De-escalation, inclusive communication, and scenario drills are core. Your brand tone and prohibited behaviors are written into post orders, not assumed.",
       },
       {
         question: "What metrics should we track?",
@@ -186,8 +186,8 @@ export const services: ServiceItem[] = [
         },
         {
           feature: "Customer interaction",
-          left: "High—officers become part of daily operations",
-          right: "Moderate—touchpoints at scheduled intervals and alarm events",
+          left: "High, officers become part of daily operations",
+          right: "Moderate, touchpoints at scheduled intervals and alarm events",
         },
         {
           feature: "Documentation",
@@ -202,11 +202,11 @@ export const services: ServiceItem[] = [
     title: "Marked Vehicle Patrol Security",
     category: "mobile",
     shortDescription:
-      "Randomized route patrols for parking assets, industrial yards, HOAs, and multi-building campuses—ideal when you need coverage without a full-time static post.",
+      "Randomized route patrols for parking assets, industrial yards, HOAs, and multi-building campuses, ideal when you need coverage without a full-time static post.",
     bestFor:
       "HOAs, business parks, industrial yards, and multi-building campuses where randomized routes break predictability and support static posts overnight.",
     whoBenefits:
-      "Patrol programs exist to compress risk across large footprints: visible deterrence, quick checks at blind spots, and documented routes that hold up when something goes wrong. We avoid cookie-cutter loops—routes reflect your hours, your incident history, and the parts of the property criminals actually probe.",
+      "Patrol programs exist to compress risk across large footprints: visible deterrence, quick checks at blind spots, and documented routes that hold up when something goes wrong. We avoid cookie-cutter loops. Routes reflect your hours, your incident history, and the parts of the property criminals actually probe.",
     highlights: [
       "Highly visible marked patrol presence",
       "Lock-up and unlock assistance where permitted",
@@ -238,7 +238,7 @@ export const services: ServiceItem[] = [
       },
     ],
     considerations: [
-      "Patrol alone rarely replaces lobby access control—pair with static coverage where public entry is continuous.",
+      "Patrol alone rarely replaces lobby access control, pair with static coverage where public entry is continuous.",
       "If response time SLAs are tight, confirm drive distances and post orders before promising sub-minute arrivals.",
     ],
     faqs: [
@@ -287,11 +287,11 @@ export const services: ServiceItem[] = [
     title: "Fire Watch Security Guards",
     category: "specialized",
     shortDescription:
-      "Dedicated fire watch coverage during impairments, hot work windows, and system outages—supporting safer operations while mechanical systems are down.",
+      "Dedicated fire watch coverage during impairments, hot work windows, and system outages, supporting safer operations while mechanical systems are down.",
     bestFor:
       "Construction during impairments, industrial outages, hot work programs, and any site where AHJs or insurers require continuous rounds and written logs.",
     whoBenefits:
-      "Fire watch is a compliance-driven discipline: continuous patrol paths, clear communication with maintenance, and logs that demonstrate diligence. Trivon Protection aligns watch patterns to your impairment plan—not generic wandering—so field leadership and the AHJ see the same story.",
+      "Fire watch is a compliance-driven discipline: continuous patrol paths, clear communication with maintenance, and logs that demonstrate diligence. Trivon Protection aligns watch patterns to your impairment plan, not generic wandering, so field leadership and the AHJ see the same story.",
     highlights: [
       "Continuous rounds and logging aligned to site requirements",
       "Clear handoffs to maintenance and leadership",
@@ -323,7 +323,7 @@ export const services: ServiceItem[] = [
       },
     ],
     considerations: [
-      "Fire watch is not a substitute for fixing impaired systems—timelines and responsible parties should be explicit.",
+      "Fire watch is not a substitute for fixing impaired systems, timelines and responsible parties should be explicit.",
       "If your site also needs perimeter theft control, scope whether officers can perform both without diluting watch integrity.",
     ],
     faqs: [
@@ -335,12 +335,12 @@ export const services: ServiceItem[] = [
       {
         question: "Can fire watch officers perform access control?",
         answer:
-          "Only when your program explicitly combines roles without violating watch integrity. Most impairments require uninterrupted vigilance—scope carefully.",
+          "Only when your program explicitly combines roles without violating watch integrity. Most impairments require uninterrupted vigilance, scope carefully.",
       },
       {
         question: "How fast can we start?",
         answer:
-          "With clear impairment windows, contacts, and site maps, many programs mobilize quickly. Unclear scopes delay staffing—send drawings and schedules early.",
+          "With clear impairment windows, contacts, and site maps, many programs mobilize quickly. Unclear scopes delay staffing, send drawings and schedules early.",
       },
     ],
     relatedKnowledgeSlugs: ["what-is-fire-watch-security"],
@@ -351,11 +351,11 @@ export const services: ServiceItem[] = [
     title: "Construction Site Security Guards",
     category: "specialized",
     shortDescription:
-      "Reduce tool theft, copper loss, trespass, and after-hours liability on active builds—from laydown yards to high-rise cores in Los Angeles.",
+      "Reduce tool theft, copper loss, trespass, and after-hours liability on active builds, from laydown yards to high-rise cores in Los Angeles.",
     bestFor:
       "GC and CM-led projects with laydown yards, vertical cores, overnight steel or MEP exposure, and busy gate traffic requiring vendor verification.",
     whoBenefits:
-      "Construction losses are rarely random luck—they follow predictable patterns: weak gate discipline, unverified deliveries, blind perimeter segments, and under-documented incidents. We align posts to your site logistics so supers get actionable information, not vague radio noise.",
+      "Construction losses are rarely random luck; they follow predictable patterns: weak gate discipline, unverified deliveries, blind perimeter segments, and under-documented incidents. We align posts to your site logistics so supers get actionable information, not vague radio noise.",
     highlights: [
       "Gate control, delivery verification, and vendor check-in",
       "Perimeter integrity checks and blind-spot patrols",
@@ -383,18 +383,18 @@ export const services: ServiceItem[] = [
       },
       {
         label: "Rover-heavy model",
-        description: "For large perimeters with intermittent gate bursts—routes weighted to blind spots and laydown.",
+        description: "For large perimeters with intermittent gate bursts, routes weighted to blind spots and laydown.",
       },
     ],
     considerations: [
       "If overnight welding or impairments occur, combine with dedicated fire watch when AHJs require it.",
-      "Understaffed gates create tailgating—model honest throughput before cutting hours.",
+      "Understaffed gates create tailgating. Model honest throughput before cutting hours.",
     ],
     faqs: [
       {
         question: "How do you coordinate with trades and deliveries?",
         answer:
-          "Post orders define check-in steps, required paperwork, and who can authorize exceptions. We align with your GC’s safety orientation so guards reinforce—not fight—the site plan.",
+          "Post orders define check-in steps, required paperwork, and who can authorize exceptions. We align with your GC’s safety orientation so guards reinforce, not fight, the site plan.",
       },
       {
         question: "What is the biggest mistake sites make?",
@@ -404,7 +404,7 @@ export const services: ServiceItem[] = [
       {
         question: "Can you support multiple shifts?",
         answer:
-          "Yes—continuity matters. We plan supervision and handoffs so standards do not drift between day and night crews.",
+          "Yes, continuity matters. We plan supervision and handoffs so standards do not drift between day and night crews.",
       },
     ],
     relatedKnowledgeSlugs: ["how-much-do-security-guards-cost-los-angeles", "armed-vs-unarmed-security-guards"],
@@ -419,7 +419,7 @@ export const services: ServiceItem[] = [
     bestFor:
       "Distribution centers, 3PL cross-docks, manufacturing with receiving intensity, and yards where trailer lines and seal integrity are daily risk points.",
     whoBenefits:
-      "Warehouse losses hide inside process noise: partial picks, seal gaps, mis-scanned returns, and tailgating at docks. Guards add visibility where cameras lag—at the human decisions around who enters, what leaves, and what looks slightly off.",
+      "Warehouse losses hide inside process noise: partial picks, seal gaps, mis-scanned returns, and tailgating at docks. Guards add visibility where cameras lag at the human decisions around who enters, what leaves, and what looks slightly off.",
     highlights: [
       "Inbound/outbound visibility and seal integrity awareness",
       "Yard patrols and trailer line monitoring",
@@ -432,7 +432,7 @@ export const services: ServiceItem[] = [
       },
       {
         title: "After-hours trailer lines",
-        body: "Organized crews probe dark rows—patrol touchpoints and seal checks matter as much as the front gate.",
+        body: "Organized crews probe dark rows where patrol touchpoints and seal checks matter as much as the front gate.",
       },
     ],
     deliverables: [
@@ -447,18 +447,18 @@ export const services: ServiceItem[] = [
       },
       {
         label: "Yard-forward model",
-        description: "Exterior-heavy coverage with interior checks on interval—ideal when trailer lines are the top risk.",
+        description: "Exterior-heavy coverage with interior checks on interval, which is ideal when trailer lines are the top risk.",
       },
     ],
     considerations: [
-      "If internal collusion is suspected, combine human presence with LP-led process reviews—uniforms alone do not fix bad data.",
+      "If internal collusion is suspected, combine human presence with LP-led process reviews. Uniforms alone do not fix bad data.",
       "High temps or cold chain sites need welfare and break planning baked into staffing.",
     ],
     faqs: [
       {
         question: "Do you integrate with WMS or scanners?",
         answer:
-          "Guards follow your site rules. We do not replace IT systems—but post orders can reference scan expectations, seal checks, and who to call when systems disagree with physical reality.",
+          "Guards follow your site rules. We do not replace IT systems, but post orders can reference scan expectations, seal checks, and who to call when systems disagree with physical reality.",
       },
       {
         question: "What is the handoff to third-shift operations?",
@@ -499,7 +499,7 @@ export const services: ServiceItem[] = [
 
 export const getServiceBySlug = (slug: string) => services.find((s) => s.slug === slug);
 
-/** Prefer same-category services, then fill from the rest — for compact “Related” grids on marketing pages. */
+/** Prefer same-category services, then fill from the remainder for compact “Related” grids on marketing pages. */
 export const getRelatedServiceSlugs = (slug: string, limit = 4): string[] => {
   const svc = getServiceBySlug(slug);
   if (!svc) return [];

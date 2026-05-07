@@ -7,7 +7,7 @@ export type LandingMarketingHeroProps = {
   variant: "service" | "area";
   /** Small label above headline (e.g. “Program” / “Coverage area”). */
   eyebrow: string;
-  /** Visible page title — must be plain text wrapped in JSX for typography. Use as the only <h1> on the route. */
+  /** Visible page title: must be plain text wrapped in JSX for typography. Use as the only <h1> on the route. */
   title: ReactNode;
   subtitle: ReactNode;
   imageSrc: string;

@@ -9,7 +9,7 @@ import { texasAreas } from "@/lib/areas";
 export const metadata: Metadata = buildMetadata({
   title: "Texas security guard service areas",
   description:
-    "DFW-area guides for Tarrant, Collin, Northeast DFW, and Denton counties—property context, risk notes, planning checklists, and recommended service mixes for regional programs.",
+    "DFW-area guides for Tarrant, Collin, Northeast DFW, and Denton counties with property context, risk notes, planning checklists, and recommended service mixes for regional programs.",
   path: "/service-areas/texas",
 });
 
@@ -24,7 +24,7 @@ export default function TexasHubPage() {
       ]}
       title="Texas service areas"
       description="Texas pages exist for clients who need aligned standards across regions. If your primary
-          operations are in Los Angeles County, start with California coverage—we will still
+          operations are in Los Angeles County, start with California coverage; we still
           coordinate reporting formats for national teams."
       contentWidth="wide"
       contentClassName="pb-0"

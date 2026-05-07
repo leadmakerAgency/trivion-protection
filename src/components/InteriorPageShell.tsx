@@ -31,7 +31,7 @@ export type InteriorPageShellProps = {
   surface?: "default" | "paper";
   /** `seoOnly` keeps BreadcrumbList structured data without showing the trail. */
   breadcrumbMode?: "full" | "seoOnly";
-  /** Omit visible H1 and description — use when the first content block renders the lone <h1> (marketing hero). */
+  /** Omit visible H1 and description: use when the first content block renders the lone <h1> (marketing hero). */
   suppressVisibleTitle?: boolean;
 };
 

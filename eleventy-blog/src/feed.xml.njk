@@ -1,0 +1,32 @@
+---
+permalink: /feed.xml
+layout: false
+eleventyExcludeFromCollections: true
+metadata:
+  title: Feed
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | escape }}</title>
+    <description>{{ site.description | escape }}</description>
+    {% if site.url %}<link>{{ site.url }}{{ '/' | url }}</link>{% else %}<link>{{ '/' | url }}</link>{% endif %}
+    <language>en</language>
+    {% if site.url %}<atom:link href="{{ site.url }}{{ '/feed.xml' | url }}" rel="self" type="application/rss+xml"/>{% endif %}
+    {% for post in collections.publishedPosts | reverse %}
+    <item>
+      <title>{{ post.data.title | escape }}</title>
+      {% if site.url %}
+      <link>{{ site.url }}{{ post.url | url }}</link>
+      <guid>{{ site.url }}{{ post.url | url }}</guid>
+      {% else %}
+      <link>{{ post.url | url }}</link>
+      <guid>{{ post.url | url }}</guid>
+      {% endif %}
+      {% set rssDek = post.data.excerpt or post.data.description %}
+      {% if rssDek %}<description>{{ rssDek | escape }}</description>{% endif %}
+      {% if post.data.date %}<pubDate>{{ post.date.toUTCString() }}</pubDate>{% endif %}
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

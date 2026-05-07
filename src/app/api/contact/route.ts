@@ -49,7 +49,7 @@ export const POST = async (request: Request) => {
   const { name, company, phone, email, service, locations, schedule, details } = parsed.data;
 
   const html = `
-    <h2>New quote request — Trivon Protection</h2>
+    <h2>New quote request: Trivon Protection</h2>
     <p><strong>Name:</strong> ${escapeHtml(name)}</p>
     <p><strong>Company:</strong> ${escapeHtml(company ?? "")}</p>
     <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
@@ -64,7 +64,7 @@ export const POST = async (request: Request) => {
     from,
     to: [to],
     replyTo: email,
-    subject: `Quote request: ${service} — ${name}`,
+    subject: `Quote request: ${service} (${name})`,
     html,
   });
 

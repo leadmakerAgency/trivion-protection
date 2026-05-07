@@ -84,14 +84,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           title={pageTitle}
           subtitle={service.shortDescription}
           imageSrc={serviceDetailImage(slug)}
-          imageAlt={`${service.title} — field operations context for Los Angeles County programs.`}
+          imageAlt={`${service.title}: field operations context for Los Angeles County programs.`}
         />
 
         <SectionBand tone="light" divider={false}>
           <div id="overview" className="scroll-mt-28">
             <ImageTextBand
               imageSrc={overviewImageForCategory(service.category)}
-              imageAlt={`${service.title} — operations context for Los Angeles County.`}
+              imageAlt={`${service.title}: operations context for Los Angeles County.`}
               imageSizes="(max-width: 1024px) 100vw, 50vw"
               imageClassName="object-cover object-center"
               imageFirst={false}
@@ -107,8 +107,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 We scope every engagement through consultation, an on-site walkthrough when it clarifies blind spots, a
                 written proposal with armed or unarmed assumptions and supervision cadence, onboarding with finalized
                 post orders, field leadership that replaces callouts and enforces standards, and activity reporting your
-                team can review. Verticals—from retail and offices through logistics yards, construction phases,
-                residential amenities, healthcare adjacency, hospitality nights, and production sets—change where we
+                team can review. Verticals, from retail and offices through logistics yards, construction phases,
+                residential amenities, healthcare adjacency, hospitality nights, and production sets, change where we
                 place emphasis; your plan reflects that mix instead of a generic lobby template.
               </p>
             </ImageTextBand>
@@ -121,7 +121,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               tone="onLight"
               eyebrow="Use cases"
               title="Where this program helps"
-              description="Two common Los Angeles deployments—your site may blend elements of both."
+              description="Two common Los Angeles deployments. Your site may blend elements of both."
             />
             <div className="mt-8 grid gap-6 lg:grid-cols-2">
               {service.scenarios.map((s, index) => {
@@ -143,7 +143,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               align="center"
               eyebrow="Deliverables"
               title="What you should expect on paper and in the field"
-              description="Clear documentation and supervision touchpoints—not vague ‘security presence’ language."
+              description="Clear documentation and supervision touchpoints, not vague ‘security presence’ language."
             />
             <div className="mt-8 flex justify-center">
               <ChecklistColumn className="max-w-2xl" items={service.deliverables} tone="onLight" />
@@ -188,7 +188,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 align="center"
                 eyebrow="Compare"
                 title={service.decisionAid.title}
-                description="Same facts, two program shapes—pick the posture that matches your risk and public interaction."
+                description="Same facts, two program shapes, pick the posture that matches your risk and public interaction."
               />
               <div className="mt-8">
                 <ComparisonCards
@@ -207,7 +207,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               tone="onLight"
               eyebrow="Fit and tradeoffs"
               title="When a different program may be smarter"
-              description="Honest boundaries help you avoid paying for the wrong posture—or under-scoping something critical."
+              description="Honest boundaries help you avoid paying for the wrong posture, or under-scoping something critical."
             />
             <ul className="mt-8 max-w-3xl space-y-5">
               {service.considerations.map((c) => (
@@ -221,8 +221,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               Still unsure?{" "}
               <Link href="/contact" className="font-medium text-accent-dark hover:underline">
                 Email or call with your site context
-              </Link>{" "}
-              — we respond with realistic options, not a generic brochure.
+              </Link>
+              . We respond with realistic options, not a generic brochure.
             </p>
           </div>
         </SectionBand>
@@ -279,7 +279,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <div className="mx-auto flex max-w-3xl flex-col items-center px-5 text-center sm:px-8 lg:px-10">
             <h2 className="text-2xl font-semibold text-foreground-on-light sm:text-3xl">Ready for a quote?</h2>
             <p className="mt-4 max-w-2xl text-base text-muted-on-light sm:text-lg">
-              Share hours, access points, and incident history—we respond with realistic staffing options for{" "}
+              Share hours, access points, and incident history. We respond with realistic staffing options for{" "}
               {service.title.toLowerCase()} programs in Los Angeles County.
             </p>
             <Button href="/contact" variant="primary" surface="light" className="mt-8 shrink-0">

@@ -51,7 +51,7 @@ export const buildLlmsTxt = (): string => {
   lines.push(heading(2, "Service Areas"));
   lines.push(
     linkLine(
-      "California — service areas",
+      "California: service areas",
       absUrl("/service-areas/california"),
       "California counties and metros covered by Trivon Protection programs.",
     ),
@@ -67,7 +67,7 @@ export const buildLlmsTxt = (): string => {
   });
   lines.push(
     linkLine(
-      "Texas — service areas",
+      "Texas: service areas",
       absUrl("/service-areas/texas"),
       "Texas regional service areas supported by Trivon Protection.",
     ),
@@ -171,12 +171,12 @@ const formatLabeledBullets = (
   items: { label: string; description: string }[],
 ) =>
   items
-    .map((item) => `- **${item.label}** — ${oneLine(item.description)}`)
+    .map((item) => `- **${item.label}**: ${oneLine(item.description)}`)
     .join("\n");
 
 const formatScenarios = (items: { title: string; body: string }[]) =>
   items
-    .map((item) => `- **${item.title}** — ${oneLine(item.body)}`)
+    .map((item) => `- **${item.title}**: ${oneLine(item.body)}`)
     .join("\n");
 
 const formatFaqs = (items: { question: string; answer: string }[]) =>
@@ -331,7 +331,7 @@ const formatMdxArticle = (
 export const buildLlmsFullTxt = (): string => {
   const sections: string[] = [];
 
-  sections.push(heading(1, `${SITE_NAME} — Full Content`));
+  sections.push(heading(1, `${SITE_NAME}: Full Content`));
   sections.push(
     `> ${SITE_NAME}: ${SITE_TAGLINE}. Generated ${new Date()
       .toISOString()
@@ -356,7 +356,7 @@ export const buildLlmsFullTxt = (): string => {
   sections.push(heading(2, "Service Areas"));
   sections.push(heading(3, "California"));
   sections.push(
-    `Hub: ${absUrl("/service-areas/california")} — counties and metros covered.`,
+    `Hub: ${absUrl("/service-areas/california")}: counties and metros covered.`,
   );
   sections.push("");
   californiaAreas.forEach((a) => {
@@ -365,7 +365,7 @@ export const buildLlmsFullTxt = (): string => {
   });
   sections.push(heading(3, "Texas"));
   sections.push(
-    `Hub: ${absUrl("/service-areas/texas")} — Texas regional coverage.`,
+    `Hub: ${absUrl("/service-areas/texas")}: Texas regional coverage.`,
   );
   sections.push("");
   texasAreas.forEach((a) => {

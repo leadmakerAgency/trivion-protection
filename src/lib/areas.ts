@@ -36,7 +36,7 @@ const laSubMarkets: { title: string; body: string }[] = [
   },
   {
     title: "Eastside and Gateway cities",
-    body: "Retail strips, industrial yards, and residential communities each need different patrol logic. We build schedules around your real operating hours—not generic overnight templates.",
+    body: "Retail strips, industrial yards, and residential communities each need different patrol logic. We build schedules around your real operating hours, not generic overnight templates.",
   },
 ];
 
@@ -54,7 +54,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       "Scalable staffing as seasonal demand changes",
     ],
     closing:
-      "Tell us about your hours, access points, and risk profile—we will recommend armed or unarmed coverage that fits the site.",
+      "Tell us about your hours, access points, and risk profile. We will recommend armed or unarmed coverage that fits the site.",
     commonPropertyTypes: ["Distribution and 3PL yards", "Oilfield-adjacent industrial", "Agricultural processing"],
     riskNotes: ["Wide perimeters with uneven lighting", "Seasonal volume spikes at gates"],
     recommendedServiceSlugs: [
@@ -71,7 +71,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Do you cover Bakersfield and outlying industrial corridors?",
         answer:
-          "Yes—scope drives routing and hours. We design patrol and static mixes based on your geography, not generic LA templates.",
+          "Yes, scope drives routing and hours. We design patrol and static mixes based on your geography, not generic LA templates.",
       },
       {
         question: "When is marked patrol preferred over a static gate?",
@@ -125,7 +125,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Can programs combine armed and unarmed posts?",
         answer:
-          "Yes when risk tiers differ by zone—lobby versus yard, day versus night. Your proposal documents the mix and why it fits.",
+          "Yes when risk tiers differ by zone, lobby versus yard, day versus night. Your proposal documents the mix and why it fits.",
       },
     ],
     subMarkets: laSubMarkets,
@@ -161,7 +161,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "What reporting do HOAs receive?",
         answer:
-          "Activity summaries, incident drafts, and exception notes aligned to your board’s preferences—without dumping raw noise.",
+          "Activity summaries, incident drafts, and exception notes aligned to your board’s preferences without dumping raw noise.",
       },
     ],
   },
@@ -178,7 +178,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       "HOA and community patrol options",
     ],
     closing:
-      "Share your site map and peak risk windows—we will propose a schedule that matches reality, not a generic template.",
+      "Share your site map and peak risk windows. We will propose a schedule that matches reality, not a generic template.",
     commonPropertyTypes: ["Inland logistics", "New residential master plans", "Strip retail"],
     riskNotes: ["Long fence lines", "Weekend residential amenity gaps"],
     recommendedServiceSlugs: ["marked-vehicle-patrol-security", "warehouse-security-guards"],
@@ -187,7 +187,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "How do you price large perimeters?",
         answer:
-          "We model realistic patrol intervals and any static posts required during peaks—then quote honestly instead of under-staffing routes.",
+          "We model realistic patrol intervals and any static posts required during peaks, then quote honestly instead of under-staffing routes.",
       },
       {
         question: "Can warehouse and HOA programs share patrol?",
@@ -218,12 +218,12 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Can officers support night audits for hotels?",
         answer:
-          "Yes—post orders define floor checks, noise response boundaries, and coordination with management.",
+          "Yes, post orders define floor checks, noise response boundaries, and coordination with management.",
       },
       {
         question: "How visible should uniforms be?",
         answer:
-          "We align attire and presence with brand standards—from low-profile to high-visibility—without compromising safety rules.",
+          "We align attire and presence with brand standards, from low-profile to high-visibility, without compromising safety rules.",
       },
     ],
   },
@@ -249,7 +249,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Do you cover multi-building logistics campuses?",
         answer:
-          "Yes—routing and post counts depend on building spacing, shared gates, and whether interior checks are in scope.",
+          "Yes, routing and post counts depend on building spacing, shared gates, and whether interior checks are in scope.",
       },
       {
         question: "How do you document incidents for LP?",
@@ -264,7 +264,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
     metaDescription:
       "San Diego security guard services: armed and unarmed officers, patrol programs, and specialized site coverage by Trivon Protection.",
     intro:
-      "San Diego’s diverse property mix—from defense-adjacent industrial to coastal hospitality—requires adaptable staffing and clear reporting.",
+      "San Diego’s diverse property mix, from defense-adjacent industrial to coastal hospitality, requires adaptable staffing and clear reporting.",
     focusBullets: [
       "Waterfront and tourism-adjacent properties with public interaction",
       "Industrial and tech campuses with controlled access",
@@ -285,7 +285,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Can you coordinate with marina or port-adjacent rules?",
         answer:
-          "Post orders reflect landlord and port requirements—we do not improvise outside your written scope.",
+          "Post orders reflect landlord and port requirements. We do not improvise outside your written scope.",
       },
     ],
   },
@@ -302,7 +302,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       "Industrial pockets with overnight exposure",
     ],
     closing:
-      "Tell us where your cameras are blind—we will design patrol touchpoints to complement them.",
+      "Tell us where your cameras are blind. We will design patrol touchpoints to complement them.",
     commonPropertyTypes: ["Studio-adjacent lots", "Suburban HOAs", "Industrial pockets"],
     riskNotes: ["Alley-adjacent retail", "Predictable overnight patrol timing if poorly designed"],
     recommendedServiceSlugs: ["marked-vehicle-patrol-security", "unarmed-security-guards"],
@@ -347,7 +347,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "What is the best model for medical plazas?",
         answer:
-          "Often a disciplined lobby post plus parking sweeps on interval—tailored to your patient flow and hours.",
+          "Often a disciplined lobby post plus parking sweeps on interval, tailored to your patient flow and hours.",
       },
     ],
   },
@@ -357,14 +357,14 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
     metaDescription:
       "Ventura County security guard services for agriculture-adjacent industry, logistics, retail, and residential communities. Trivon Protection.",
     intro:
-      "Ventura County blends industrial strength with coastal communities—coverage should match both operational tempo and local expectations.",
+      "Ventura County blends industrial strength with coastal communities, coverage should match both operational tempo and local expectations.",
     focusBullets: [
       "Perimeter and yard programs for industrial operators",
       "Residential community patrol and rule enforcement",
       "Retail and mixed-use customer-forward security",
     ],
     closing:
-      "We will recommend armed or unarmed staffing based on your asset mix and incident history—without upselling you into the wrong tier.",
+      "We will recommend armed or unarmed staffing based on your asset mix and incident history, without upselling you into the wrong tier.",
     commonPropertyTypes: ["Agriculture-adjacent processing", "Coastal retail", "Residential HOAs"],
     riskNotes: ["Perimeter length on industrial sites", "Seasonal tourism effects on retail"],
     recommendedServiceSlugs: ["warehouse-security-guards", "unarmed-security-guards", "marked-vehicle-patrol-security"],
@@ -373,7 +373,7 @@ export const californiaAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Do you cover Oxnard logistics corridors?",
         answer:
-          "Yes—routing and staffing depend on gate counts, yard size, and whether interior checks are included.",
+          "Yes, routing and staffing depend on gate counts, yard size, and whether interior checks are included.",
       },
       {
         question: "How do you approach mixed English/Spanish sites?",
@@ -412,7 +412,7 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Can you support multi-site patrol routing?",
         answer:
-          "Yes when drive times and liability allow—we model honest intervals before quoting.",
+          "Yes when drive times and liability allow, we model honest intervals before quoting.",
       },
     ],
   },
@@ -429,7 +429,7 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       "Residential community patrol programs",
     ],
     closing:
-      "We focus on clear communication with HOA boards and property managers—especially around enforcement boundaries.",
+      "We focus on clear communication with HOA boards and property managers, especially around enforcement boundaries.",
     commonPropertyTypes: ["Master-planned residential", "Corporate offices", "Upscale retail"],
     riskNotes: ["Amenity misuse during weekends", "Visitor tailgating at gates"],
     recommendedServiceSlugs: ["unarmed-security-guards", "marked-vehicle-patrol-security"],
@@ -438,12 +438,12 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "How do you document HOA patrols?",
         answer:
-          "Route logs and exception notes that boards can review—without personal data unrelated to safety.",
+          "Route logs and exception notes that boards can review, without personal data unrelated to safety.",
       },
       {
         question: "Can officers issue parking warnings?",
         answer:
-          "Only actions explicitly authorized in your post orders and contracts—never improvised enforcement.",
+          "Only actions explicitly authorized in your post orders and contracts, never improvised enforcement.",
       },
     ],
   },
@@ -460,7 +460,7 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       "Incident documentation that supports investigations",
     ],
     closing:
-      "Tell us your peak receiving windows—we will align staffing to operational reality.",
+      "Tell us your peak receiving windows. We will align staffing to operational reality.",
     commonPropertyTypes: ["Regional distribution hubs", "Last-mile depots", "Industrial parks"],
     riskNotes: ["Night trailer rows", "Peak congestion at gates"],
     recommendedServiceSlugs: ["warehouse-security-guards", "marked-vehicle-patrol-security"],
@@ -469,7 +469,7 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "Do you integrate with site KPIs?",
         answer:
-          "We align reporting to the operational metrics you already track—dock exceptions, incidents, and coverage gaps called out clearly.",
+          "We align reporting to the operational metrics you already track, dock exceptions, incidents, and coverage gaps called out clearly.",
       },
       {
         question: "What is a realistic mobilization timeline?",
@@ -491,7 +491,7 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       "Industrial perimeter programs",
     ],
     closing:
-      "We will map your risks first, then propose staffing—so you pay for outcomes, not buzzwords.",
+      "We will map your risks first, then propose staffing, so you pay for outcomes, not buzzwords.",
     commonPropertyTypes: ["Student-adjacent retail", "New residential phases", "Light industrial"],
     riskNotes: ["Weekend retail peaks", "Construction-adjacent theft"],
     recommendedServiceSlugs: ["unarmed-security-guards", "construction-site-security-guards"],
@@ -500,12 +500,12 @@ export const texasAreas: Omit<ServiceAreaItem, "state">[] = [
       {
         question: "How do you supervise spread-out communities?",
         answer:
-          "Supervisor routes, spot checks, and digital checkpoints where your program uses them—designed to scale with honest drive times.",
+          "Supervisor routes, spot checks, and digital checkpoints where your program uses them, designed to scale with honest drive times.",
       },
       {
         question: "Can programs start small and expand?",
         answer:
-          "Yes—phased scopes with documented expansion triggers help fast-growing portfolios stay controlled.",
+          "Yes, phased scopes with documented expansion triggers help fast-growing portfolios stay controlled.",
       },
     ],
   },
