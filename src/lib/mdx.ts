@@ -10,7 +10,7 @@ export type MdxFrontmatter = {
   /** Optional update timestamp for freshness (OG `modified_time`, JSON-LD) */
   updated?: string;
   author?: string;
-  /** Card / hero image path under `public`, e.g. `/images/construction.jpg` */
+  /** Card / hero image URL path; files live in `content/media` and are copied to `public/media` — use e.g. `/media/construction.webp` */
   coverImage?: string;
 };
 

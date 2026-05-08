@@ -17,7 +17,7 @@ const pathPrefix = normalizePathPrefix(process.env.ELEVENTY_PATH_PREFIX);
 export default function (eleventyConfig) {
   // Admin lives outside `src` so Eleventy does not treat index.html as a template.
   eleventyConfig.addPassthroughCopy("admin");
-  eleventyConfig.addPassthroughCopy("src/media");
+  eleventyConfig.addPassthroughCopy({ "../content/media": "media" });
   eleventyConfig.addPassthroughCopy("src/css");
 
   eleventyConfig.addCollection("publishedPosts", (collectionApi) => {

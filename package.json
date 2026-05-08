@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/copy-sveltia-admin.cjs && npm run generate:llms",
-    "predev": "node scripts/copy-sveltia-admin.cjs && npm run generate:llms",
+    "prebuild": "node scripts/copy-sveltia-admin.cjs && node scripts/copy-content-media.cjs && npm run generate:llms",
+    "predev": "node scripts/copy-sveltia-admin.cjs && node scripts/copy-content-media.cjs && npm run generate:llms",
     "generate:llms": "tsx scripts/generate-llms.ts",
     "dev": "next dev",
     "build": "next build",

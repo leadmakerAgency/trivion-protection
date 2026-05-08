@@ -8,7 +8,7 @@ Static blog under `eleventy-blog/` in this repository.
 | --- | --- |
 | `src/` | Eleventy templates, posts, global data |
 | `src/posts/` | Markdown entries (edited via CMS or locally) |
-| `src/media/` | Uploaded media (copied to `_site/media`) |
+| [`../content/media`](../content/media) | Shared thumbnails / CMS uploads (Eleventy copies to `_site/media`; Next copies to `public/media`) |
 | `admin/` | Sveltia `index.html` + `config.yml` (copied verbatim to `_site/admin`; kept outside `src/` so Eleventy does not process `index.html` as a template) |
 | `_site/` | Build output (gitignored) |
 
@@ -42,9 +42,13 @@ OAuth **Authorization callback** / GitHub OAuth **Homepage URL** should include 
 2. **Paths** — Defaults assume this monorepo layout:
 
    - Posts: `/eleventy-blog/src/posts`
-   - Media: `/eleventy-blog/src/media`
+   - Media: `/content/media` (same folder as Next.js MDX `coverImage` paths `/media/...`; see root `scripts/copy-content-media.cjs`)
 
-   If you move the blog to its own repository with `src/` at the repo root, change `folder`, `media_folder`, and comments in `admin/config.yml` to `/src/posts` and `/src/media`.
+   If you move the blog to its own repository with `src/` at the repo root, change `folder` and `media_folder` in `admin/config.yml` accordingly.
+
+### Blog thumbnails (Next.js + MDX)
+
+Put image files in **[`content/media`](../content/media)** at the repo root. Use **`coverImage: /media/your-file.webp`** in [`content/blog/*.mdx`](../content/blog). The root app’s **`prebuild` / `predev`** copies `content/media` → `public/media` so Vercel serves them. Sveltia **`featured_image`** uploads use the same `content/media` folder (`media_folder` in `admin/config.yml`).
 
 3. **`public_folder` and GitHub Pages**
 

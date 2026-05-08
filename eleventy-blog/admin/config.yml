@@ -9,8 +9,8 @@ backend:
   # and set base_url to your worker URL:
   # base_url: https://your-worker.your-subdomain.workers.dev
 
-# GitHub Pages project site: set public_folder to "/YOUR_GITHUB_REPO/media" so uploads match deployed URLs.
-media_folder: /eleventy-blog/src/media
+# Thumbnails / uploads: same folder as Next.js blog (copied to public/media on prebuild). GitHub Pages project site: set public_folder to "/YOUR_GITHUB_REPO/media" if needed.
+media_folder: /content/media
 public_folder: /media
 
 output:
