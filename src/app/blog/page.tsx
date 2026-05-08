@@ -6,9 +6,8 @@ import { getBlogIndex } from "@/lib/mdx";
 import { resolveBlogCover } from "@/lib/blog-covers";
 
 /**
- * Public /blog lists MDX files under content/blog (see getBlogIndex).
- * Sveltia’s Eleventy posts live under eleventy-blog/src/posts; they do not appear here until you add matching
- * MDX under content/blog (or build a sync/export step).
+ * Public /blog lists hand-authored `content/blog/*.mdx` plus Sveltia posts in `eleventy-blog/src/posts/*.md`
+ * (see `getBlogIndex` / `getMdxSource` in `src/lib/mdx.ts`).
  */
 
 export const metadata: Metadata = buildMetadata({

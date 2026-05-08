@@ -14,44 +14,140 @@ export type MdxFrontmatter = {
   coverImage?: string;
 };
 
-const blogDir = path.join(process.cwd(), "content", "blog");
+/** Raw YAML from Sveltia / Eleventy posts (`eleventy-blog/src/posts/*.md`). */
+type RawCmsPostFrontmatter = {
+  title?: string;
+  description?: string;
+  excerpt?: string;
+  date?: string;
+  updated?: string;
+  author?: string;
+  coverImage?: string;
+  featured_image?: string;
+  draft?: boolean;
+  body?: string;
+};
 
-const readBlogCollection = () => {
-  if (!fs.existsSync(blogDir)) return [];
-  return fs
-    .readdirSync(blogDir)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((file) => {
+const blogMdxDir = path.join(process.cwd(), "content", "blog");
+const sveltiaPostsDir = path.join(process.cwd(), "eleventy-blog", "src", "posts");
+
+const isDraft = (data: Record<string, unknown>): boolean => data.draft === true;
+
+const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => {
+  const title = typeof data.title === "string" ? data.title : "Untitled";
+  const description =
+    (typeof data.description === "string" && data.description.trim()
+      ? data.description
+      : typeof data.excerpt === "string"
+        ? data.excerpt
+        : "") || "";
+  const date = typeof data.date === "string" ? data.date : new Date().toISOString();
+  const coverImage =
+    (typeof data.coverImage === "string" && data.coverImage) ||
+    (typeof data.featured_image === "string" && data.featured_image) ||
+    undefined;
+  const meta: MdxFrontmatter = {
+    title,
+    description,
+    date,
+    ...(typeof data.updated === "string" ? { updated: data.updated } : {}),
+    ...(typeof data.author === "string" ? { author: data.author } : {}),
+    ...(coverImage ? { coverImage } : {}),
+  };
+  return meta;
+};
+
+const stripBodyFromData = (data: Record<string, unknown>): Record<string, unknown> => {
+  const { body: _b, ...rest } = data;
+  return rest;
+};
+
+const parsePostFile = (
+  filePath: string,
+): { meta: MdxFrontmatter; content: string } | null => {
+  if (!fs.existsSync(filePath)) return null;
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(raw);
+  const record = data as Record<string, unknown>;
+  if (isDraft(record)) return null;
+  const meta = normalizeFrontmatter(stripBodyFromData(record));
+  const bodyFromFm = record.body;
+  const markdownBody =
+    typeof bodyFromFm === "string" && bodyFromFm.trim().length > 0 ? bodyFromFm : content;
+  return { meta, content: markdownBody };
+};
+
+export type BlogIndexEntry = { slug: string; segment: "blog" } & MdxFrontmatter;
+
+const readBlogCollection = (): BlogIndexEntry[] => {
+  const bySlug = new Map<string, BlogIndexEntry>();
+
+  if (fs.existsSync(blogMdxDir)) {
+    for (const file of fs.readdirSync(blogMdxDir)) {
+      if (!file.endsWith(".mdx")) continue;
       const slug = file.replace(/\.mdx$/, "");
-      const raw = fs.readFileSync(path.join(blogDir, file), "utf-8");
-      const { data } = matter(raw);
-      const meta = data as MdxFrontmatter;
-      return { slug, ...meta, segment: "blog" as const };
-    })
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+      const parsed = parsePostFile(path.join(blogMdxDir, file));
+      if (!parsed) continue;
+      bySlug.set(slug, { slug, segment: "blog", ...parsed.meta });
+    }
+  }
+
+  if (fs.existsSync(sveltiaPostsDir)) {
+    for (const file of fs.readdirSync(sveltiaPostsDir)) {
+      if (!file.endsWith(".md") || file === "posts.11tydata.js") continue;
+      const slug = file.replace(/\.md$/, "");
+      if (bySlug.has(slug)) continue;
+      const parsed = parsePostFile(path.join(sveltiaPostsDir, file));
+      if (!parsed) continue;
+      bySlug.set(slug, { slug, segment: "blog", ...parsed.meta });
+    }
+  }
+
+  return [...bySlug.values()].sort((a, b) => (a.date < b.date ? 1 : -1));
 };
 
 export const getBlogIndex = () => readBlogCollection();
 
 export const getMdxSource = (slug: string) => {
-  const file = path.join(blogDir, `${slug}.mdx`);
-  if (!fs.existsSync(file)) return null;
-  const raw = fs.readFileSync(file, "utf-8");
-  const { data, content } = matter(raw);
-  return { meta: data as MdxFrontmatter, content };
+  const mdxPath = path.join(blogMdxDir, `${slug}.mdx`);
+  if (fs.existsSync(mdxPath)) {
+    return parsePostFile(mdxPath);
+  }
+  const mdPath = path.join(sveltiaPostsDir, `${slug}.md`);
+  if (fs.existsSync(mdPath)) {
+    return parsePostFile(mdPath);
+  }
+  return null;
 };
 
 export const getMdxSlugs = (): string[] => {
-  if (!fs.existsSync(blogDir)) return [];
-  return fs
-    .readdirSync(blogDir)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/, ""));
+  const slugs = new Set<string>();
+  if (fs.existsSync(blogMdxDir)) {
+    for (const f of fs.readdirSync(blogMdxDir)) {
+      if (f.endsWith(".mdx")) {
+        const slug = f.replace(/\.mdx$/, "");
+        const parsed = parsePostFile(path.join(blogMdxDir, f));
+        if (parsed) slugs.add(slug);
+      }
+    }
+  }
+  if (fs.existsSync(sveltiaPostsDir)) {
+    for (const f of fs.readdirSync(sveltiaPostsDir)) {
+      if (!f.endsWith(".md") || f === "posts.11tydata.js") continue;
+      const slug = f.replace(/\.md$/, "");
+      if (slugs.has(slug)) continue;
+      const parsed = parsePostFile(path.join(sveltiaPostsDir, f));
+      if (parsed) slugs.add(slug);
+    }
+  }
+  return [...slugs];
 };
 
 /** Best-effort last modified: max of file mtime and frontmatter `date` / `updated`. */
 export const getMdxLastModified = (slug: string): Date => {
-  const filePath = path.join(blogDir, `${slug}.mdx`);
+  const mdxPath = path.join(blogMdxDir, `${slug}.mdx`);
+  const mdPath = path.join(sveltiaPostsDir, `${slug}.md`);
+  const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : mdxPath;
   let fileMtimeMs = Date.now();
   if (fs.existsSync(filePath)) {
     fileMtimeMs = fs.statSync(filePath).mtime.getTime();
