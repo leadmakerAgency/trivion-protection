@@ -23,10 +23,7 @@ const categoryLabel: Record<ServiceCategory, string> = {
 };
 
 export default function ServicesIndexPage() {
-  const guides = resolveMdxLinkPreviews([
-    "los-angeles-private-security-hiring-checklist",
-    "construction-site-theft-prevention-los-angeles",
-  ]);
+  const guides = resolveMdxLinkPreviews([]);
 
   return (
     <InteriorPageShell
@@ -49,10 +46,17 @@ export default function ServicesIndexPage() {
             predictability dangerous; specialized programs like fire watch exist when compliance windows demand
             continuous rounds.
           </p>
-          <p>
-            Use the blog posts below when you are comparing vendors or building an RFP. Each program card summarizes who
-            it fits, what it covers, and a concise field highlight to help you shortlist before you talk scope with us.
-          </p>
+          {guides.length > 0 ? (
+            <p>
+              Use the blog posts below when you are comparing vendors or building an RFP. Each program card summarizes who
+              it fits, what it covers, and a concise field highlight to help you shortlist before you talk scope with us.
+            </p>
+          ) : (
+            <p>
+              Each program card summarizes who it fits, what it covers, and a concise field highlight to help you shortlist
+              before you talk scope with us.
+            </p>
+          )}
         </ContentProse>
 
         {guides.length > 0 ? (

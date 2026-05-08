@@ -32,10 +32,7 @@ export const industries: IndustryItem[] = [
     ],
     primaryServiceSlug: "unarmed-security-guards",
     secondaryServiceSlug: "marked-vehicle-patrol-security",
-    relatedBlogSlugs: [
-      "los-angeles-private-security-hiring-checklist",
-      "construction-site-theft-prevention-los-angeles",
-    ],
+    relatedBlogSlugs: [],
   },
   {
     id: "corporate-offices",
@@ -56,7 +53,7 @@ export const industries: IndustryItem[] = [
       "Align terminology with HR and legal for consistent narratives.",
     ],
     primaryServiceSlug: "unarmed-security-guards",
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [],
   },
   {
     id: "industrial-warehouse",
@@ -78,10 +75,7 @@ export const industries: IndustryItem[] = [
     ],
     primaryServiceSlug: "warehouse-security-guards",
     secondaryServiceSlug: "marked-vehicle-patrol-security",
-    relatedBlogSlugs: [
-      "los-angeles-private-security-hiring-checklist",
-      "construction-site-theft-prevention-los-angeles",
-    ],
+    relatedBlogSlugs: [],
   },
   {
     id: "construction",
@@ -103,7 +97,7 @@ export const industries: IndustryItem[] = [
     ],
     primaryServiceSlug: "construction-site-security-guards",
     secondaryServiceSlug: "fire-watch-security-guards",
-    relatedBlogSlugs: ["construction-site-theft-prevention-los-angeles", "los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [],
   },
   {
     id: "residential-hoa",
@@ -125,7 +119,7 @@ export const industries: IndustryItem[] = [
     ],
     primaryServiceSlug: "marked-vehicle-patrol-security",
     secondaryServiceSlug: "unarmed-security-guards",
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist", "construction-site-theft-prevention-los-angeles"],
+    relatedBlogSlugs: [],
   },
   {
     id: "healthcare",
@@ -146,7 +140,7 @@ export const industries: IndustryItem[] = [
       "Align escalation names with on-call clinical leadership.",
     ],
     primaryServiceSlug: "unarmed-security-guards",
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [],
   },
   {
     id: "hospitality",
@@ -168,7 +162,7 @@ export const industries: IndustryItem[] = [
     ],
     primaryServiceSlug: "unarmed-security-guards",
     secondaryServiceSlug: "marked-vehicle-patrol-security",
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist", "construction-site-theft-prevention-los-angeles"],
+    relatedBlogSlugs: [],
   },
   {
     id: "film-production",
@@ -190,6 +184,6 @@ export const industries: IndustryItem[] = [
     ],
     primaryServiceSlug: "armed-security-guards",
     secondaryServiceSlug: "unarmed-security-guards",
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [],
   },
 ];

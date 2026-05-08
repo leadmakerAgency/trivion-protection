@@ -87,10 +87,7 @@ export const services: ServiceItem[] = [
           "Current access lists, key contacts, camera blind spots, alarm protocols, and any contractor schedules. The faster we align on real workflows, the faster coverage feels native to your site.",
       },
     ],
-    relatedBlogSlugs: [
-      "los-angeles-private-security-hiring-checklist",
-      "construction-site-theft-prevention-los-angeles",
-    ],
+    relatedBlogSlugs: [],
     decisionAid: {
       title: "When clients compare armed and unarmed programs",
       headers: ["Topic", "Armed program", "Unarmed program"],
@@ -174,10 +171,7 @@ export const services: ServiceItem[] = [
           "Denials at access points, after-hours anomalies, parking incidents, and response times to management calls. Good programs improve measurably in 30–60 days when reporting is consistent.",
       },
     ],
-    relatedBlogSlugs: [
-      "los-angeles-private-security-hiring-checklist",
-      "construction-site-theft-prevention-los-angeles",
-    ],
+    relatedBlogSlugs: [],
     decisionAid: {
       title: "Unarmed static post versus marked patrol",
       headers: ["Consideration", "Static unarmed post", "Marked patrol"],
@@ -261,10 +255,7 @@ export const services: ServiceItem[] = [
           "Depends on geography, posted speed limits, and how many checkpoints you require. We model honest intervals before we quote so you are not sold an impossible route.",
       },
     ],
-    relatedBlogSlugs: [
-      "construction-site-theft-prevention-los-angeles",
-      "los-angeles-private-security-hiring-checklist",
-    ],
+    relatedBlogSlugs: [],
     decisionAid: {
       title: "Marked patrol versus static coverage",
       headers: ["Topic", "Marked patrol", "Static post"],
@@ -348,10 +339,7 @@ export const services: ServiceItem[] = [
           "With clear impairment windows, contacts, and site maps, many programs mobilize quickly. Unclear scopes delay staffing, send drawings and schedules early.",
       },
     ],
-    relatedBlogSlugs: [
-      "construction-site-theft-prevention-los-angeles",
-      "los-angeles-private-security-hiring-checklist",
-    ],
+    relatedBlogSlugs: [],
   },
   {
     slug: "construction-site-security-guards",
@@ -414,7 +402,7 @@ export const services: ServiceItem[] = [
           "Yes, continuity matters. We plan supervision and handoffs so standards do not drift between day and night crews.",
       },
     ],
-    relatedBlogSlugs: ["construction-site-theft-prevention-los-angeles", "los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [],
   },
   {
     slug: "warehouse-security-guards",
@@ -477,10 +465,7 @@ export const services: ServiceItem[] = [
           "When incident history, asset value, and insurer expectations justify it. Many warehouses run strong unarmed programs with excellent gate discipline.",
       },
     ],
-    relatedBlogSlugs: [
-      "construction-site-theft-prevention-los-angeles",
-      "los-angeles-private-security-hiring-checklist",
-    ],
+    relatedBlogSlugs: [],
     decisionAid: {
       title: "Dock-first versus yard-first emphasis",
       headers: ["Operational focus", "Dock-first program", "Yard-first program"],
