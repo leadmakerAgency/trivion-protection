@@ -35,9 +35,21 @@ This repo’s production site is **Next.js**, not Eleventy-only hosting. Static 
 
 OAuth **Authorization callback** / GitHub OAuth **Homepage URL** should include this production `/admin` origin if you log in from Vercel.
 
+### `backend.repo` on Vercel (fix “no access to YOUR_GITHUB_REPO”)
+
+The committed [`admin/config.yml`](admin/config.yml) keeps a **placeholder** `repo: YOUR_GITHUB_USER/YOUR_GITHUB_REPO`. During **`prebuild` / `predev`**, [`scripts/copy-sveltia-admin.cjs`](../scripts/copy-sveltia-admin.cjs) rewrites **`public/admin/config.yml`** when it can resolve a real repo:
+
+1. **`SVELTIA_GITHUB_REPO`** (recommended) — In Vercel → Project → **Settings → Environment Variables**, add `SVELTIA_GITHUB_REPO` = **`your-github-username/trivon-protection`** (or whatever your repo is called), for Production (and Preview if you use `/admin` there).
+
+2. **Or** enable **“Automatically expose System Environment Variables”** (Vercel project settings) so **`VERCEL_GIT_REPO_OWNER`** and **`VERCEL_GIT_REPO_SLUG`** are available; the copy script will build `owner/slug` automatically.
+
+3. **Local dev:** create **`.env.local`** in the repo root with `SVELTIA_GITHUB_REPO=owner/repo` (never commit tokens or secrets there).
+
+After redeploy, hard-refresh `/admin` so the browser loads the new `config.yml`.
+
 ## Configure Sveltia (`admin/config.yml`)
 
-1. **`backend.repo`** — Set to `YOUR_GITHUB_USER/YOUR_GITHUB_REPO` (the repo that contains `eleventy-blog/`).
+1. **`backend.repo`** — Either rely on **`SVELTIA_GITHUB_REPO`** at build time (see above) or replace the placeholder in **`eleventy-blog/admin/config.yml`** with your real **`owner/repo`** if you prefer committing it.
 
 2. **Paths** — Defaults assume this monorepo layout:
 

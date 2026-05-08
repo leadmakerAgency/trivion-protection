@@ -4,12 +4,12 @@
 
 backend:
   name: github
-  repo: YOUR_GITHUB_USER/YOUR_GITHUB_REPO
+  repo: leadmakerAgency/trivion-protection
   # For OAuth (recommended for non-technical editors), deploy https://github.com/sveltia/sveltia-cms-auth
   # and set base_url to your worker URL:
   # base_url: https://your-worker.your-subdomain.workers.dev
 
-# Thumbnails / uploads: same folder as Next.js blog (copied to public/media on prebuild). GitHub Pages project site: set public_folder to "/YOUR_GITHUB_REPO/media" if needed.
+# Thumbnails / uploads: same folder as Next.js blog (copied to public/media on prebuild). GitHub Pages project site: set public_folder to "/trivion-protection/media" if needed.
 media_folder: /content/media
 public_folder: /media
 
