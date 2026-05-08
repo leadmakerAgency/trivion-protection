@@ -21,7 +21,6 @@ export type ServiceItem = {
   staffingModels: { label: string; description: string }[];
   considerations: string[];
   faqs: { question: string; answer: string }[];
-  relatedKnowledgeSlugs: string[];
   relatedBlogSlugs: string[];
   decisionAid?: ServiceDecisionAid;
 };
@@ -88,8 +87,10 @@ export const services: ServiceItem[] = [
           "Current access lists, key contacts, camera blind spots, alarm protocols, and any contractor schedules. The faster we align on real workflows, the faster coverage feels native to your site.",
       },
     ],
-    relatedKnowledgeSlugs: ["armed-vs-unarmed-security-guards", "how-much-do-security-guards-cost-los-angeles"],
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [
+      "los-angeles-private-security-hiring-checklist",
+      "construction-site-theft-prevention-los-angeles",
+    ],
     decisionAid: {
       title: "When clients compare armed and unarmed programs",
       headers: ["Topic", "Armed program", "Unarmed program"],
@@ -173,8 +174,10 @@ export const services: ServiceItem[] = [
           "Denials at access points, after-hours anomalies, parking incidents, and response times to management calls. Good programs improve measurably in 30–60 days when reporting is consistent.",
       },
     ],
-    relatedKnowledgeSlugs: ["armed-vs-unarmed-security-guards", "how-much-do-security-guards-cost-los-angeles"],
-    relatedBlogSlugs: ["los-angeles-private-security-hiring-checklist"],
+    relatedBlogSlugs: [
+      "los-angeles-private-security-hiring-checklist",
+      "construction-site-theft-prevention-los-angeles",
+    ],
     decisionAid: {
       title: "Unarmed static post versus marked patrol",
       headers: ["Consideration", "Static unarmed post", "Marked patrol"],
@@ -258,8 +261,10 @@ export const services: ServiceItem[] = [
           "Depends on geography, posted speed limits, and how many checkpoints you require. We model honest intervals before we quote so you are not sold an impossible route.",
       },
     ],
-    relatedKnowledgeSlugs: ["how-much-do-security-guards-cost-los-angeles"],
-    relatedBlogSlugs: ["construction-site-theft-prevention-los-angeles"],
+    relatedBlogSlugs: [
+      "construction-site-theft-prevention-los-angeles",
+      "los-angeles-private-security-hiring-checklist",
+    ],
     decisionAid: {
       title: "Marked patrol versus static coverage",
       headers: ["Topic", "Marked patrol", "Static post"],
@@ -343,8 +348,10 @@ export const services: ServiceItem[] = [
           "With clear impairment windows, contacts, and site maps, many programs mobilize quickly. Unclear scopes delay staffing, send drawings and schedules early.",
       },
     ],
-    relatedKnowledgeSlugs: ["what-is-fire-watch-security"],
-    relatedBlogSlugs: ["construction-site-theft-prevention-los-angeles"],
+    relatedBlogSlugs: [
+      "construction-site-theft-prevention-los-angeles",
+      "los-angeles-private-security-hiring-checklist",
+    ],
   },
   {
     slug: "construction-site-security-guards",
@@ -407,7 +414,6 @@ export const services: ServiceItem[] = [
           "Yes, continuity matters. We plan supervision and handoffs so standards do not drift between day and night crews.",
       },
     ],
-    relatedKnowledgeSlugs: ["how-much-do-security-guards-cost-los-angeles", "armed-vs-unarmed-security-guards"],
     relatedBlogSlugs: ["construction-site-theft-prevention-los-angeles", "los-angeles-private-security-hiring-checklist"],
   },
   {
@@ -471,8 +477,10 @@ export const services: ServiceItem[] = [
           "When incident history, asset value, and insurer expectations justify it. Many warehouses run strong unarmed programs with excellent gate discipline.",
       },
     ],
-    relatedKnowledgeSlugs: ["how-much-do-security-guards-cost-los-angeles", "armed-vs-unarmed-security-guards"],
-    relatedBlogSlugs: ["construction-site-theft-prevention-los-angeles"],
+    relatedBlogSlugs: [
+      "construction-site-theft-prevention-los-angeles",
+      "los-angeles-private-security-hiring-checklist",
+    ],
     decisionAid: {
       title: "Dock-first versus yard-first emphasis",
       headers: ["Operational focus", "Dock-first program", "Yard-first program"],

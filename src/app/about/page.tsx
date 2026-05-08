@@ -108,7 +108,7 @@ const AboutPage = () => {
                 { href: "/services", label: "Services" },
                 { href: "/industries", label: "Industries" },
                 { href: "/service-areas", label: "Service areas" },
-                { href: "/knowledge", label: "Knowledge base" },
+                { href: "/blog", label: "Blog" },
                 { href: "/careers", label: "Careers" },
                 { href: "/contact", label: "Contact" },
               ].map(({ href, label }) => (

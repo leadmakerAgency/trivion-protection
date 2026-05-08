@@ -21,7 +21,7 @@ export type InteriorPageShellProps = {
   /** When "none", content row has no horizontal padding (children supply their own). */
   contentPad?: "default" | "none";
   /**
-   * `archive`: contrasting header + main column (use with `surface="paper"` for all-light blog/knowledge).
+   * `archive`: contrasting header + main column (use with `surface="paper"` for all-light blog).
    * `default`: standard interior body under the header.
    */
   pageTone?: "default" | "archive";

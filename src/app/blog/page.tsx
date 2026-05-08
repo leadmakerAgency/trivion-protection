@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { ArchiveIndexPanel } from "@/components/ArchiveIndexPanel";
 import { ArchiveArticleCard } from "@/components/ArchiveArticleCard";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { buildMetadata } from "@/lib/seo";
 import { getBlogIndex } from "@/lib/mdx";
 import { resolveBlogCover } from "@/lib/blog-covers";
+
+/**
+ * Public /blog lists MDX files under content/blog (see getBlogIndex).
+ * Sveltia + Eleventy use eleventy-blog/src/posts — a separate pipeline unless you mirror or sync content.
+ */
 
 export const metadata: Metadata = buildMetadata({
   title: "Blog: Los Angeles security insights",
@@ -19,31 +23,28 @@ export default function BlogIndexPage() {
     <InteriorPageShell
       surface="paper"
       breadcrumbs={[{ href: "/blog", label: "Blog" }]}
+      breadcrumbMode="seoOnly"
       title="Blog"
-      description="Short articles for Los Angeles County operators covering policy, field practice, hiring, and stronger security outcomes, without filler."
-      headerClassName="pb-10"
-      contentWidth="wide"
+      description="Practical notes for Los Angeles County operators."
+      headerPadding="compact"
+      headerClassName="pb-8"
+      contentWidth="narrow"
     >
-      <div>
-        <ArchiveIndexPanel
-          segment="blog"
-          surface="light"
-          recent={posts.slice(0, 5).map((p) => ({ slug: p.slug, title: p.title }))}
-        />
-        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-2">
-          {posts.map((p) => (
+      <ul className="mx-auto grid max-w-3xl list-none gap-8 p-0 sm:gap-10">
+        {posts.map((p) => (
+          <li key={p.slug} className="min-w-0">
             <ArchiveArticleCard
-              key={p.slug}
               href={`/blog/${p.slug}`}
               title={p.title}
               description={p.description}
               date={p.date}
               imageSrc={resolveBlogCover(p.slug, p.coverImage)}
               imageAlt={`Photography illustrating “${p.title}”`}
+              variant="minimal"
             />
-          ))}
-        </div>
-      </div>
+          </li>
+        ))}
+      </ul>
     </InteriorPageShell>
   );
 }

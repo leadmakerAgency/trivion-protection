@@ -47,7 +47,7 @@ export default function IndustriesPage() {
           const secondary = industry.secondaryServiceSlug
             ? getServiceBySlug(industry.secondaryServiceSlug)
             : null;
-          const reading = resolveMdxLinkPreviews("knowledge", industry.relatedKnowledgeSlugs);
+          const reading = resolveMdxLinkPreviews(industry.relatedBlogSlugs);
           const imageFirst = index % 2 === 0;
           const imgBorder = "border-surface-light-edge shadow-sm";
           const h2 = "text-foreground-on-light";
@@ -127,7 +127,7 @@ export default function IndustriesPage() {
 
                   {reading.length > 0 ? (
                     <div className="mt-8">
-                      <ResourceLinks title="Guides that pair with this industry" items={reading} tone="light" />
+                      <ResourceLinks title="Blog posts that pair with this industry" items={reading} tone="light" />
                     </div>
                   ) : null}
                 </div>

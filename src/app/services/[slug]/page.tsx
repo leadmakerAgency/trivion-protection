@@ -57,9 +57,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
-  const knowledgeResources = resolveMdxLinkPreviews("knowledge", service.relatedKnowledgeSlugs);
-  const blogResources = resolveMdxLinkPreviews("blog", service.relatedBlogSlugs);
-  const relatedReading = [...knowledgeResources, ...blogResources];
+  const relatedReading = resolveMdxLinkPreviews(service.relatedBlogSlugs);
 
   const relatedSlugs = getRelatedServiceSlugs(service.slug, 4);
 

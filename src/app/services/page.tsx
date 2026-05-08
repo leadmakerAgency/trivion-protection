@@ -23,10 +23,9 @@ const categoryLabel: Record<ServiceCategory, string> = {
 };
 
 export default function ServicesIndexPage() {
-  const guides = resolveMdxLinkPreviews("knowledge", [
-    "armed-vs-unarmed-security-guards",
-    "how-much-do-security-guards-cost-los-angeles",
-    "what-is-fire-watch-security",
+  const guides = resolveMdxLinkPreviews([
+    "los-angeles-private-security-hiring-checklist",
+    "construction-site-theft-prevention-los-angeles",
   ]);
 
   return (
@@ -51,14 +50,14 @@ export default function ServicesIndexPage() {
             continuous rounds.
           </p>
           <p>
-            Use the articles below when you are comparing vendors or building an RFP. Each program card summarizes who
+            Use the blog posts below when you are comparing vendors or building an RFP. Each program card summarizes who
             it fits, what it covers, and a concise field highlight to help you shortlist before you talk scope with us.
           </p>
         </ContentProse>
 
         {guides.length > 0 ? (
           <div className="mt-8">
-            <ResourceLinks tone="light" title="Guides for procurement teams" items={guides} />
+            <ResourceLinks tone="light" title="Blog posts for procurement teams" items={guides} />
           </div>
         ) : null}
       </SectionBand>

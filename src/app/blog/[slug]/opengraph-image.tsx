@@ -8,7 +8,7 @@ export const alt = "";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export const generateStaticParams = () => getMdxSlugs("blog").map((slug) => ({ slug }));
+export const generateStaticParams = () => getMdxSlugs().map((slug) => ({ slug }));
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -19,7 +19,7 @@ const truncate = (text: string, max: number) =>
 
 export default async function OgImage(props: Props) {
   const { slug } = await props.params;
-  const post = getMdxSource("blog", slug);
+  const post = getMdxSource(slug);
   const headline = post ? post.meta.title : "Blog";
   const dek = post ? truncate(post.meta.description, 220) : "";
 

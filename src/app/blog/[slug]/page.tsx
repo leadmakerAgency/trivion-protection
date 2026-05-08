@@ -13,11 +13,11 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export const generateStaticParams = () => getMdxSlugs("blog").map((slug) => ({ slug }));
+export const generateStaticParams = () => getMdxSlugs().map((slug) => ({ slug }));
 
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { slug } = await params;
-  const post = getMdxSource("blog", slug);
+  const post = getMdxSource(slug);
   if (!post) return {};
   const path = `/blog/${slug}`;
   const publishedTime = new Date(post.meta.date).toISOString();
@@ -37,7 +37,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogArticlePage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getMdxSource("blog", slug);
+  const post = getMdxSource(slug);
   if (!post) notFound();
 
   const cover = resolveBlogCover(slug, post.meta.coverImage);
@@ -55,7 +55,6 @@ export default async function BlogArticlePage({ params }: PageProps) {
     <>
       <JsonLd
         data={buildMdxArticleStructuredData(
-          "blog",
           slug,
           post.meta.title,
           post.meta.description,
@@ -68,6 +67,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
         surface="paper"
         as="article"
         headerPadding="compact"
+        breadcrumbMode="seoOnly"
         breadcrumbs={[
           { href: "/blog", label: "Blog" },
           { href: `/blog/${slug}`, label: post.meta.title },
@@ -77,6 +77,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
         }
         title={post.meta.title}
         description={post.meta.description}
+        contentWidth="narrow"
         contentClassName="pt-2"
       >
         <div className="space-y-10">

@@ -17,7 +17,6 @@ const staticPaths = [
   "/service-areas",
   "/service-areas/california",
   "/service-areas/texas",
-  "/knowledge",
   "/blog",
 ];
 
@@ -55,19 +54,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  getMdxSlugs("knowledge").forEach((slug) => {
-    routes.push({
-      url: `${base}/knowledge/${slug}`,
-      lastModified: getMdxLastModified("knowledge", slug),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    });
-  });
-
-  getMdxSlugs("blog").forEach((slug) => {
+  getMdxSlugs().forEach((slug) => {
     routes.push({
       url: `${base}/blog/${slug}`,
-      lastModified: getMdxLastModified("blog", slug),
+      lastModified: getMdxLastModified(slug),
       changeFrequency: "monthly",
       priority: 0.55,
     });

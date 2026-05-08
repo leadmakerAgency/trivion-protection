@@ -1,10 +1,6 @@
 import { allAreas, californiaAreas, texasAreas } from "@/lib/areas";
 import { industries } from "@/lib/industries";
-import {
-  getBlogIndex,
-  getKnowledgeIndex,
-  getMdxSource,
-} from "@/lib/mdx";
+import { getBlogIndex, getMdxSource } from "@/lib/mdx";
 import { homeDescription } from "@/lib/seo";
 import { services, type ServiceItem } from "@/lib/services";
 import { SITE_NAME, SITE_TAGLINE, getSiteUrl } from "@/lib/site";
@@ -91,17 +87,6 @@ export const buildLlmsTxt = (): string => {
   });
   lines.push("");
 
-  const knowledge = getKnowledgeIndex();
-  if (knowledge.length > 0) {
-    lines.push(heading(2, "Knowledge"));
-    knowledge.forEach((k) => {
-      lines.push(
-        linkLine(k.title, absUrl(`/knowledge/${k.slug}`), k.description),
-      );
-    });
-    lines.push("");
-  }
-
   const blog = getBlogIndex();
   if (blog.length > 0) {
     lines.push(heading(2, "Blog"));
@@ -149,7 +134,7 @@ export const buildLlmsTxt = (): string => {
     linkLine(
       "llms-full.txt",
       absUrl("/llms-full.txt"),
-      "Full long-form content (services, service areas, industries, knowledge, and blog) concatenated as a single markdown document for offline AI ingestion.",
+      "Full long-form content (services, service areas, industries, and blog) concatenated as a single markdown document for offline AI ingestion.",
     ),
   );
   lines.push(
@@ -308,13 +293,10 @@ const formatIndustry = (
   return sections.join("\n");
 };
 
-const formatMdxArticle = (
-  segment: "knowledge" | "blog",
-  slug: string,
-): string | null => {
-  const post = getMdxSource(segment, slug);
+const formatMdxArticle = (slug: string): string | null => {
+  const post = getMdxSource(slug);
   if (!post) return null;
-  const url = absUrl(`/${segment}/${slug}`);
+  const url = absUrl(`/blog/${slug}`);
   const meta = post.meta;
   const headerLines = [
     heading(3, meta.title),
@@ -379,23 +361,11 @@ export const buildLlmsFullTxt = (): string => {
     sections.push("");
   });
 
-  const knowledge = getKnowledgeIndex();
-  if (knowledge.length > 0) {
-    sections.push(heading(2, "Knowledge"));
-    knowledge.forEach((k) => {
-      const article = formatMdxArticle("knowledge", k.slug);
-      if (article) {
-        sections.push(article);
-        sections.push("");
-      }
-    });
-  }
-
   const blog = getBlogIndex();
   if (blog.length > 0) {
     sections.push(heading(2, "Blog"));
     blog.forEach((b) => {
-      const article = formatMdxArticle("blog", b.slug);
+      const article = formatMdxArticle(b.slug);
       if (article) {
         sections.push(article);
         sections.push("");
