@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-import { getMdxSlugs, getMdxSource } from "@/lib/mdx";
+import { getMdxSource } from "@/lib/mdx";
+import { BLOG_STATIC_EXPORT_STUB_SLUG, getBlogSlugStaticParams } from "@/lib/blog-static-export";
 import { SITE_NAME } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -8,7 +9,9 @@ export const alt = "";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export const generateStaticParams = () => getMdxSlugs().map((slug) => ({ slug }));
+export function generateStaticParams() {
+  return getBlogSlugStaticParams();
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -19,6 +22,29 @@ const truncate = (text: string, max: number) =>
 
 export default async function OgImage(props: Props) {
   const { slug } = await props.params;
+  if (slug === BLOG_STATIC_EXPORT_STUB_SLUG) {
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#f8fafc",
+            color: "#64748b",
+            fontSize: 32,
+            fontWeight: 600,
+          }}
+        >
+          {SITE_NAME} — Blog
+        </div>
+      ),
+      { ...size },
+    );
+  }
+
   const post = getMdxSource(slug);
   const headline = post ? post.meta.title : "Blog";
   const dek = post ? truncate(post.meta.description, 220) : "";

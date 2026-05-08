@@ -1,22 +1,24 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
 import { JsonLd } from "@/components/JsonLd";
 import { MdxArticle } from "@/components/MdxArticle";
 import { buildMetadata } from "@/lib/seo";
 import { buildMdxArticleStructuredData } from "@/lib/jsonld/article-page";
 import { resolveBlogCover } from "@/lib/blog-covers";
-import { getMdxSlugs, getMdxSource } from "@/lib/mdx";
+import { BLOG_STATIC_EXPORT_STUB_SLUG } from "@/lib/blog-static-export";
+import { getMdxSource } from "@/lib/mdx";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export const generateStaticParams = () => getMdxSlugs().map((slug) => ({ slug }));
-
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { slug } = await params;
+  if (slug === BLOG_STATIC_EXPORT_STUB_SLUG) {
+    return { title: "Blog", robots: { index: false, follow: true } };
+  }
   const post = getMdxSource(slug);
   if (!post) return {};
   const path = `/blog/${slug}`;
@@ -37,6 +39,10 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogArticlePage({ params }: PageProps) {
   const { slug } = await params;
+  if (slug === BLOG_STATIC_EXPORT_STUB_SLUG) {
+    permanentRedirect("/blog");
+  }
+
   const post = getMdxSource(slug);
   if (!post) notFound();
 
