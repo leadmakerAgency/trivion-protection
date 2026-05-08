@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/copy-sveltia-admin.cjs",
-    "predev": "node scripts/copy-sveltia-admin.cjs",
+    "prebuild": "node scripts/copy-sveltia-admin.cjs && npm run generate:llms",
+    "predev": "node scripts/copy-sveltia-admin.cjs && npm run generate:llms",
+    "generate:llms": "tsx scripts/generate-llms.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -17,9 +18,7 @@
     "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-icons": "^5.6.0",
-    "resend": "^6.4.2",
-    "zod": "^4.1.12"
+    "react-icons": "^5.6.0"
   },
   "overrides": {
     "uuid": "^14.0.0"
@@ -33,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

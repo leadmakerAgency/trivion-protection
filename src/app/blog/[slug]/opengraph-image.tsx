@@ -2,6 +2,8 @@ import { ImageResponse } from "next/og";
 import { getMdxSlugs, getMdxSource } from "@/lib/mdx";
 import { SITE_NAME } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export const alt = "";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

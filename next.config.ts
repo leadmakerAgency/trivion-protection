@@ -1,18 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",
   transpilePackages: ["next-mdx-remote"],
   reactCompiler: true,
-  async redirects() {
-    return [
-      {
-        source: "/our-process",
-        destination: "/#our-process",
-        permanent: true,
-      },
-    ];
-  },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

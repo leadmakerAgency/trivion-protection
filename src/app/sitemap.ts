@@ -4,6 +4,8 @@ import { getMdxLastModified, getMdxSlugs } from "@/lib/mdx";
 import { getSiteUrl } from "@/lib/site";
 import { services } from "@/lib/services";
 
+export const dynamic = "force-static";
+
 const staticPaths = [
   "/",
   "/about",
@@ -11,6 +13,7 @@ const staticPaths = [
   "/contact",
   "/industries",
   "/services",
+  "/our-process",
   "/service-areas",
   "/service-areas/california",
   "/service-areas/texas",

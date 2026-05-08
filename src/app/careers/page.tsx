@@ -24,9 +24,9 @@ export default function CareersPage() {
       <section className="rounded-xl border border-surface-light-edge bg-surface-light p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-foreground-on-light">How to apply</h2>
         <p className="mt-3">
-          Send your resume, guard card status, and preferred work areas through the contact form with
-          the subject line “Careers.” For fastest routing, include availability (days/nights) and any
-          armed qualification details if applicable.
+          Email your resume, guard card status, and preferred work areas with the subject line
+          “Careers.” For fastest routing, include availability (days/nights) and any armed qualification
+          details if applicable.
         </p>
       </section>
       <Button href="/contact" variant="primary" surface="light">
