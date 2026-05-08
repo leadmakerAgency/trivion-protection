@@ -1,4 +1,4 @@
-import { ORGANIZATION_SCHEMA_ID, SITE_NAME, getSiteLogoAbsoluteUrl, getSiteUrl } from "@/lib/site";
+import { ORGANIZATION_SCHEMA_ID, SITE_NAME, getSiteIconAbsoluteUrl, getSiteUrl } from "@/lib/site";
 
 const resolveHeroImageUrl = (coverImageUrl: string | undefined, base: string, fallbackLogoUrl: string) => {
   if (!coverImageUrl) return fallbackLogoUrl;
@@ -19,7 +19,7 @@ export const buildMdxArticleStructuredData = (
   const base = getSiteUrl();
   const pageUrl = `${base}/blog/${slug}`;
   const orgRef = ORGANIZATION_SCHEMA_ID();
-  const publisherLogo = getSiteLogoAbsoluteUrl();
+  const publisherLogo = getSiteIconAbsoluteUrl();
   const heroUrl = resolveHeroImageUrl(coverImageUrl, base, publisherLogo);
 
   return {

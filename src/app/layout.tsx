@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { buildSiteStructuredDataGraph } from "@/lib/jsonld/site-graph";
-import { getSiteUrl, SITE_LOGO_PATH, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { getSiteUrl, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -20,10 +20,6 @@ export const metadata: Metadata = {
   },
   description:
     "Trivon Protection is a Los Angeles County security guard company offering armed and unarmed posts, marked vehicle patrol, fire watch, construction site security, and warehouse programs.",
-  icons: {
-    icon: SITE_LOGO_PATH,
-    apple: SITE_LOGO_PATH,
-  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,

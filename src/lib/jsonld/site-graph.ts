@@ -8,7 +8,7 @@ import {
   getPostalGeo,
   getSiteContactEmail,
   getSitePhoneRaw,
-  getSiteLogoAbsoluteUrl,
+  getSiteIconAbsoluteUrl,
   getSiteUrl,
   siteHasPostalAddressForLocalBusiness,
   SITE_NAME,
@@ -21,7 +21,7 @@ const orgDescription =
 /** Single JSON-LD document for sitewide `Organization`, optional `LocalBusiness`, and `WebSite`. */
 export const buildSiteStructuredDataGraph = (): Record<string, unknown> => {
   const url = getSiteUrl();
-  const logoUrl = getSiteLogoAbsoluteUrl();
+  const logoUrl = getSiteIconAbsoluteUrl();
   const orgId = ORGANIZATION_SCHEMA_ID();
   const siteId = WEBSITE_SCHEMA_ID();
   const postal = getPostalAddressDetails();

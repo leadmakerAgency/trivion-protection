@@ -1,10 +1,15 @@
 export const SITE_NAME = "Trivon Protection";
 export const SITE_TAGLINE = "Los Angeles Security Guards";
 
-/** Primary brand mark (PNG). Used in header, footer, favicon, and structured data. */
+/** Primary brand mark (PNG). Used in header and footer. */
 export const SITE_LOGO_PATH = "https://i.imgur.com/7JC2Y9R.png";
 
-/** Absolute URL for JSON-LD and metadata when the logo may be same-origin or remote. */
+/** Same-origin favicon / app icon route (`src/app/icon.tsx`). Used in JSON-LD `logo` for search. */
+export const SITE_ICON_PATH = "/icon";
+
+export const getSiteIconAbsoluteUrl = (): string => `${getSiteUrl()}${SITE_ICON_PATH}`;
+
+/** Absolute URL for the header/footer image when `SITE_LOGO_PATH` is relative. */
 export const getSiteLogoAbsoluteUrl = (): string => {
   if (/^https?:\/\//i.test(SITE_LOGO_PATH)) return SITE_LOGO_PATH;
   const base = getSiteUrl();
