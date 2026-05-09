@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { ArchiveArticleCard } from "@/components/ArchiveArticleCard";
+import { BlogPostsGrid } from "@/components/BlogPostsGrid";
 import { InteriorPageShell } from "@/components/InteriorPageShell";
+import { getPageSlice } from "@/lib/blog-pagination";
 import { buildMetadata } from "@/lib/seo";
 import { getBlogIndex } from "@/lib/mdx";
-import { resolveBlogCover } from "@/lib/blog-covers";
 
 /**
  * Public /blog reads from `content/posts` first (automation + Sveltia), then legacy post locations.
@@ -19,6 +19,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function BlogIndexPage() {
   const posts = getBlogIndex();
+  const { slice, totalPages } = getPageSlice(posts, 1);
   return (
     <InteriorPageShell
       surface="paper"
@@ -28,27 +29,9 @@ export default function BlogIndexPage() {
       description="Practical notes for Los Angeles County operators."
       headerPadding="compact"
       headerClassName="pb-8"
-      contentWidth="narrow"
+      contentWidth="wide"
     >
-      {posts.length === 0 ? (
-        <p className="mx-auto max-w-xl text-center text-sm leading-relaxed text-muted-on-light">No posts yet.</p>
-      ) : (
-        <ul className="mx-auto grid max-w-3xl list-none gap-8 p-0 sm:gap-10">
-          {posts.map((p) => (
-            <li key={p.slug} className="min-w-0">
-              <ArchiveArticleCard
-                href={`/blog/${p.slug}`}
-                title={p.title}
-                description={p.description}
-                date={p.date}
-                imageSrc={resolveBlogCover(p.slug, p.coverImage)}
-                imageAlt={`Photography illustrating “${p.title}”`}
-                variant="minimal"
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+      <BlogPostsGrid posts={slice} currentPage={1} totalPages={totalPages} />
     </InteriorPageShell>
   );
 }

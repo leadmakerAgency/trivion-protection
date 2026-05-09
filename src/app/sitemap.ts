@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allAreas } from "@/lib/areas";
+import { getTotalPages } from "@/lib/blog-pagination";
 import { getMdxLastModified, getMdxSlugs } from "@/lib/mdx";
 import { getSiteUrl } from "@/lib/site";
 import { services } from "@/lib/services";
@@ -54,7 +55,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  getMdxSlugs().forEach((slug) => {
+  const blogSlugs = getMdxSlugs();
+  blogSlugs.forEach((slug) => {
     routes.push({
       url: `${base}/blog/${slug}`,
       lastModified: getMdxLastModified(slug),
@@ -62,6 +64,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.55,
     });
   });
+
+  const blogPageCount = getTotalPages(blogSlugs.length);
+  if (blogPageCount > 1) {
+    for (let page = 2; page <= blogPageCount; page += 1) {
+      routes.push({
+        url: `${base}/blog/page/${page}`,
+        lastModified: staticLastModified,
+        changeFrequency: "weekly",
+        priority: 0.5,
+      });
+    }
+  }
 
   return routes;
 }

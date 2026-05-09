@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 export type ArchiveArticleCardProps = {
   href: string;
   title: string;
-  description: string;
+  description?: string;
   /** ISO date string */
   date: string;
   imageSrc: string;
@@ -13,6 +13,8 @@ export type ArchiveArticleCardProps = {
   readLabel?: string;
   /** `minimal` = flatter card (blog index); `default` = richer archive card */
   variant?: "default" | "minimal";
+  showDescription?: boolean;
+  showReadLink?: boolean;
 };
 
 export const ArchiveArticleCard = ({
@@ -24,6 +26,8 @@ export const ArchiveArticleCard = ({
   imageAlt,
   readLabel = "Read article",
   variant = "default",
+  showDescription = true,
+  showReadLink = true,
 }: ArchiveArticleCardProps) => {
   const formatted = new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -72,11 +76,13 @@ export const ArchiveArticleCard = ({
             {formatted}
           </time>
           <h2 className={titleClass}>{title}</h2>
-          <p className={descClass}>{description}</p>
-          <span className={footerClass}>
-            {readLabel}
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-px group-hover:-translate-y-px" aria-hidden />
-          </span>
+          {showDescription && description ? <p className={descClass}>{description}</p> : null}
+          {showReadLink ? (
+            <span className={footerClass}>
+              {readLabel}
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-px group-hover:-translate-y-px" aria-hidden />
+            </span>
+          ) : null}
         </div>
       </Link>
     </article>
