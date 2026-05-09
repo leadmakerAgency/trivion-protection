@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 # Paths are relative to the repository root (leading slash).
-# If you move this site to its own repo with src at repo root, change folder/media_folder to /src/posts and /src/media.
+# Canonical blog source for automation + CMS is /content/posts.
 
 backend:
   name: github
@@ -9,7 +9,7 @@ backend:
   # and set base_url to your worker URL:
   # base_url: https://your-worker.your-subdomain.workers.dev
 
-# Thumbnails / uploads: same folder as Next.js blog (copied to public/media on prebuild). GitHub Pages project site: set public_folder to "/trivion-protection/media" if needed.
+# Thumbnails / uploads: same folder as Next.js blog (copied to public/media on prebuild).
 media_folder: /content/media
 public_folder: /media
 
@@ -20,9 +20,9 @@ collections:
   - name: posts
     label: Posts
     label_singular: Post
-    folder: /eleventy-blog/src/posts
+    folder: /content/posts
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
+    slug: "{{fields.slug}}"
     extension: md
     format: frontmatter
     fields:
