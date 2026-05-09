@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { getSiteAddressLines, getSiteContactEmail, getSitePhoneRaw, getSiteTelHref, SITE_NAME } from "@/lib/site";
 import { services } from "@/lib/services";
-import { imageAttribution } from "@/lib/site-images";
 
 const footerLinks = [
   { href: "/about", label: "About" },
@@ -33,7 +32,6 @@ export const Footer = () => {
               California-licensed professionals. Insurance and supervision aligned to professional
               standards, details confirmed during onboarding.
             </p>
-            <p className="mt-3 text-xs leading-relaxed text-muted/80">{imageAttribution}</p>
           </div>
           <div className="md:border-r md:border-solid md:border-edge md:px-2 lg:px-4">
             <p className="text-base font-semibold text-foreground">Contact</p>
