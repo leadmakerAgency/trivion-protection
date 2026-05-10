@@ -62,10 +62,10 @@ After redeploy, hard-refresh `/admin` so the browser loads the new `config.yml`.
 
 Put image files in **[`content/media`](../content/media)** at the repo root. Use **`coverImage: /media/your-file.webp`** in [`content/blog/*.mdx`](../content/blog). The root app’s **`prebuild` / `predev`** copies `content/media` → `public/media` so Vercel serves them. Sveltia **`featured_image`** uploads use the same `content/media` folder (`media_folder` in `admin/config.yml`).
 
-3. **`public_folder` and GitHub Pages**
+3. **`public_folder` and base path**
 
-   - **Project site** (`https://<user>.github.io/<repo>/`): set `public_folder` to `/<repo>/media` so Markdown images resolve under the same prefix as the build (`ELEVENTY_PATH_PREFIX` in CI should match the repo name).
-   - **Site at domain root** (custom domain or `username.github.io` with no subpath): keep `public_folder: /media` and set `ELEVENTY_PATH_PREFIX` empty when building (see below).
+   - **Subpath** (site under a prefix, e.g. `/blog/`): set `public_folder` so Markdown images resolve under the same prefix as the build (`ELEVENTY_PATH_PREFIX` should match that prefix).
+   - **Site at domain root** (no URL prefix): keep `public_folder: /media` and set `ELEVENTY_PATH_PREFIX` empty when building (see below).
 
 ## Post fields (`admin/config.yml`)
 
@@ -99,28 +99,22 @@ Sveltia does **not** use Netlify Git Gateway. Pick one:
 
 1. Create a **GitHub OAuth App** (Settings → Developer settings):
 
-   - **Homepage URL**: your live site URL (e.g. `https://<user>.github.io/<repo>/`).
+   - **Homepage URL**: your live production site URL (e.g. `https://yourdomain.com`).
    - **Authorization callback URL**: follow the README of your OAuth client (below).
 
 2. Deploy **[Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth)** (Cloudflare Workers) or another [external OAuth client](https://decapcms.org/docs/external-oauth-clients/) compatible with Decap/Sveltia.
 
 3. In `admin/config.yml`, set **`backend.base_url`** to your authenticator’s public URL (uncomment the example line).
 
-## GitHub Pages and Actions
+## CI / GitHub Pages (removed)
 
-1. **Pages**: Repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Automated **GitHub Actions** workflows for **GitHub Pages** and **Bluehost SSH** deploy were removed from this repository so pushes to `main` no longer trigger those jobs.
 
-2. **Workflow**: [.github/workflows/deploy-eleventy-blog.yml](../.github/workflows/deploy-eleventy-blog.yml) runs on pushes to `main` or `master` that touch `eleventy-blog/` or the workflow file.
-
-3. **`ELEVENTY_PATH_PREFIX`**: The workflow sets it to **`github.event.repository.name`** so links and assets work for a **project** Pages URL. For a **root** site build, remove or empty that env in the workflow and align `public_folder` as described above.
-
-4. **Collaborators**: Editors need **write** access to the repository so the CMS can push commits.
-
-5. **CSP**: If you add a Content Security Policy to the site, allow requests required by Sveltia and GitHub per [Sveltia security docs](https://sveltiacms.app/en/docs/security#setting-up-content-security-policy).
-
-6. **`ELEVENTY_SITE_URL`**: Set in CI (see workflow) to your public origin **without a trailing slash** (e.g. `https://<user>.github.io`). Eleventy’s `pathPrefix` still adds `/<repo>/` to paths; RSS `link`/`guid` values combine origin + `post.url`. For a custom domain, change this env in the workflow.
-
-7. **Scheduled rebuild**: The workflow runs on a **cron** (hourly UTC by default) so posts with a **Publish date** in the past are included on the next build without a new Git push. GitHub Actions cron is not minute-precise.
+- **Disable Pages in GitHub** (stops the “github-pages” environment from being used by Actions): Repository **Settings → Pages → Build and deployment**, set **Source** to **None** (or disable the site) if you no longer host the Eleventy build on Pages.
+- **Bluehost “auto deploy” outside GitHub**: If Bluehost still deploys when you push, that is usually **cPanel → Git Version Control** (or similar) on the host, not this repo. Remove or disable that integration in Bluehost; nothing else in this codebase triggers it.
+- **Collaborators**: Editors still need **write** access so the CMS can push commits.
+- **CSP**: If you add a Content Security Policy, allow requests required by Sveltia and GitHub per [Sveltia security docs](https://sveltiacms.app/en/docs/security#setting-up-content-security-policy).
+- **Build Eleventy locally** (optional): from `eleventy-blog/`, run `npm ci && npm run build`. Set `ELEVENTY_PATH_PREFIX` and `ELEVENTY_SITE_URL` in the shell to match wherever you publish `_site` (RSS and absolute links use `ELEVENTY_SITE_URL`).
 
 ## Drafts and scheduling
 
