@@ -6,13 +6,13 @@ Create these in Vercel (or your host) for production:
 
 | Variable | Required | Purpose |
 |----------|----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site origin, e.g. `https://trivonprotection.com` (no trailing slash). Used for metadata, sitemap, and JSON-LD. |
-| `LEADMAKER_WEBHOOK_URL` | **Required for `/contact` form** | Server-only URL for the n8n (or LeadMaker) webhook that receives JSON submissions from `POST /api/contact`. Example: `https://hooks.leadmaker.agency/webhook/<your-id>`. If unset, the API returns 503 and the UI asks visitors to call or email instead. |
+| `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site origin, e.g. `https://trivonprotection.com` (no trailing slash). Used for `metadataBase`, sitemap, robots, and JSON-LD. **If unset on Vercel**, the app uses the automatic `VERCEL_URL` host (for example `https://trivion-protection.vercel.app`), so previews match the deployment URL without configuration. Set this explicitly once you attach a custom domain. |
+| `LEADMAKER_WEBHOOK_URL` | Optional | Overrides the built-in production n8n webhook URL used by `POST /api/contact`. Set this if you use a different workflow, staging hook, or rotate the endpoint without redeploying. |
 | `RESEND_API_KEY` | Optional (future email) | Resend API key for transactional email, if you add a separate email pipeline later. |
 | `CONTACT_TO_EMAIL` | Optional (future email) | Inbox address for email-based quote delivery. |
 | `CONTACT_FROM_EMAIL` | Optional (future email) | Verified sender domain on Resend, e.g. `Trivon Protection <hello@trivonprotection.com>`. |
 
-The contact form posts to your own `/api/contact` route, which validates the payload and forwards it to `LEADMAKER_WEBHOOK_URL`. Resend variables are unrelated unless you implement email in addition to the webhook.
+The contact form posts to `/api/contact`, which forwards JSON to the LeadMaker n8n webhook (default URL is built into the app). Set `LEADMAKER_WEBHOOK_URL` only when you need to override that destination. Resend variables are unrelated unless you add email separately.
 
 ## Vercel + DNS
 

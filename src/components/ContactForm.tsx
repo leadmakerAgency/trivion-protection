@@ -82,7 +82,7 @@ export const ContactForm = ({
 
     setStatus("submitting");
     const pageUrl =
-      typeof window !== "undefined" ? `${window.location.pathname}${window.location.search}` : "";
+      typeof window !== "undefined" ? window.location.href.split("#")[0] ?? "" : "";
 
     try {
       const res = await fetch("/api/contact", {

@@ -17,8 +17,22 @@ export const getSiteLogoAbsoluteUrl = (): string => {
   return `${base}${path}`;
 };
 
-export const getSiteUrl = () =>
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://trivonprotection.com";
+/**
+ * Canonical site origin (no trailing slash).
+ * 1) `NEXT_PUBLIC_SITE_URL` when set (use for production custom domain, e.g. `https://trivonprotection.com`).
+ * 2) On Vercel, `VERCEL_URL` is set automatically (e.g. `trivion-protection.vercel.app`); we prefix `https://`
+ *    so preview/production deployments get correct metadata without extra env until you add a custom domain.
+ * 3) Otherwise local / non-Vercel fallback for development.
+ */
+export const getSiteUrl = () => {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "").trim();
+  if (explicit) return explicit;
+
+  const vercelHost = process.env.VERCEL_URL?.replace(/\/$/, "").trim();
+  if (vercelHost) return `https://${vercelHost}`;
+
+  return "https://trivonprotection.com";
+};
 
 const trim = (v: string | undefined) => (typeof v === "string" ? v.trim() : undefined);
 

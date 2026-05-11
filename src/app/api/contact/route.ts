@@ -2,6 +2,10 @@ import { validateContactRequest } from "@/lib/contact-payload";
 
 const WEBHOOK_TIMEOUT_MS = 12_000;
 
+/** Production n8n webhook; override with `LEADMAKER_WEBHOOK_URL` for staging or if the workflow URL changes. */
+const DEFAULT_LEADMAKER_WEBHOOK_URL =
+  "https://hooks.leadmaker.agency/webhook/a8ebc1c1-1a8f-4ec7-9d33-9dfcbae7e4ca";
+
 export async function POST(request: Request) {
   let raw: unknown;
   try {
@@ -24,16 +28,8 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, message: validated.message }, { status: validated.status });
   }
 
-  const webhookUrl = process.env.LEADMAKER_WEBHOOK_URL?.trim();
-  if (!webhookUrl) {
-    return Response.json(
-      {
-        ok: false,
-        message: "Contact delivery is not configured. Please call or email us instead.",
-      },
-      { status: 503 },
-    );
-  }
+  const webhookUrl =
+    process.env.LEADMAKER_WEBHOOK_URL?.trim() || DEFAULT_LEADMAKER_WEBHOOK_URL;
 
   let upstream: Response;
   try {
