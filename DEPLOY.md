@@ -7,13 +7,16 @@ Create these in Vercel (or your host) for production:
 | Variable | Required | Purpose |
 |----------|----------|---------|
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site origin, e.g. `https://trivonprotection.com` (no trailing slash). Used for metadata, sitemap, and JSON-LD. |
-| `RESEND_API_KEY` | For email | Resend API key for transactional email. |
-| `CONTACT_TO_EMAIL` | For email | Inbox address that receives quote form submissions. |
-| `CONTACT_FROM_EMAIL` | For email | Verified sender domain on Resend, e.g. `Trivon Protection <hello@trivonprotection.com>`. |
+| `LEADMAKER_WEBHOOK_URL` | **Required for `/contact` form** | Server-only URL for the n8n (or LeadMaker) webhook that receives JSON submissions from `POST /api/contact`. Example: `https://hooks.leadmaker.agency/webhook/<your-id>`. If unset, the API returns 503 and the UI asks visitors to call or email instead. |
+| `RESEND_API_KEY` | Optional (future email) | Resend API key for transactional email, if you add a separate email pipeline later. |
+| `CONTACT_TO_EMAIL` | Optional (future email) | Inbox address for email-based quote delivery. |
+| `CONTACT_FROM_EMAIL` | Optional (future email) | Verified sender domain on Resend, e.g. `Trivon Protection <hello@trivonprotection.com>`. |
 
-If Resend variables are missing, the contact API returns a clear error and the page suggests calling/emailing instead.
+The contact form posts to your own `/api/contact` route, which validates the payload and forwards it to `LEADMAKER_WEBHOOK_URL`. Resend variables are unrelated unless you implement email in addition to the webhook.
 
 ## Vercel + DNS
+
+Use the default Next.js deployment on Vercel (Node/serverless) so `POST /api/contact` runs. Pure static hosting that only serves `next export` output is not sufficient for the contact form.
 
 1. Import the repository into Vercel and select the Next.js framework preset.
 2. Set **Root Directory** to the repository root (this project).
