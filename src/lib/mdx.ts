@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { isPublishedForSite } from "@/lib/post-visibility";
 
 export type MdxFrontmatter = {
   title: string;
@@ -56,8 +57,6 @@ const postSources: SourceDefinition[] = [
   },
 ];
 
-const isDraft = (data: Record<string, unknown>): boolean => data.draft === true;
-
 const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => {
   const title = typeof data.title === "string" ? data.title : "Untitled";
   const description =
@@ -91,7 +90,7 @@ const parsePostFile = (filePath: string): ParsedPost | null => {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
   const record = data as Record<string, unknown>;
-  if (isDraft(record)) return null;
+  if (!isPublishedForSite(record)) return null;
   const meta = normalizeFrontmatter(stripBodyFromData(record));
   const bodyFromFrontmatter = record.body;
   const markdownBody =

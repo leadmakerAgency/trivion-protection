@@ -4,6 +4,8 @@
 
 backend:
   name: github
+  # Matches current origin: https://github.com/leadmakerAgency/trivion-protection
+  # Recommended: set SVELTIA_GITHUB_REPO in environment so prebuild injects this dynamically.
   repo: leadmakerAgency/trivion-protection
   # For OAuth (recommended for non-technical editors), deploy https://github.com/sveltia/sveltia-cms-auth
   # and set base_url to your worker URL:
@@ -47,6 +49,7 @@ collections:
           required: true,
           default: "{{now}}",
           picker_utc: true,
+          hint: "UTC datetime. Future dates are hidden in production until a scheduled rebuild runs after this instant.",
         }
       - {
           label: Excerpt,
@@ -83,6 +86,7 @@ collections:
           widget: boolean,
           default: false,
           required: false,
+          hint: "When enabled, this post stays hidden in production until Draft is turned off.",
         }
       - {
           label: Body,

@@ -1,0 +1,23 @@
+name: Scheduled Vercel Redeploy
+
+on:
+  schedule:
+    # Every hour at minute 5 (UTC)
+    - cron: "5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "Missing required secret: VERCEL_DEPLOY_HOOK"
+            exit 1
+          fi
+
+          curl --fail --show-error --silent --request POST "$VERCEL_DEPLOY_HOOK"
+          echo "Deploy hook triggered successfully."
