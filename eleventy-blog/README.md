@@ -53,14 +53,14 @@ After redeploy, hard-refresh `/admin` so the browser loads the new `config.yml`.
 
 2. **Paths** — Defaults assume this monorepo layout:
 
-   - Posts: `/eleventy-blog/src/posts`
+   - Posts: `/content/posts` (canonical source shared with Next.js `/blog` and Sveltia CMS)
    - Media: `/content/media` (same folder as Next.js MDX `coverImage` paths `/media/...`; see root `scripts/copy-content-media.cjs`)
 
    If you move the blog to its own repository with `src/` at the repo root, change `folder` and `media_folder` in `admin/config.yml` accordingly.
 
 ### Blog thumbnails (Next.js + MDX)
 
-Put image files in **[`content/media`](../content/media)** at the repo root. Use **`coverImage: /media/your-file.webp`** in [`content/blog/*.mdx`](../content/blog). The root app’s **`prebuild` / `predev`** copies `content/media` → `public/media` so Vercel serves them. Sveltia **`featured_image`** uploads use the same `content/media` folder (`media_folder` in `admin/config.yml`).
+Put image files in **[`content/media`](../content/media)** at the repo root. Use **`coverImage: /media/your-file.webp`** or **`featured_image: /media/your-file.webp`** in files under **[`content/posts`](../content/posts)**. The root app’s **`prebuild` / `predev`** copies `content/media` → `public/media` so Vercel serves them. Sveltia uploads use the same `content/media` folder (`media_folder` in `admin/config.yml`).
 
 3. **`public_folder` and base path**
 

@@ -2,7 +2,8 @@ import { getMdxSlugs } from "@/lib/mdx";
 
 /**
  * Next.js `output: "export"` requires at least one entry in `generateStaticParams` for each dynamic segment.
- * When `content/blog` has no `.mdx` files, we still emit this slug so the build succeeds; the page redirects to `/blog`.
+ * When there are no published posts in `content/posts`, we still emit this slug
+ * so the build succeeds; the page redirects to `/blog`.
  */
 export const BLOG_STATIC_EXPORT_STUB_SLUG = "__blog_build_stub";
 

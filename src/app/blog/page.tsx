@@ -6,8 +6,8 @@ import { buildMetadata } from "@/lib/seo";
 import { getBlogIndex } from "@/lib/mdx";
 
 /**
- * Public /blog reads from `content/posts` first (automation + Sveltia), then legacy post locations.
- * See source priority in `src/lib/mdx.ts`.
+ * Public /blog uses `content/posts` as the single canonical source.
+ * This matches Sveltia CMS `/admin` configuration.
  */
 
 export const metadata: Metadata = buildMetadata({

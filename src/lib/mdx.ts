@@ -15,47 +15,9 @@ export type MdxFrontmatter = {
   coverImage?: string;
 };
 
-type RawCmsPostFrontmatter = {
-  title?: string;
-  description?: string;
-  excerpt?: string;
-  date?: string;
-  updated?: string;
-  author?: string;
-  coverImage?: string;
-  featured_image?: string;
-  draft?: boolean;
-  body?: string;
-};
-
 type ParsedPost = { meta: MdxFrontmatter; content: string };
-type SourceDefinition = {
-  dir: string;
-  allowedExtensions: string[];
-  ignoredFiles?: string[];
-};
-
-/**
- * Source priority matters:
- * 1) `content/posts` (n8n automation + future Sveltia target)
- * 2) `content/blog` (legacy MDX posts)
- * 3) `eleventy-blog/src/posts` (legacy Sveltia/Eleventy posts)
- */
-const postSources: SourceDefinition[] = [
-  {
-    dir: path.join(process.cwd(), "content", "posts"),
-    allowedExtensions: [".md", ".mdx"],
-  },
-  {
-    dir: path.join(process.cwd(), "content", "blog"),
-    allowedExtensions: [".mdx", ".md"],
-  },
-  {
-    dir: path.join(process.cwd(), "eleventy-blog", "src", "posts"),
-    allowedExtensions: [".md"],
-    ignoredFiles: ["posts.11tydata.js"],
-  },
-];
+const blogPostsDir = path.join(process.cwd(), "content", "posts");
+const blogPostExtensions = [".md", ".mdx"] as const;
 
 const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => {
   const title = typeof data.title === "string" ? data.title : "Untitled";
@@ -81,7 +43,9 @@ const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => 
 };
 
 const stripBodyFromData = (data: Record<string, unknown>): Record<string, unknown> => {
-  const { body: _body, ...rest } = data;
+  if (!("body" in data)) return data;
+  const rest = { ...data };
+  delete rest.body;
   return rest;
 };
 
@@ -101,37 +65,31 @@ const parsePostFile = (filePath: string): ParsedPost | null => {
 };
 
 const findExistingPostFile = (slug: string): string | null => {
-  for (const source of postSources) {
-    for (const ext of source.allowedExtensions) {
-      const candidate = path.join(source.dir, `${slug}${ext}`);
-      if (fs.existsSync(candidate)) return candidate;
-    }
+  for (const ext of blogPostExtensions) {
+    const candidate = path.join(blogPostsDir, `${slug}${ext}`);
+    if (fs.existsSync(candidate)) return candidate;
   }
   return null;
 };
 
-const isEligibleSourceFile = (file: string, source: SourceDefinition): boolean => {
-  if (source.ignoredFiles?.includes(file)) return false;
-  return source.allowedExtensions.some((ext) => file.endsWith(ext));
-};
+const isEligibleBlogPostFile = (file: string): boolean =>
+  blogPostExtensions.some((ext) => file.endsWith(ext));
 
 const toSlug = (fileName: string): string => fileName.replace(/\.[^.]+$/, "");
 
 export type BlogIndexEntry = { slug: string; segment: "blog" } & MdxFrontmatter;
 
 const readBlogCollection = (): BlogIndexEntry[] => {
+  if (!fs.existsSync(blogPostsDir)) return [];
   const bySlug = new Map<string, BlogIndexEntry>();
 
-  for (const source of postSources) {
-    if (!fs.existsSync(source.dir)) continue;
-    for (const file of fs.readdirSync(source.dir)) {
-      if (!isEligibleSourceFile(file, source)) continue;
-      const slug = toSlug(file);
-      if (bySlug.has(slug)) continue;
-      const parsed = parsePostFile(path.join(source.dir, file));
-      if (!parsed) continue;
-      bySlug.set(slug, { slug, segment: "blog", ...parsed.meta });
-    }
+  for (const file of fs.readdirSync(blogPostsDir)) {
+    if (!isEligibleBlogPostFile(file)) continue;
+    const slug = toSlug(file);
+    if (bySlug.has(slug)) continue;
+    const parsed = parsePostFile(path.join(blogPostsDir, file));
+    if (!parsed) continue;
+    bySlug.set(slug, { slug, segment: "blog", ...parsed.meta });
   }
 
   return [...bySlug.values()].sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -146,16 +104,15 @@ export const getMdxSource = (slug: string): ParsedPost | null => {
 };
 
 export const getMdxSlugs = (): string[] => {
+  if (!fs.existsSync(blogPostsDir)) return [];
   const slugs = new Set<string>();
-  for (const source of postSources) {
-    if (!fs.existsSync(source.dir)) continue;
-    for (const file of fs.readdirSync(source.dir)) {
-      if (!isEligibleSourceFile(file, source)) continue;
-      const slug = toSlug(file);
-      if (slugs.has(slug)) continue;
-      const parsed = parsePostFile(path.join(source.dir, file));
-      if (parsed) slugs.add(slug);
-    }
+
+  for (const file of fs.readdirSync(blogPostsDir)) {
+    if (!isEligibleBlogPostFile(file)) continue;
+    const slug = toSlug(file);
+    if (slugs.has(slug)) continue;
+    const parsed = parsePostFile(path.join(blogPostsDir, file));
+    if (parsed) slugs.add(slug);
   }
   return [...slugs];
 };
