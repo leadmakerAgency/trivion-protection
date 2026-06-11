@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { isPublishedForSite } from "@/lib/post-visibility";
+import { getPublishInstant, isPublishedForSite } from "@/lib/post-visibility";
 
 export type MdxFrontmatter = {
   title: string;
@@ -19,6 +19,12 @@ type ParsedPost = { meta: MdxFrontmatter; content: string };
 const blogPostsDir = path.join(process.cwd(), "content", "posts");
 const blogPostExtensions = [".md", ".mdx"] as const;
 
+const normalizeDateInput = (value: unknown): string | null => {
+  const instant = getPublishInstant(value);
+  if (instant == null) return null;
+  return new Date(instant).toISOString();
+};
+
 const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => {
   const title = typeof data.title === "string" ? data.title : "Untitled";
   const description =
@@ -27,7 +33,8 @@ const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => 
       : typeof data.excerpt === "string"
         ? data.excerpt
         : "") || "";
-  const date = typeof data.date === "string" ? data.date : new Date().toISOString();
+  const date = normalizeDateInput(data.date) ?? new Date().toISOString();
+  const updated = normalizeDateInput(data.updated);
   const coverImage =
     (typeof data.coverImage === "string" && data.coverImage) ||
     (typeof data.featured_image === "string" && data.featured_image) ||
@@ -36,7 +43,7 @@ const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => 
     title,
     description,
     date,
-    ...(typeof data.updated === "string" ? { updated: data.updated } : {}),
+    ...(updated ? { updated } : {}),
     ...(typeof data.author === "string" ? { author: data.author } : {}),
     ...(coverImage ? { coverImage } : {}),
   };
@@ -92,7 +99,11 @@ const readBlogCollection = (): BlogIndexEntry[] => {
     bySlug.set(slug, { slug, segment: "blog", ...parsed.meta });
   }
 
-  return [...bySlug.values()].sort((a, b) => (a.date < b.date ? 1 : -1));
+  return [...bySlug.values()].sort((a, b) => {
+    const aInstant = getPublishInstant(a.date) ?? 0;
+    const bInstant = getPublishInstant(b.date) ?? 0;
+    return bInstant - aInstant;
+  });
 };
 
 export const getBlogIndex = () => readBlogCollection();
