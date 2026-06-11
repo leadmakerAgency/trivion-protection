@@ -25,9 +25,12 @@ Production blog scheduling is enforced at build time:
 
 Because this site is statically generated, newly publishable future posts require a rebuild after the target time.
 
-### Scheduled rebuild automation
+### Rebuild automation
 
-This repository includes [`/.github/workflows/vercel-scheduled-redeploy.yml`](.github/workflows/vercel-scheduled-redeploy.yml), which triggers a Vercel Deploy Hook hourly (and supports manual run).
+This repository includes:
+
+- [`/.github/workflows/vercel-content-redeploy.yml`](.github/workflows/vercel-content-redeploy.yml): triggers Vercel Deploy Hook on every `main` push touching `content/posts`, `content/media`, or `eleventy-blog/admin` (plus manual run).
+- [`/.github/workflows/vercel-scheduled-redeploy.yml`](.github/workflows/vercel-scheduled-redeploy.yml): hourly fallback (plus manual run).
 
 Setup:
 
@@ -39,7 +42,8 @@ Setup:
 
 Expected release window:
 
-- Cron runs at minute 5 every hour (UTC), so publish latency is usually up to ~60 minutes after target `date`.
+- Content commits to `main` should deploy shortly after push via the content-triggered workflow.
+- Cron still runs at minute 5 every hour (UTC) as a fallback, so worst-case publish latency is usually up to ~60 minutes after target `date`.
 - You can shorten this by increasing cron frequency if build budget allows.
 
 Preview controls (local/staging):
