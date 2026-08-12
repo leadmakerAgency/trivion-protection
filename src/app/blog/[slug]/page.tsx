@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 import { buildMdxArticleStructuredData } from "@/lib/jsonld/article-page";
 import { resolveBlogCover } from "@/lib/blog-covers";
 import { BLOG_STATIC_EXPORT_STUB_SLUG } from "@/lib/blog-static-export";
-import { getMdxSource } from "@/lib/mdx";
+import { getCanonicalBlogSlug, getMdxSource } from "@/lib/mdx";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -19,9 +19,11 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
   if (slug === BLOG_STATIC_EXPORT_STUB_SLUG) {
     return { title: "Blog", robots: { index: false, follow: true } };
   }
-  const post = getMdxSource(slug);
+  const canonicalSlug = getCanonicalBlogSlug(slug);
+  if (!canonicalSlug) return {};
+  const post = getMdxSource(canonicalSlug);
   if (!post) return {};
-  const path = `/blog/${slug}`;
+  const path = `/blog/${canonicalSlug}`;
   const publishedTime = new Date(post.meta.date).toISOString();
   const modifiedTime = post.meta.updated
     ? new Date(post.meta.updated).toISOString()
@@ -43,10 +45,16 @@ export default async function BlogArticlePage({ params }: PageProps) {
     permanentRedirect("/blog");
   }
 
-  const post = getMdxSource(slug);
+  const canonicalSlug = getCanonicalBlogSlug(slug);
+  if (!canonicalSlug) notFound();
+  if (canonicalSlug !== slug) {
+    permanentRedirect(`/blog/${canonicalSlug}`);
+  }
+
+  const post = getMdxSource(canonicalSlug);
   if (!post) notFound();
 
-  const cover = resolveBlogCover(slug, post.meta.coverImage);
+  const cover = resolveBlogCover(canonicalSlug, post.meta.coverImage);
   const publishedTime = new Date(post.meta.date).toISOString();
   const modifiedTime = post.meta.updated
     ? new Date(post.meta.updated).toISOString()
@@ -61,7 +69,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
     <>
       <JsonLd
         data={buildMdxArticleStructuredData(
-          slug,
+          canonicalSlug,
           post.meta.title,
           post.meta.description,
           publishedTime,
@@ -76,7 +84,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
         breadcrumbMode="seoOnly"
         breadcrumbs={[
           { href: "/blog", label: "Blog" },
-          { href: `/blog/${slug}`, label: post.meta.title },
+          { href: `/blog/${canonicalSlug}`, label: post.meta.title },
         ]}
         meta={
           <p className="text-xs font-semibold uppercase tracking-wide text-accent-dark">{dateLabel}</p>

@@ -8,7 +8,11 @@ export default {
     permalink: (data) => {
       const normalized = data.page.inputPath.replace(/\\/g, "/");
       const match = normalized.match(/\/posts\/([^/]+)\.md$/);
-      const slug = match ? match[1] : data.page.fileSlug;
+      const filenameSlug = match ? match[1] : data.page.fileSlug;
+      const slug =
+        typeof data.slug === "string" && data.slug.trim()
+          ? data.slug.trim()
+          : filenameSlug;
       const path = `/posts/${slug}/index.html`;
       if (!isPublishedForSite(data)) return false;
       return path;

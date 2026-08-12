@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { resolveMediaPublicPath } from "@/lib/blog-media";
 import { getPublishInstant, isPublishedForSite } from "@/lib/post-visibility";
 
 export type MdxFrontmatter = {
@@ -16,6 +17,13 @@ export type MdxFrontmatter = {
 };
 
 type ParsedPost = { meta: MdxFrontmatter; content: string };
+
+type PostIndexEntry = {
+  filePath: string;
+  canonicalSlug: string;
+  filenameSlug: string;
+};
+
 const blogPostsDir = path.join(process.cwd(), "content", "posts");
 const blogPostExtensions = [".md", ".mdx"] as const;
 
@@ -25,7 +33,29 @@ const normalizeDateInput = (value: unknown): string | null => {
   return new Date(instant).toISOString();
 };
 
-const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => {
+/** n8n article bodies often use `H2:` / `H3:` labels instead of markdown headings. */
+export const normalizeN8nMarkdown = (content: string): string =>
+  content
+    .replace(/^H2:\s*(.+)$/gm, "## $1")
+    .replace(/^H3:\s*(.+)$/gm, "### $1");
+
+const toFilenameSlug = (fileName: string): string => fileName.replace(/\.[^.]+$/, "");
+
+const toCanonicalSlug = (data: Record<string, unknown>, filenameSlug: string): string => {
+  if (typeof data.slug === "string" && data.slug.trim()) {
+    return data.slug.trim();
+  }
+  if (typeof data.permalink === "string") {
+    const match = data.permalink.match(/\/blog\/([^/]+)\/?$/);
+    if (match?.[1]) return match[1];
+  }
+  return filenameSlug;
+};
+
+const normalizeFrontmatter = (
+  data: Record<string, unknown>,
+  canonicalSlug: string,
+): MdxFrontmatter => {
   const title = typeof data.title === "string" ? data.title : "Untitled";
   const description =
     (typeof data.description === "string" && data.description.trim()
@@ -35,10 +65,11 @@ const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => 
         : "") || "";
   const date = normalizeDateInput(data.date) ?? new Date().toISOString();
   const updated = normalizeDateInput(data.updated);
-  const coverImage =
+  const rawCoverImage =
     (typeof data.coverImage === "string" && data.coverImage) ||
     (typeof data.featured_image === "string" && data.featured_image) ||
     undefined;
+  const coverImage = resolveMediaPublicPath(rawCoverImage, canonicalSlug);
   return {
     title,
     description,
@@ -56,47 +87,80 @@ const stripBodyFromData = (data: Record<string, unknown>): Record<string, unknow
   return rest;
 };
 
-const parsePostFile = (filePath: string): ParsedPost | null => {
+const parsePostFile = (filePath: string, canonicalSlug: string): ParsedPost | null => {
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
   const record = data as Record<string, unknown>;
   if (!isPublishedForSite(record)) return null;
-  const meta = normalizeFrontmatter(stripBodyFromData(record));
+  const meta = normalizeFrontmatter(stripBodyFromData(record), canonicalSlug);
   const bodyFromFrontmatter = record.body;
   const markdownBody =
     typeof bodyFromFrontmatter === "string" && bodyFromFrontmatter.trim().length > 0
       ? bodyFromFrontmatter
       : content;
-  return { meta, content: markdownBody };
-};
-
-const findExistingPostFile = (slug: string): string | null => {
-  for (const ext of blogPostExtensions) {
-    const candidate = path.join(blogPostsDir, `${slug}${ext}`);
-    if (fs.existsSync(candidate)) return candidate;
-  }
-  return null;
+  return { meta, content: normalizeN8nMarkdown(markdownBody) };
 };
 
 const isEligibleBlogPostFile = (file: string): boolean =>
   blogPostExtensions.some((ext) => file.endsWith(ext));
 
-const toSlug = (fileName: string): string => fileName.replace(/\.[^.]+$/, "");
+let postIndexCache: {
+  bySlug: Map<string, PostIndexEntry>;
+  canonicalSlugs: string[];
+} | null = null;
+
+const buildPostIndex = () => {
+  const bySlug = new Map<string, PostIndexEntry>();
+  const canonicalSlugs: string[] = [];
+
+  if (!fs.existsSync(blogPostsDir)) {
+    postIndexCache = { bySlug, canonicalSlugs };
+    return postIndexCache;
+  }
+
+  for (const file of fs.readdirSync(blogPostsDir)) {
+    if (!isEligibleBlogPostFile(file)) continue;
+
+    const filePath = path.join(blogPostsDir, file);
+    const filenameSlug = toFilenameSlug(file);
+    const raw = fs.readFileSync(filePath, "utf-8");
+    const { data } = matter(raw);
+    const record = data as Record<string, unknown>;
+    if (!isPublishedForSite(record)) continue;
+
+    const canonicalSlug = toCanonicalSlug(record, filenameSlug);
+    const entry: PostIndexEntry = { filePath, canonicalSlug, filenameSlug };
+
+    bySlug.set(canonicalSlug, entry);
+    if (filenameSlug !== canonicalSlug) {
+      bySlug.set(filenameSlug, entry);
+    }
+    canonicalSlugs.push(canonicalSlug);
+  }
+
+  postIndexCache = { bySlug, canonicalSlugs };
+  return postIndexCache;
+};
+
+const getPostIndex = () => postIndexCache ?? buildPostIndex();
+
+const findPostIndexEntry = (slug: string): PostIndexEntry | null =>
+  getPostIndex().bySlug.get(slug) ?? null;
 
 export type BlogIndexEntry = { slug: string; segment: "blog" } & MdxFrontmatter;
 
 const readBlogCollection = (): BlogIndexEntry[] => {
-  if (!fs.existsSync(blogPostsDir)) return [];
+  const { canonicalSlugs } = getPostIndex();
   const bySlug = new Map<string, BlogIndexEntry>();
 
-  for (const file of fs.readdirSync(blogPostsDir)) {
-    if (!isEligibleBlogPostFile(file)) continue;
-    const slug = toSlug(file);
-    if (bySlug.has(slug)) continue;
-    const parsed = parsePostFile(path.join(blogPostsDir, file));
+  for (const canonicalSlug of canonicalSlugs) {
+    if (bySlug.has(canonicalSlug)) continue;
+    const entry = findPostIndexEntry(canonicalSlug);
+    if (!entry) continue;
+    const parsed = parsePostFile(entry.filePath, entry.canonicalSlug);
     if (!parsed) continue;
-    bySlug.set(slug, { slug, segment: "blog", ...parsed.meta });
+    bySlug.set(canonicalSlug, { slug: canonicalSlug, segment: "blog", ...parsed.meta });
   }
 
   return [...bySlug.values()].sort((a, b) => {
@@ -108,32 +172,34 @@ const readBlogCollection = (): BlogIndexEntry[] => {
 
 export const getBlogIndex = () => readBlogCollection();
 
+export const getCanonicalBlogSlug = (slug: string): string | null =>
+  findPostIndexEntry(slug)?.canonicalSlug ?? null;
+
 export const getMdxSource = (slug: string): ParsedPost | null => {
-  const filePath = findExistingPostFile(slug);
-  if (!filePath) return null;
-  return parsePostFile(filePath);
+  const entry = findPostIndexEntry(slug);
+  if (!entry) return null;
+  return parsePostFile(entry.filePath, entry.canonicalSlug);
 };
 
 export const getMdxSlugs = (): string[] => {
-  if (!fs.existsSync(blogPostsDir)) return [];
-  const slugs = new Set<string>();
+  const seen = new Set<string>();
+  const slugs: string[] = [];
 
-  for (const file of fs.readdirSync(blogPostsDir)) {
-    if (!isEligibleBlogPostFile(file)) continue;
-    const slug = toSlug(file);
-    if (slugs.has(slug)) continue;
-    const parsed = parsePostFile(path.join(blogPostsDir, file));
-    if (parsed) slugs.add(slug);
+  for (const slug of getPostIndex().canonicalSlugs) {
+    if (seen.has(slug)) continue;
+    seen.add(slug);
+    slugs.push(slug);
   }
-  return [...slugs];
+
+  return slugs;
 };
 
 /** Best-effort last modified: max of file mtime and frontmatter `date` / `updated`. */
 export const getMdxLastModified = (slug: string): Date => {
-  const filePath = findExistingPostFile(slug);
+  const entry = findPostIndexEntry(slug);
   let fileMtimeMs = Date.now();
-  if (filePath && fs.existsSync(filePath)) {
-    fileMtimeMs = fs.statSync(filePath).mtime.getTime();
+  if (entry && fs.existsSync(entry.filePath)) {
+    fileMtimeMs = fs.statSync(entry.filePath).mtime.getTime();
   }
   const post = getMdxSource(slug);
   if (!post) return new Date(fileMtimeMs);
@@ -156,14 +222,16 @@ export type MdxLinkPreview = {
 
 /** Title + description for deep links from service/area pages (no body). */
 export const getMdxLinkPreview = (slug: string): MdxLinkPreview | null => {
-  const post = getMdxSource(slug);
+  const canonicalSlug = getCanonicalBlogSlug(slug);
+  if (!canonicalSlug) return null;
+  const post = getMdxSource(canonicalSlug);
   if (!post) return null;
   return {
     segment: "blog",
-    slug,
+    slug: canonicalSlug,
     title: post.meta.title,
     description: post.meta.description,
-    href: `/blog/${slug}`,
+    href: `/blog/${canonicalSlug}`,
   };
 };
 
