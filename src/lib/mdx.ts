@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { resolveMediaPublicPath } from "@/lib/blog-media";
 import { getPublishInstant, isPublishedForSite } from "@/lib/post-visibility";
 
 export type MdxFrontmatter = {
@@ -52,10 +51,7 @@ const toCanonicalSlug = (data: Record<string, unknown>, filenameSlug: string): s
   return filenameSlug;
 };
 
-const normalizeFrontmatter = (
-  data: Record<string, unknown>,
-  canonicalSlug: string,
-): MdxFrontmatter => {
+const normalizeFrontmatter = (data: Record<string, unknown>): MdxFrontmatter => {
   const title = typeof data.title === "string" ? data.title : "Untitled";
   const description =
     (typeof data.description === "string" && data.description.trim()
@@ -65,11 +61,10 @@ const normalizeFrontmatter = (
         : "") || "";
   const date = normalizeDateInput(data.date) ?? new Date().toISOString();
   const updated = normalizeDateInput(data.updated);
-  const rawCoverImage =
+  const coverImage =
     (typeof data.coverImage === "string" && data.coverImage) ||
     (typeof data.featured_image === "string" && data.featured_image) ||
     undefined;
-  const coverImage = resolveMediaPublicPath(rawCoverImage, canonicalSlug);
   return {
     title,
     description,
@@ -87,13 +82,13 @@ const stripBodyFromData = (data: Record<string, unknown>): Record<string, unknow
   return rest;
 };
 
-const parsePostFile = (filePath: string, canonicalSlug: string): ParsedPost | null => {
+const parsePostFile = (filePath: string): ParsedPost | null => {
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
   const record = data as Record<string, unknown>;
   if (!isPublishedForSite(record)) return null;
-  const meta = normalizeFrontmatter(stripBodyFromData(record), canonicalSlug);
+  const meta = normalizeFrontmatter(stripBodyFromData(record));
   const bodyFromFrontmatter = record.body;
   const markdownBody =
     typeof bodyFromFrontmatter === "string" && bodyFromFrontmatter.trim().length > 0
@@ -158,7 +153,7 @@ const readBlogCollection = (): BlogIndexEntry[] => {
     if (bySlug.has(canonicalSlug)) continue;
     const entry = findPostIndexEntry(canonicalSlug);
     if (!entry) continue;
-    const parsed = parsePostFile(entry.filePath, entry.canonicalSlug);
+    const parsed = parsePostFile(entry.filePath);
     if (!parsed) continue;
     bySlug.set(canonicalSlug, { slug: canonicalSlug, segment: "blog", ...parsed.meta });
   }
@@ -178,7 +173,7 @@ export const getCanonicalBlogSlug = (slug: string): string | null =>
 export const getMdxSource = (slug: string): ParsedPost | null => {
   const entry = findPostIndexEntry(slug);
   if (!entry) return null;
-  return parsePostFile(entry.filePath, entry.canonicalSlug);
+  return parsePostFile(entry.filePath);
 };
 
 export const getMdxSlugs = (): string[] => {
