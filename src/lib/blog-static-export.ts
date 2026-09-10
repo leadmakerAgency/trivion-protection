@@ -7,7 +7,7 @@ import { getMdxSlugs } from "@/lib/mdx";
  */
 export const BLOG_STATIC_EXPORT_STUB_SLUG = "__blog_build_stub";
 
-/** Shared by `blog/[slug]/layout.tsx` and `blog/[slug]/opengraph-image.tsx` (metadata routes do not inherit layout `generateStaticParams`). */
+/** Shared by `blog/[slug]/layout.tsx`. */
 export function getBlogSlugStaticParams(): { slug: string }[] {
   const slugs = getMdxSlugs();
   if (slugs.length > 0) {

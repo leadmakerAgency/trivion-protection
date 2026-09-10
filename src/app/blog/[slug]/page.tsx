@@ -32,7 +32,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     title: post.meta.title,
     description: post.meta.description,
     path,
-    ogImage: `${path}/opengraph-image`,
+    ogImage: resolveBlogCover(canonicalSlug, post.meta.coverImage),
     ogImageAlt: post.meta.title,
     openGraphType: "article",
     article: { publishedTime, modifiedTime },

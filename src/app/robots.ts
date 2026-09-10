@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: ["/", "/llms.txt", "/llms-full.txt"],
-      disallow: [`/blog/${BLOG_STATIC_EXPORT_STUB_SLUG}`, `/blog/${BLOG_STATIC_EXPORT_STUB_SLUG}/opengraph-image`],
+      disallow: [`/blog/${BLOG_STATIC_EXPORT_STUB_SLUG}`],
     },
     sitemap: `${base}/sitemap.xml`,
   };
