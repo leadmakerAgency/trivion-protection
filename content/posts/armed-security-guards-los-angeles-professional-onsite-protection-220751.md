@@ -14,8 +14,6 @@ permalink: "/blog/armed-security-guards-los-angeles-professional-onsite-protecti
 
 A smash-and-grab can take twenty seconds. A well-trained armed security guard can turn that twenty seconds into an incident that is contained, documented, and resolved without injury. In Los Angeles, where high foot traffic, high-value assets, and large public events create unique security challenges, hiring the right armed security presence changes liability, response time, and outcomes.
 
-Introduction
-
 This article explains what professional armed security guards in Los Angeles do, when you need them, and how to hire the right team. Whether you manage a retail chain, a construction site, an entertainment venue, or a residential property, understanding the role and requirements of armed guards will help you make practical decisions that protect people and property while minimizing legal exposure.
 
 What armed security guards in Los Angeles actually do

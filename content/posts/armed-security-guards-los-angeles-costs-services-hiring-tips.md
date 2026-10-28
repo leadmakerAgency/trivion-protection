@@ -3,7 +3,7 @@ layout: "blog-post.njk"
 title: "Armed Security Guards Los Angeles: Costs, Services & Hiring Tips"
 slug: "armed-security-guards-los-angeles-costs-services-hiring-tips"
 date: "2026-07-18T14:02:16.505Z"
-excerpt: "Hook One violent incident can erase months of revenue, a reputation, and the sense of safety for customers and staff. For many Los Angeles businesses and property managers, that risk is what prompts a single question: do we hire armed secur"
+excerpt: "One violent incident can erase months of revenue, a reputation, and the sense of safety for customers and staff. For many Los Angeles businesses and property managers, that risk is what prompts a single question: do we hire armed secur"
 featured_image: "/media/image-armed-security-guards-los-angeles-costs-services-hiring-tips.png"
 hero_emoji: ""
 tags:
@@ -12,11 +12,7 @@ tags:
 permalink: "/blog/armed-security-guards-los-angeles-costs-services-hiring-tips/"
 ---
 
-Hook
-
 One violent incident can erase months of revenue, a reputation, and the sense of safety for customers and staff. For many Los Angeles businesses and property managers, that risk is what prompts a single question: do we hire armed security guards, and if so, how much will it cost and how do we choose the right team?
-
-Introduction
 
 Armed security guards are a common sight across Los Angeles, posted outside banks, luxury apartment buildings, film sets, retail stores, and large events. Hiring armed personnel changes the nature of security you provide, and it also changes legal obligations, cost structures, and the level of oversight you must maintain. This article explains typical costs, the services armed guards offer, and practical hiring tips to help you make a defensible, well-informed decision for your property or event.
 

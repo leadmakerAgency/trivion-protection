@@ -3,7 +3,7 @@ layout: "blog-post.njk"
 title: "Armed Security Guards Los Angeles: Hiring Guide & Costs"
 slug: "armed-security-guards-los-angeles-hiring-guide-costs"
 date: "2026-09-18T14:02:54.268Z"
-excerpt: "Hook: If a confrontation erupts at your property at midnight, the difference between a controlled resolution and a costly lawsuit often comes down to the training, licensing, and judgment of the guard standing at your door. Introduction Hir"
+excerpt: "If a confrontation erupts at your property at midnight, the difference between a controlled resolution and a costly lawsuit often comes down to the training, licensing, and judgment of the guard standing at your door. Introduction Hir"
 featured_image: "/media/image-armed-security-guards-los-angeles-hiring-guide-costs.png"
 hero_emoji: ""
 tags:
@@ -12,9 +12,8 @@ tags:
 permalink: "/blog/armed-security-guards-los-angeles-hiring-guide-costs/"
 ---
 
-Hook: If a confrontation erupts at your property at midnight, the difference between a controlled resolution and a costly lawsuit often comes down to the training, licensing, and judgment of the guard standing at your door.
+If a confrontation erupts at your property at midnight, the difference between a controlled resolution and a costly lawsuit often comes down to the training, licensing, and judgment of the guard standing at your door.
 
-Introduction
 Hiring armed security guards in Los Angeles is a practical step for many businesses and individuals who face elevated risk. Whether you manage a retail store, a construction site, an office tower, an event, or a private estate, the decision to hire armed protection raises specific legal, operational, and financial questions. This guide explains what armed security guards in Los Angeles do, what licenses and training they must have, how much you should expect to pay, and how to hire and manage a team that reduces risk without creating new liabilities.
 
 H2: What armed security guards do, and how they differ from unarmed guards

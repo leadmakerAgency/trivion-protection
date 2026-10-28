@@ -3,7 +3,7 @@ layout: "blog-post.njk"
 title: "Armed Security Guards Los Angeles: Costs, Services & Tips"
 slug: "armed-security-guards-los-angeles-costs-services-tips"
 date: "2026-10-18T14:03:05.765Z"
-excerpt: "Hook: You wake up to a text at 3:12 a.m. reporting suspicious activity at your retail location in South Los Angeles. The CCTV shows a group casing the back door. You call your security provider and within minutes an armed guard is on site,"
+excerpt: "You wake up to a text at 3:12 a.m. reporting suspicious activity at your retail location in South Los Angeles. The CCTV shows a group casing the back door. You call your security provider and within minutes an armed guard is on site,"
 featured_image: "/media/image-armed-security-guards-los-angeles-costs-services-tips.png"
 hero_emoji: ""
 tags:
@@ -12,9 +12,8 @@ tags:
 permalink: "/blog/armed-security-guards-los-angeles-costs-services-tips/"
 ---
 
-Hook: You wake up to a text at 3:12 a.m. reporting suspicious activity at your retail location in South Los Angeles. The CCTV shows a group casing the back door. You call your security provider and within minutes an armed guard is on site, assessing the scene and coordinating with police. That rapid, trained response is exactly why many businesses and individuals in Los Angeles choose armed security.
+You wake up to a text at 3:12 a.m. reporting suspicious activity at your retail location in South Los Angeles. The CCTV shows a group casing the back door. You call your security provider and within minutes an armed guard is on site, assessing the scene and coordinating with police. That rapid, trained response is exactly why many businesses and individuals in Los Angeles choose armed security.
 
-Introduction
 Deciding whether to hire armed security guards in Los Angeles raises practical questions, not just emotional ones. How much will it cost? What services can an armed guard legally provide? How do you vet a firm so you do not increase liability? This article explains realistic costs, the most common services armed guards provide, the licensing and legal landscape in California, and clear, tactical tips for hiring the right team for your property or event.
 
 Why businesses and individuals choose armed security

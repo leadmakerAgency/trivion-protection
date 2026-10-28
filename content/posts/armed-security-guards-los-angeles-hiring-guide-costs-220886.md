@@ -3,7 +3,7 @@ layout: "blog-post.njk"
 title: "Armed Security Guards Los Angeles: Hiring Guide & Costs"
 slug: "armed-security-guards-los-angeles-hiring-guide-costs"
 date: "2026-09-20T14:02:34.453Z"
-excerpt: "Hook: When a late-night theft or an aggressive trespasser threatens your business, the difference between an incident that ends in a broken window and one that ends in injury often comes down to who is standing at the door. Hiring armed sec"
+excerpt: "When a late-night theft or an aggressive trespasser threatens your business, the difference between an incident that ends in a broken window and one that ends in injury often comes down to who is standing at the door. Hiring armed sec"
 featured_image: "/media/image-armed-security-guards-los-angeles-hiring-guide-costs.png"
 hero_emoji: ""
 tags:
@@ -12,9 +12,8 @@ tags:
 permalink: "/blog/armed-security-guards-los-angeles-hiring-guide-costs/"
 ---
 
-Hook: When a late-night theft or an aggressive trespasser threatens your business, the difference between an incident that ends in a broken window and one that ends in injury often comes down to who is standing at the door. Hiring armed security guards in Los Angeles can feel like buying peace of mind, but it also brings legal responsibilities, significant cost variation, and real risk if the wrong provider is chosen.
+When a late-night theft or an aggressive trespasser threatens your business, the difference between an incident that ends in a broken window and one that ends in injury often comes down to who is standing at the door. Hiring armed security guards in Los Angeles can feel like buying peace of mind, but it also brings legal responsibilities, significant cost variation, and real risk if the wrong provider is chosen.
 
-Introduction
 This guide answers the questions most Los Angeles property owners and managers ask first: do I need armed guards, what are the legal and training requirements, how much will it cost, and how do I hire a competent team without exposing myself to unnecessary liability? The information below is practical and actionable, built around real-world scenarios you will face when arranging armed protection in the LA market.
 
 H2: Do you need armed security guards in Los Angeles?
